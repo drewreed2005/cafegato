@@ -1,5 +1,5 @@
 current directory: /Users/mister_dew/vscode/cafegato/vendor/bundle/ruby/2.6.0/gems/commonmarker-0.23.6/ext/commonmarker
-/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/bin/ruby -I /System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0 -r ./siteconf20230105-55919-12ho5gg.rb extconf.rb
+/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/bin/ruby -I /System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0 -r ./siteconf20230106-21131-yto9gq.rb extconf.rb
 creating Makefile
 
 current directory: /Users/mister_dew/vscode/cafegato/vendor/bundle/ruby/2.6.0/gems/commonmarker-0.23.6/ext/commonmarker
