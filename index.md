@@ -2,7 +2,7 @@
 <br>
 ## Location
 > Find us in Del Sur!
-<p style="font-size:25px">16480 Paseo Del Sur, San Diego, CA 92127</p>
+<p style="font-size:25px">19374 Paseo Del Sur, San Diego, CA 92127</p>
 
 ## About Us
 
