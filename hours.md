@@ -30,7 +30,7 @@ We remain open on these holidays (with special holiday offerings!):
 <ul>
   <li style="color:pink">Valentine's Day</li>
   <li style="color:green">Saint Patrick's Day</li>
-  <li style="color:#F2EE00">Easter</li>
+  <li style="color:purple">Easter</li>
   <li style="color:blue">4th of July</li>
   <li style="color:orange">Halloween</li>
   <li style="color:red">Christmas Eve</li>
@@ -41,3 +41,9 @@ We will remain closed on other prominent holidays such as Veterans Day, Thanksgi
 ## Daily Schedule
 
 Here are the sort of things you can expect to see each day.
+
+<div class="eventbox" style="border:solid 6px #805900;background:#EDA500">
+    <img src="{{site.baseurl}}/images/Studio_Project.png" width="300px" style="float:right;padding: 5px 5px 5px 5px">   
+    <h1 style="color:white">9AM: Kitty Breakfast</h1>
+    The cats may need to take a short break from playing with toys or sitting on high-up hammocks to eat their own breakfast. (Don't worry: we make sure they're all fed plenty!)<br><br>If you come on the weekend, the kitties will already have been fed.
+</div>
