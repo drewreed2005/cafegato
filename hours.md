@@ -7,7 +7,7 @@
     line-height: 2;
     border: solid 6px black;
     border-radius: 50px;
-    padding: 0px 30px 16px;
+    padding: 8px 30px 16px;
     color: white;
   }
 </style>
@@ -43,7 +43,7 @@ We will remain closed on other prominent holidays such as Veterans Day, Thanksgi
 Here are the sort of things you can expect to see each day.
 
 <div class="eventbox" style="border:solid 6px #805900;background:#EDA500">
-    <img src="{{site.baseurl}}/images/Studio_Project.png" width="300px" style="float:right;padding: 5px 5px 5px 5px">   
+    <img src="{{site.baseurl}}/images/cat-cafe-maui-11-1024x576.jpeg" width="300px" style="float:right;padding: 5px 5px 5px 5px">   
     <h1 style="color:white">9AM: Kitty Breakfast</h1>
     The cats may need to take a short break from playing with toys or sitting on high-up hammocks to eat their own breakfast. (Don't worry: we make sure they're all fed plenty!)<br><br>If you come on the weekend, the kitties will already have been fed.
 </div>
