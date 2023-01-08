@@ -1,4 +1,4 @@
-<div style="width:100%"><img src="{{site.baseurl}}/images/catcafepic.png"></div>
+<div style="width:100%"><img src="{{site.baseurl}}/images/catcafepic.jpeg"></div>
 
 ## Location
 > Find us in Del Sur!
