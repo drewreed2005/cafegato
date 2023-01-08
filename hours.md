@@ -11,7 +11,7 @@
     color: white;
   }
 </style>
-## Hours
+<h1 style="color:black">Hours</h1>
 
 | Week Day | Hours | Weekly Events | Details |
 | --- | --- | --- | --- |
@@ -38,7 +38,7 @@ We remain open on these holidays (with special holiday offerings!):
 
 We will remain closed on other prominent holidays such as Veterans Day, Thanksgiving, and Christmas Day.
 
-## Daily Schedule
+<h1 style="color:black">Daily Schedule</h1>
 
 Here are the sort of things you can expect to see each day.
 
