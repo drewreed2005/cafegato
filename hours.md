@@ -7,7 +7,7 @@
     line-height: 2;
     border: solid 6px black;
     border-radius: 50px;
-    padding: 8px 30px 16px;
+    padding: 16px 30px 16px;
     color: white;
   }
 </style>
