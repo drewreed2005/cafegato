@@ -10,7 +10,7 @@
     padding: 16px 30px 16px;
     color: white;
   }
-.apollobutton{
+.button{
     width: 100%;
     height: 7vh;
     background #3c5077;
@@ -29,21 +29,81 @@
     font-weight: 500;
     border-radius: 15px;
 }
-</style>
-<h1 style="color:black">Meet Our Cats!</h1>
+.popup{
+  width: 400px;
+  background: #F8E69A;
+  border-radius: 20px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%,-50%) scale(0.1);
+  text-align: center;
+  padding: 0 30px 30px;
+  color: #333;
+  visibility: hidden;
+  transition: transform 0.3s, top 0.3s;
+}
+.open-popup{
+  visibility: visible;
+  top: 50%;
+  transform: translate(-50%,-23%) scale(1);
+}
+.popup img{
+  width: 100px;
+  margin-top: -40px;
+}
+.popup h2{
+  font-size: 38px;
+  font-weight: 500;
+  margin: 30px 0 10px;
+}
+.popup button{
+  width: 100%;
+  margin-top: 50px;
+  padding: 10px 0;
+  background: #ff941c;
+  color: #fff;
+  border: 0;
+  outline: none;
+  font-size: 18px;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
 
-<h3 style="color:grey">Adoptable Cats</h3>
-<div class="eventbox" style="border:solid 6px #805900;background:#EDA500">
-    <img src="file:///Users/aliyatang/Library/Messages/Attachments/25/05/91044141-4F0D-43F0-9F39-266F0E0BC647/IMG_9039.jpeg" width="300px" style="float:right;padding: 5px 5px 5px 5px">   
+</style>
+<html>
+<body>
+  <h1 style="color:black">Meet Our Cats!</h1>
+  <h3 style="color:grey">Adoptable Cats</h3>
+  <div class="eventbox" style="border:solid 6px #805900;background:#EDA500">
+    <img src="https://github.com/drewreed2005/cafegato/blob/gh-pages/images/01-09-23-cat1.jpeg?raw=true" width="250px" style="float:right;padding: 5px 5px 5px 5px">   
     <h1 style="color:white"><b>Apollo</b></h1>
-    Domestic Short Hair  
-    Sex: Male - Neutered  
-    Estimated Age: 2 Years, 8 Months  
-    Weight: 13.4 lbs  
+    Domestic Short Hair  <br>
+    Sex: Male - Neutered  <br>
+    Estimated Age: 2 Years, 8 Months  <br>
+    Weight: 13.4 lbs  <br>
     Color: Orange  <br>
-    Status: Available  
-    <div class="apollobutton">
-        <button type="submit" class="btn">More About Apollo</button>
-        <div class="popup">
-        <h2>Hello! 
-</div>
+    Status: Available  <br>
+    <div class="button">
+      <button type="submit" class="btn" onclick="openPopup()">More About Apollo</button>
+      <div class="popup" id="popup">
+        <img src="https://raw.githubusercontent.com/drewreed2005/cafegato/gh-pages/images/01-09-23-cat2.webp">
+        <h1 style="color:black"><b>Hello, I'm Apollo!</b></h1>
+        <br>
+        <p>I am a sweet cat who is outgoing in new situations and I will love your pets and attention! I love to run around and explore, but not as much as relaxing and napping. I will be a constant source of companionship and entertainment for you! Will you give me a chance to win your heart?</p>
+        <button type="button" onclick="closePopup()">Close</button>
+      </div>
+    </div>
+  </div>
+<script>
+let popup = document.getElementById("popup");
+function openPopup(){
+  popup.classList.add("open-popup");
+}
+function closePopup(){
+  popup.classList.remove("open-popup");
+}
+</script>
+</body>
+</html>
