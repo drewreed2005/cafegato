@@ -2,6 +2,7 @@
 <!---
 Markdown Format takes entire column
 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 ![](images/Dad_Mom_2019.jpg)
 
 ## Reunion/Multi-Family Pictures

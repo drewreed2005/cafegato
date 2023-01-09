@@ -1,3 +1,4 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <div style="width:100%"><img src="{{site.baseurl}}/images/catcafepic.jpeg"></div>
 <br>
 ## Location

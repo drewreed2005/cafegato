@@ -1,3 +1,4 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 ## Family Night
 > Each evening family will meet.  Family nights are intended to build the Leuck family legacy.
 
