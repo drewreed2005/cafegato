@@ -10,6 +10,33 @@
     padding: 16px 30px 16px;
     color: white;
   }
+  .open-popup{
+  visibility: visible;
+  top: 50%;
+  transform: translate(-50%,-23%) scale(1);
+  }
+  .popup img{
+    width: 100px;
+    margin-top: -40px;
+  }
+  .popup h2{
+    font-size: 38px;
+    font-weight: 500;
+    margin: 30px 0 10px;
+  }
+  .popup button{
+    width: 100%;
+    margin-top: 50px;
+    padding: 10px 0;
+    background: #ff941c;
+    color: #fff;
+    border: 0;
+    outline: none;
+    font-size: 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
 </style>
 <h1 style="color:black">Hours</h1>
 
@@ -46,4 +73,21 @@ Here are the sort of things you can expect to see each day.
     <img src="{{site.baseurl}}/images/cat-cafe-maui-11-1024x576.jpeg" width="300px" style="float:right;padding: 5px 5px 5px 5px">   
     <h1 style="color:white">9AM: Kitty Breakfast</h1>
     The cats may need to take a short break from playing with toys or sitting on high-up hammocks to eat their own breakfast. (Don't worry: we make sure they're all fed plenty!)<br><br>If you come on the weekend, the kitties will already have been fed.
+    <div class="button">
+      <button type="submit" class="btn" onclick="openPopup()">More About Apollo</button>
+      <div class="popup" id="popup">
+        <img src="https://raw.githubusercontent.com/drewreed2005/cafegato/gh-pages/images/01-09-23-cat2.webp">
+        <br><br>
+        <h1 style="color:black"><b>Hello, I'm Apollo!</b></h1>
+        <p>I am a sweet cat who is outgoing in new situations and I will love your pets and attention! I love to run around and explore, but not as much as relaxing and napping. I will be a constant source of companionship and entertainment for you! Will you give me a chance to win your heart?</p>
+        <button type="button" onclick="closePopup()">Close</button>
 </div>
+<script>
+let popup = document.getElementById("popup");
+function openPopup(){
+  popup.classList.add("open-popup");
+}
+function closePopup(){
+  popup.classList.remove("open-popup");
+}
+</script>
