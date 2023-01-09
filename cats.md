@@ -89,8 +89,8 @@
       <button type="submit" class="btn" onclick="openPopup()">More About Apollo</button>
       <div class="popup" id="popup">
         <img src="https://raw.githubusercontent.com/drewreed2005/cafegato/gh-pages/images/01-09-23-cat2.webp">
+        <br><br>
         <h1 style="color:black"><b>Hello, I'm Apollo!</b></h1>
-        <br>
         <p>I am a sweet cat who is outgoing in new situations and I will love your pets and attention! I love to run around and explore, but not as much as relaxing and napping. I will be a constant source of companionship and entertainment for you! Will you give me a chance to win your heart?</p>
         <button type="button" onclick="closePopup()">Close</button>
       </div>
