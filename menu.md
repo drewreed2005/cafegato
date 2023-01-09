@@ -8,7 +8,7 @@
 
 | Food 	| Price 	|
 |---	|---	|
-| Assorted Pastries .............. 	| $3.00 	|
-| Fruit Yogurt Parfait ............ 	| $5.00 	|
-| Fluffy Cat Buns ............ 	| $6.00 	|
+| Assorted Pastries.............. 	| $3.00 	|
+| Fruit Yogurt Parfait............ 	| $5.00 	|
+| Fluffy Cat Buns............ 	| $6.00 	|
 
