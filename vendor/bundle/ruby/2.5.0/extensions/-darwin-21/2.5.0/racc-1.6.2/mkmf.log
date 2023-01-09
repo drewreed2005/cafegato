@@ -1,0 +1,55 @@
+have_func: checking for rb_block_call()... -------------------- yes
+
+"gcc -o conftest -I/Users/aliyatang/.rvm/rubies/ruby-2.5.0/include/ruby-2.5.0/-darwin21 -I/Users/aliyatang/.rvm/rubies/ruby-2.5.0/include/ruby-2.5.0/ruby/backward -I/Users/aliyatang/.rvm/rubies/ruby-2.5.0/include/ruby-2.5.0 -I.  -I/opt/homebrew/opt/libyaml/include -I/opt/homebrew/opt/libksba/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/zlib/include -I/opt/homebrew/opt/openssl@1.1/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wno-error=implicit-function-declaration  -fno-common -pipe conftest.c  -L. -L/Users/aliyatang/.rvm/rubies/ruby-2.5.0/lib -L/opt/homebrew/opt/libyaml/lib -L/opt/homebrew/opt/libksba/lib -L/opt/homebrew/opt/readline/lib -L/opt/homebrew/opt/zlib/lib -L/opt/homebrew/opt/openssl@1.1/lib -L. -fstack-protector -L/opt/homebrew/opt/libyaml/lib -L/opt/homebrew/opt/libksba/lib -L/opt/homebrew/opt/readline/lib -L/opt/homebrew/opt/zlib/lib -L/opt/homebrew/opt/openssl@1.1/lib     -lruby.2.5.0  -lpthread -ldl -lobjc "
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: int main(int argc, char **argv)
+4: {
+5:   return 0;
+6: }
+/* end */
+
+"gcc -o conftest -I/Users/aliyatang/.rvm/rubies/ruby-2.5.0/include/ruby-2.5.0/-darwin21 -I/Users/aliyatang/.rvm/rubies/ruby-2.5.0/include/ruby-2.5.0/ruby/backward -I/Users/aliyatang/.rvm/rubies/ruby-2.5.0/include/ruby-2.5.0 -I.  -I/opt/homebrew/opt/libyaml/include -I/opt/homebrew/opt/libksba/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/zlib/include -I/opt/homebrew/opt/openssl@1.1/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wno-error=implicit-function-declaration  -fno-common -pipe conftest.c  -L. -L/Users/aliyatang/.rvm/rubies/ruby-2.5.0/lib -L/opt/homebrew/opt/libyaml/lib -L/opt/homebrew/opt/libksba/lib -L/opt/homebrew/opt/readline/lib -L/opt/homebrew/opt/zlib/lib -L/opt/homebrew/opt/openssl@1.1/lib -L. -fstack-protector -L/opt/homebrew/opt/libyaml/lib -L/opt/homebrew/opt/libksba/lib -L/opt/homebrew/opt/readline/lib -L/opt/homebrew/opt/zlib/lib -L/opt/homebrew/opt/openssl@1.1/lib     -lruby.2.5.0  -lpthread -ldl -lobjc "
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+13: int t(void) { void ((*volatile p)()); p = (void ((*)()))rb_block_call; return !p; }
+/* end */
+
+--------------------
+
+have_func: checking for rb_ary_subseq()... -------------------- yes
+
+"gcc -o conftest -I/Users/aliyatang/.rvm/rubies/ruby-2.5.0/include/ruby-2.5.0/-darwin21 -I/Users/aliyatang/.rvm/rubies/ruby-2.5.0/include/ruby-2.5.0/ruby/backward -I/Users/aliyatang/.rvm/rubies/ruby-2.5.0/include/ruby-2.5.0 -I.  -I/opt/homebrew/opt/libyaml/include -I/opt/homebrew/opt/libksba/include -I/opt/homebrew/opt/readline/include -I/opt/homebrew/opt/zlib/include -I/opt/homebrew/opt/openssl@1.1/include -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -O3 -ggdb3 -Wno-error=implicit-function-declaration  -fno-common -pipe conftest.c  -L. -L/Users/aliyatang/.rvm/rubies/ruby-2.5.0/lib -L/opt/homebrew/opt/libyaml/lib -L/opt/homebrew/opt/libksba/lib -L/opt/homebrew/opt/readline/lib -L/opt/homebrew/opt/zlib/lib -L/opt/homebrew/opt/openssl@1.1/lib -L. -fstack-protector -L/opt/homebrew/opt/libyaml/lib -L/opt/homebrew/opt/libksba/lib -L/opt/homebrew/opt/readline/lib -L/opt/homebrew/opt/zlib/lib -L/opt/homebrew/opt/openssl@1.1/lib     -lruby.2.5.0  -lpthread -ldl -lobjc "
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+13: int t(void) { void ((*volatile p)()); p = (void ((*)()))rb_ary_subseq; return !p; }
+/* end */
+
+--------------------
+
