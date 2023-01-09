@@ -19,6 +19,17 @@
     align-items: center
     justify-content: center;
 }
+.btn{
+    padding: 10px 25px;
+    background: #ffffe0;
+    border: 3;
+    border-color: #FFDB45; 
+    outline: none;
+    cursor: pointer;
+    font-size: 22px;
+    font-weight: 500;
+    border-radius: 15px;
+}
   .popup{
     width: 400px;
     background: #F8E69A;
@@ -36,7 +47,7 @@
   .open-popup{
   visibility: visible;
   top: 50%;
-  transform: translate(-50%,-23%) scale(1);
+  transform: translate(-50%,20%) scale(1);
   }
   .popup img{
     width: 100px;
@@ -102,7 +113,7 @@ Here are the sort of things you can expect to see each day.
         <img src="https://raw.githubusercontent.com/drewreed2005/cafegato/gh-pages/images/01-09-23-cat2.webp">
         <br><br>
         <h1 style="color:black"><b>Feeding Information</b></h1>
-        <p>Cats are fed, depending on their age and size, 1/3 of a cup to 1/2 of a cup of wet food per day, plus supplemental dry food accessible to them at any time. Our cats always have access to clean water in multiple separate bowls, filtered and replaced daily (sometimes multiple times daily). Purina ONE, our sponsors, is the provider of our wet and dry food. Switching the flavor of food can cause cats with sensitive stomachs to temporarily deal with digestive issues, so we make sure to</p>
+        <p style="font-size:18">Cats are fed, depending on their age and size, 1/3 of a cup to 1/2 of a cup of wet food per day, plus supplemental dry food accessible to them at any time. Our cats always have access to clean water in multiple separate bowls, filtered and replaced daily (sometimes multiple times daily). Purina ONE, our sponsors, is the provider of our wet and dry food. Switching the flavor of food can cause cats with sensitive stomachs to temporarily deal with digestive issues, so we make sure to</p>
         <button type="button" onclick="closePopup()">Close</button>
 </div>
 <script>
