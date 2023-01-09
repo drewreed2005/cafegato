@@ -97,7 +97,7 @@ Here are the sort of things you can expect to see each day.
     <h1 style="color:white">9AM: Kitty Breakfast</h1>
     The cats may need to take a short break from playing with toys or sitting on high-up hammocks to eat their own breakfast. (Don't worry: we make sure they're all fed plenty!)<br><br>If you come on the weekend, the kitties will already have been fed.
     <div class="button">
-      <button type="submit" class="btn" onclick="openPopup()">More About Apollo</button>
+      <button type="submit" class="btn" onclick="openPopup()">Feeding Information</button>
       <div class="popup" id="popup">
         <img src="https://raw.githubusercontent.com/drewreed2005/cafegato/gh-pages/images/01-09-23-cat2.webp">
         <br><br>
