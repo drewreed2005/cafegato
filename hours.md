@@ -10,6 +10,20 @@
     padding: 16px 30px 16px;
     color: white;
   }
+  .popup{
+    width: 400px;
+    background: #F8E69A;
+    border-radius: 20px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%,-50%) scale(0.1);
+    text-align: center;
+    padding: 0 30px 30px;
+    color: #333;
+    visibility: hidden;
+    transition: transform 0.3s, top 0.3s;
+  }
   .open-popup{
   visibility: visible;
   top: 50%;
@@ -78,8 +92,8 @@ Here are the sort of things you can expect to see each day.
       <div class="popup" id="popup">
         <img src="https://raw.githubusercontent.com/drewreed2005/cafegato/gh-pages/images/01-09-23-cat2.webp">
         <br><br>
-        <h1 style="color:black"><b>Hello, I'm Apollo!</b></h1>
-        <p>I am a sweet cat who is outgoing in new situations and I will love your pets and attention! I love to run around and explore, but not as much as relaxing and napping. I will be a constant source of companionship and entertainment for you! Will you give me a chance to win your heart?</p>
+        <h1 style="color:black"><b>Feeding Information</b></h1>
+        <p>Cats are fed, depending on their age and size, 1/3 of a cup to 1/2 of a cup of wet food per day, plus supplemental dry food accessible to them at any time. Our cats always have access to clean water in multiple separate bowls, filtered and replaced daily (sometimes multiple times daily). Purina ONE, our sponsors, is the provider of our wet and dry food. Switching the flavor of food can cause cats with sensitive stomachs to temporarily deal with digestive issues, so we make sure to</p>
         <button type="button" onclick="closePopup()">Close</button>
 </div>
 <script>
