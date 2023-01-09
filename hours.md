@@ -10,6 +10,14 @@
     padding: 16px 30px 16px;
     color: white;
   }
+  .button{
+    width: 100%;
+    height: 7vh;
+    background #3c5077;
+    display: flex;
+    align-items: center
+    justify-content: center;
+}
   .popup{
     width: 400px;
     background: #F8E69A;
