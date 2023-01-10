@@ -73,16 +73,57 @@
   }
 </style>
 <h1 style="color:black">Hours</h1>
+<table>
+  <tr>
+    <th>Week Day</th>
+    <th>Hours</th>
+    <th>Weekly Events</th>
+    <th>Detail</th>
+  </tr>
+  <tr>
+    <td>Monday</td>
+    <td>8AM - 5PM</td>
+    <td>Blue Mountain Mondays</td>
+    <td>Enjoy one free cup of high-quality Jamaican Blue Mountain coffee with a reservation.</td>
+  </tr>
+  <tr>
+    <td>Tuesday</td>
+    <td>8AM - 5PM</td>
+    <td>Cat Pose</td>
+    <td>Join us in the events room from yoga (opening to 10AM).</td>
+  </tr>
+  <tr>
+    <td>Wednesday</td>
+    <td>8AM - 5PM</td>
+    <td>Superhero Day</td>
+    <td>Come dressed as your favorite superhero and get a free medium drink.</td>
+  </tr>
+  <tr>
+    <td>Thursday</td>
+    <td>8AM - 5PM</td>
+    <td>Cats for Coffee</td>
+    <td>Show us a picture/video of you with your cat, tell us a bit about them, and enjoy a free medium drink.</td>
+  </tr>
+  <tr>
+    <td>Friday</td>
+    <td>8AM - 5PM</td>
+    <td>Up-and-Coming Local Jazz</td>
+    <td>Enjoy soothing music from rising local bands, in and out of the cat room.</td>
+  </tr>
+  <tr>
+    <td>Saturday</td>
+    <td>10AM - 6PM</td>
+    <td>Bingo Night</td>
+    <td>Join us for bingo from 5PM to 6PM in the events room.</td>
+  </tr>
+  <tr>
+    <td>Sunday</td>
+    <td>10AM - 6PM</td>
+    <td>Support Animals</td>
+    <td>A portion of all food and drink sales are be donated to the <a href="https://www.sdhumane.org/">San Diego Humane Society</a>.</td>
+  </tr>
+</table>
 
-| Week Day | Hours | Weekly Events | Details |
-| --- | --- | --- | --- |
-| Monday | 8AM - 5PM | Blue Mountain Mondays | Enjoy one free cup of high-quality Jamaican Blue Mountain coffee with a reservation. |
-| Tuesday | 8AM - 5PM | Cat Pose | Join us in the events room from yoga (opening to 10AM). |
-| Wednesday | 8AM - 5PM | Superhero Day | Come dressed as your favorite superhero and get a free medium drink. |
-| Thusday | 8AM - 5PM | Cats for Coffee | Show us a picture/video of you with your cat, tell us a bit about them, and enjoy a free medium drink. |
-| Friday | 8AM - 5PM | Up-and-Coming Local Jazz | Enjoy soothing music from rising local bands, in and out of the cat room. |
-| Saturday | 10AM - 6PM | Bingo Night |Join us for bingo from 5PM to 6PM in the events room. |
-| Sunday | 10AM - 6PM | Support Animals | A portion of all food and drink sales are be donated to the [San Diego Humane Society](https://www.sdhumane.org/). |
 
 ### Holiday Policy
 
