@@ -1,16 +1,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-    .topheader {
-        height: 120px;
-        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-        font-size: 120%;
-        background: #ff921e;
-        border-color: black;
-        border-width: 10px;
+    .navbar {
+        overflow: hidden;
+        background-color: #ff921e;
+        position: fixed;
+        top: 0;
+        width: 100%
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 120%
     }
+
     .headlink {
+        float: left;
+        display: block;
         color: rgb(249, 238, 238);
-        text-decoration-color: rgb(0, 0, 0);
+        text-decoration-color: rgb(0, 0, 0)
+        text-align: center;
+        padding: 14px 16px;
+        
         font-family:Verdana, Geneva, Tahoma, sans-serif;
         font-size: 100%;
         text-shadow: 4px 4px 5px rgb(148, 66, 16);
@@ -22,8 +29,8 @@
     }
 </style>
 
-<p class="topheader">
-    <table class="topheader">
+<p class="navbar">
+    <table class="navbar">
         <tr>
             <td><a href="."><img src="{{site.baseurl}}/images/Studio_Project.png" width="200px"></a></td><!--ABOUT US IN HERE-->
             <td><a href="cats" class="headlink">Cats</a></td>
