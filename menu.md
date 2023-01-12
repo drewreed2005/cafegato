@@ -3,13 +3,13 @@
 <div class="row"> <!--- make a new row -->
   <!-- each column is one-third of width -->
   <div class="column">
-    <img src="/images/cupcake.png" alt="1996" style="width:100%">
+    <img src="/images/cupcake.png">
   </div>
 </div>
 <div class="row"> <!--- make a new row -->
   <!-- each column is one-third of width -->
   <div class="column">
-    <img src="/images/donut.png" alt="1996" style="width:100%">
+    <img src="/images/donut.png">
   </div>
 </div>
 
