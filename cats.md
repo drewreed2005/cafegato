@@ -97,6 +97,70 @@
       </div>
     </div>
   </div>
+
+  <div class="eventbox" style="border:solid 6px #805900;background:#EDA500">
+    <img src="/images/morgana.jpg" width="250px" style="float:right;padding: 5px 5px 5px 5px">   
+    <h1 style="color:white"><b>Morgana</b></h1>
+    Homo Sapian  <br>
+    Sex: Yes  <br>
+    Estimated Age: 1 year, 1 month  <br>
+    Weight: 8 lbs  <br>
+    Color: Black  <br>
+    Status: Available  <br>
+    <div class="button">
+      <button type="submit" class="btn" onclick="openPopup()">More About Morgana</button>
+      <div class="popup" id="popup">
+        <img src="https://raw.githubusercontent.com/drewreed2005/cafegato/gh-pages/images/01-09-23-cat2.webp">
+        <br><br>
+        <h1 style="color:black"><b>Placeholder</b></h1>
+        <p>Placeholder</p>
+        <button type="button" onclick="closePopup()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="eventbox" style="border:solid 6px #805900;background:#EDA500">
+    <img src="/images/garfield.jpg" width="250px" style="float:right;padding: 5px 5px 5px 5px">   
+    <h1 style="color:white"><b>Garfield</b></h1>
+    Orange  <br>
+    Sex: Male  <br>
+    Estimated Age: 44 Years  <br>
+    Weight: 23.4 lbs  <br>
+    Color: Orange  <br>
+    Status: Hungry  <br>
+    <div class="button">
+      <button type="submit" class="btn" onclick="openPopup()">More About Garfield</button>
+      <div class="popup" id="popup">
+        <img src="https://raw.githubusercontent.com/drewreed2005/cafegato/gh-pages/images/01-09-23-cat2.webp">
+        <br><br>
+        <h1 style="color:black"><b>Placeholder</b></h1>
+        <p>Placeholder</p>
+        <button type="button" onclick="closePopup()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="eventbox" style="border:solid 6px #805900;background:#EDA500">
+    <img src="/images/dali.jpg" width="250px" style="float:right;padding: 5px 5px 5px 5px">   
+    <h1 style="color:white"><b>Dali</b></h1>
+    Tool  <br>
+    Sex: Male  <br>
+    Estimated Age: 3 Years  <br>
+    Weight: 9.3 lbs  <br>
+    Color: Orange  <br>
+    Status: Available  <br>
+    <div class="button">
+      <button type="submit" class="btn" onclick="openPopup()">More About Dali</button>
+      <div class="popup" id="popup">
+        <img src="https://raw.githubusercontent.com/drewreed2005/cafegato/gh-pages/images/01-09-23-cat2.webp">
+        <br><br>
+        <h1 style="color:black"><b>Placeholder</b></h1>
+        <p>Placeholder</p>
+        <button type="button" onclick="closePopup()">Close</button>
+      </div>
+    </div>
+  </div>
+  
 <script>
 let popup = document.getElementById("popup");
 function openPopup(){
