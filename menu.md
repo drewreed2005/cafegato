@@ -1,5 +1,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<div class="row"> <!--- make a new row -->
+  <!-- each column is one-third of width -->
+  <div class="column">
+    <img src="/images/cupcake.png" alt="1996" style="width:100%">
+  </div>
+</div>
+<div class="row"> <!--- make a new row -->
+  <!-- each column is one-third of width -->
+  <div class="column">
+    <img src="/images/donut.png" alt="1996" style="width:100%">
+  </div>
+</div>
+
+
 | Hot Drinks 	| Price 	|
 |---	|---	|
 | Esspresso 12oz.............. 	| $3.00 	|
