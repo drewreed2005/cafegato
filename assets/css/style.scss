@@ -14,3 +14,8 @@
     flex: 33.33%;
     padding: 5px;
   }
+  /* this is intended to be used with a span tag for an extra large break */
+  .widebr {
+    display: block;
+    margin-bottom: 1em;
+  }

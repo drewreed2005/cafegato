@@ -145,15 +145,17 @@ Here are the sort of things you can expect to see each day.
 
 <div class="eventbox" style="border:solid 6px #805900;background:#EDA500">
     <img src="{{site.baseurl}}/images/cat-cafe-maui-11-1024x576.jpeg" width="300px" style="float:right;padding: 5px 5px 5px 5px">   
-    <h1 style="color:white">9AM: Kitty Breakfast</h1>
-    The cats may need to take a short break from playing with toys or sitting on high-up hammocks to eat their own breakfast. (Don't worry: we make sure they're all fed plenty!)<br><br>If you come on the weekend, the kitties will already have been fed.
+    <h1 style="color:white" class="widebr"><u>9AM: Kitty Breakfast</u></h1>
+    The cats may need to take a short break from playing with toys or sitting on high-up hammocks to eat their own breakfast. (Don't worry: we make sure they're all fed plenty!)
+    <span class="widebr"></span>
+    If you come on the weekend, the kitties will already have been fed.<br>
     <div class="button">
       <button type="submit" class="btn" onclick="openPopup()">Feeding Information</button>
-      <div class="popup" id="popup">
+      <div class="popup" id="popup" style="width:600px">
         <img src="https://raw.githubusercontent.com/drewreed2005/cafegato/gh-pages/images/01-09-23-cat2.webp">
         <br><br>
         <h1 style="color:black"><b>Feeding Information</b></h1>
-        <p style="font-size:18">Cats are fed, depending on their age and size, 1/3 of a cup to 1/2 of a cup of wet food per day, plus supplemental dry food accessible to them at any time. Our cats always have access to clean water in multiple separate bowls, filtered and replaced daily (sometimes multiple times daily). Purina ONE, our sponsors, is the provider of our wet and dry food. Switching the flavor of food can cause cats with sensitive stomachs to temporarily deal with digestive issues, so we make sure to</p>
+        <p style="font-size:18">Cats are fed, depending on their age and size, 1/3 of a cup to 1/2 of a cup of wet food per day, plus supplemental dry food accessible to them at any time. Our cats always have access to clean water in multiple separate bowls, filtered and replaced daily (sometimes multiple times daily). Purina ONE, our sponsor, is the provider of our wet and dry food.</p>
         <button type="button" onclick="closePopup()">Close</button>
 </div>
 <script>
