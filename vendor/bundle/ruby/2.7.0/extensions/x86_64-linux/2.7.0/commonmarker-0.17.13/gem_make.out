@@ -1,5 +1,5 @@
 current directory: /home/kkcbal/vscode/cafegato/vendor/bundle/ruby/2.7.0/gems/commonmarker-0.17.13/ext/commonmarker
-/usr/bin/ruby2.7 -I /usr/lib/ruby/2.7.0 -r ./siteconf20230113-2395-ndl5kk.rb extconf.rb
+/usr/bin/ruby2.7 -I /usr/lib/ruby/2.7.0 -r ./siteconf20230113-3894-14u3nn9.rb extconf.rb
 mkmf.rb can't find header files for ruby at /usr/lib/ruby/include/ruby.h
 
 You might have to install separate package for the ruby development
