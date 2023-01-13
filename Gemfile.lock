@@ -289,16 +289,19 @@ GEM
       unf_ext
     unf_ext (0.0.8.2)
     unicode-display_width (1.8.0)
+    webrick (1.7.0)
     zeitwerk (2.6.6)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  execjs (~> 2.8)
   github-pages
   nokogiri
   rack (~> 2.2.4)
   rspec
+  webrick (~> 1.7)
 
 BUNDLED WITH
-   1.17.3
+   2.4.3

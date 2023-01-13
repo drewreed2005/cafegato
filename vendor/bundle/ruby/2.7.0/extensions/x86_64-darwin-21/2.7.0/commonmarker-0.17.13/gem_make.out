@@ -1,0 +1,59 @@
+current directory: /Users/mister_dew/vscode/cafegato/vendor/bundle/ruby/2.7.0/gems/commonmarker-0.17.13/ext/commonmarker
+/nix/store/5dbxm29kwz7pry5jydkzvnvavyd1mwbi-ruby-2.7.6/bin/ruby -I /nix/store/5dbxm29kwz7pry5jydkzvnvavyd1mwbi-ruby-2.7.6/lib/ruby/2.7.0 extconf.rb
+creating Makefile
+
+current directory: /Users/mister_dew/vscode/cafegato/vendor/bundle/ruby/2.7.0/gems/commonmarker-0.17.13/ext/commonmarker
+make DESTDIR\= sitearchdir\=./.gem.20230112-64921-1j8kqta sitelibdir\=./.gem.20230112-64921-1j8kqta clean
+
+current directory: /Users/mister_dew/vscode/cafegato/vendor/bundle/ruby/2.7.0/gems/commonmarker-0.17.13/ext/commonmarker
+make DESTDIR\= sitearchdir\=./.gem.20230112-64921-1j8kqta sitelibdir\=./.gem.20230112-64921-1j8kqta
+compiling arena.c
+compiling autolink.c
+compiling blocks.c
+compiling buffer.c
+compiling cmark.c
+compiling cmark_ctype.c
+compiling commonmark.c
+compiling commonmarker.c
+In file included from commonmarker.c:3:
+In file included from ./houdini.h:9:
+./config.h:8:9: warning: 'HAVE_STDBOOL_H' macro redefined [-Wmacro-redefined]
+#define HAVE_STDBOOL_H
+        ^
+/nix/store/5dbxm29kwz7pry5jydkzvnvavyd1mwbi-ruby-2.7.6/include/ruby-2.7.0/x86_64-darwin21/ruby/config.h:39:9: note: previous definition is here
+#define HAVE_STDBOOL_H 1
+        ^
+1 warning generated.
+compiling core-extensions.c
+compiling ext_scanners.c
+compiling footnotes.c
+compiling houdini_href_e.c
+compiling houdini_html_e.c
+compiling houdini_html_u.c
+compiling html.c
+compiling inlines.c
+compiling iterator.c
+compiling latex.c
+compiling linked_list.c
+compiling man.c
+compiling map.c
+compiling node.c
+compiling plaintext.c
+compiling plugin.c
+compiling references.c
+compiling registry.c
+compiling render.c
+compiling scanners.c
+compiling strikethrough.c
+compiling syntax_extension.c
+compiling table.c
+compiling tagfilter.c
+compiling utf8.c
+compiling xml.c
+linking shared-object commonmarker/commonmarker.bundle
+ld: warning: directory not found for option '-L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-ruby-3.1.2/lib'
+ld: warning: directory not found for option '-L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-clang-wrapper-11.1.0/resource-root/lib'
+
+current directory: /Users/mister_dew/vscode/cafegato/vendor/bundle/ruby/2.7.0/gems/commonmarker-0.17.13/ext/commonmarker
+make DESTDIR\= sitearchdir\=./.gem.20230112-64921-1j8kqta sitelibdir\=./.gem.20230112-64921-1j8kqta install
+install -c -p -m 755 commonmarker.bundle ./.gem.20230112-64921-1j8kqta/commonmarker

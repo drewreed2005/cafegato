@@ -1,0 +1,18 @@
+current directory: /Users/mister_dew/vscode/cafegato/vendor/bundle/ruby/2.7.0/gems/http_parser.rb-0.8.0/ext/ruby_http_parser
+/nix/store/5dbxm29kwz7pry5jydkzvnvavyd1mwbi-ruby-2.7.6/bin/ruby -I /nix/store/5dbxm29kwz7pry5jydkzvnvavyd1mwbi-ruby-2.7.6/lib/ruby/2.7.0 extconf.rb
+creating Makefile
+
+current directory: /Users/mister_dew/vscode/cafegato/vendor/bundle/ruby/2.7.0/gems/http_parser.rb-0.8.0/ext/ruby_http_parser
+make DESTDIR\= sitearchdir\=./.gem.20230112-64921-878m8q sitelibdir\=./.gem.20230112-64921-878m8q clean
+
+current directory: /Users/mister_dew/vscode/cafegato/vendor/bundle/ruby/2.7.0/gems/http_parser.rb-0.8.0/ext/ruby_http_parser
+make DESTDIR\= sitearchdir\=./.gem.20230112-64921-878m8q sitelibdir\=./.gem.20230112-64921-878m8q
+compiling ruby_http_parser.c
+compiling ryah_http_parser.c
+linking shared-object ruby_http_parser.bundle
+ld: warning: directory not found for option '-L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-ruby-3.1.2/lib'
+ld: warning: directory not found for option '-L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-clang-wrapper-11.1.0/resource-root/lib'
+
+current directory: /Users/mister_dew/vscode/cafegato/vendor/bundle/ruby/2.7.0/gems/http_parser.rb-0.8.0/ext/ruby_http_parser
+make DESTDIR\= sitearchdir\=./.gem.20230112-64921-878m8q sitelibdir\=./.gem.20230112-64921-878m8q install
+install -c -p -m 755 ruby_http_parser.bundle ./.gem.20230112-64921-878m8q

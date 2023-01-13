@@ -1,0 +1,18 @@
+current directory: /Users/mister_dew/vscode/cafegato/vendor/bundle/ruby/2.7.0/gems/unf_ext-0.0.8.2/ext/unf_ext
+/nix/store/5dbxm29kwz7pry5jydkzvnvavyd1mwbi-ruby-2.7.6/bin/ruby -I /nix/store/5dbxm29kwz7pry5jydkzvnvavyd1mwbi-ruby-2.7.6/lib/ruby/2.7.0 extconf.rb
+checking for -lstdc++... yes
+creating Makefile
+
+current directory: /Users/mister_dew/vscode/cafegato/vendor/bundle/ruby/2.7.0/gems/unf_ext-0.0.8.2/ext/unf_ext
+make DESTDIR\= sitearchdir\=./.gem.20230112-64921-1uz2cmv sitelibdir\=./.gem.20230112-64921-1uz2cmv clean
+
+current directory: /Users/mister_dew/vscode/cafegato/vendor/bundle/ruby/2.7.0/gems/unf_ext-0.0.8.2/ext/unf_ext
+make DESTDIR\= sitearchdir\=./.gem.20230112-64921-1uz2cmv sitelibdir\=./.gem.20230112-64921-1uz2cmv
+compiling unf.cc
+linking shared-object unf_ext.bundle
+ld: warning: directory not found for option '-L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-ruby-3.1.2/lib'
+ld: warning: directory not found for option '-L/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-clang-wrapper-11.1.0/resource-root/lib'
+
+current directory: /Users/mister_dew/vscode/cafegato/vendor/bundle/ruby/2.7.0/gems/unf_ext-0.0.8.2/ext/unf_ext
+make DESTDIR\= sitearchdir\=./.gem.20230112-64921-1uz2cmv sitelibdir\=./.gem.20230112-64921-1uz2cmv install
+install -c -p -m 755 unf_ext.bundle ./.gem.20230112-64921-1uz2cmv
