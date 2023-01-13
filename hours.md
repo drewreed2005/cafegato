@@ -76,22 +76,24 @@ Here are the sort of things you can expect to see each day.
     <h1 style="color:white" class="widebr"><u>9AM: Kitty Breakfast</u></h1>
     The cats may need to take a short break from playing with toys or sitting on high-up hammocks to eat their own breakfast. (Don't worry: we make sure they're all fed plenty!)
     <span class="widebr"></span>
-    If you come on the weekend, the kitties will already have been fed.<br>
+    If you come on the weekend, the kitties will already have been fed.
+    <span class="widebr"></span>
     <div class="button">
-      <button type="submit" class="btn" onclick="openPopup()">Feeding Information</button>
-      <div class="popup" id="popup" style="width:600px">
+      <button type="submit" class="btn" onclick="openPopup('feedingbfpopup')">Feeding Information</button>
+      <div class="popup" id="feedingbfpopup" style="width:600px;transform:translate(-50%, -50%)">
         <img src="https://raw.githubusercontent.com/drewreed2005/cafegato/gh-pages/images/01-09-23-cat2.webp">
         <br><br>
         <h1 style="color:black"><b>Feeding Information</b></h1>
         <p style="font-size:18">Cats are fed, depending on their age and size, 1/3 of a cup to 1/2 of a cup of wet food per day, plus supplemental dry food accessible to them at any time. Our cats always have access to clean water in multiple separate bowls, filtered and replaced daily (sometimes multiple times daily). Purina ONE, our sponsor, is the provider of our wet and dry food.</p>
-        <button type="button" onclick="closePopup()">Close</button>
+        <button type="button" onclick="closePopup('feedingbfpopup')">Close</button>
 </div>
 <script>
-let popup = document.getElementById("popup");
-function openPopup(){
-  popup.classList.add("open-popup");
+function openPopup(id){
+  pop = document.getElementById(id);
+  pop.classList.add("open-popup");
 }
-function closePopup(){
-  popup.classList.remove("open-popup");
+function closePopup(id){
+  pop = document.getElementById(id)
+  pop.classList.remove("open-popup");
 }
 </script>
