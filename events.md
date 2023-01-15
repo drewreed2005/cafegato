@@ -112,11 +112,11 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
     // THIS IS A PLACEHOLDER FUNCTION FOR WHEN THE API IS RUNNING
     function submit_Form() {
         var tempname = document.getElementById('name').value;
-        alert("Thank you, " + tempname + ", for submitting an event! Watch your email for a confirmation message. \n\n(Warning: Please do not submit two events at a time! Your events may end up being cancelled as a result.)");
+        alert("Thank you, " + tempname + ", for submitting an event! Watch your email for a confirmation message. \n\n(Warning: Please do not submit two events at a time! Your events may end up being cancelled as a result.)"); 
     }
 
     // Static json, this can be used to test data prior to API and Model being ready
-    const json = '[{"_name":"Thomas Edison", "_email":"tedison@lightbulb.edu", "_event_name":"The Edison Troupe Meet", "_event_details":"We 10 selected geniuses will meet in the events room for a convergence.", "_date":"02/23/2023", "_start_time":"13:00", "_end_time":"14:00"}, {"_name":"John Mortensen", "_email":"jmortensen@powayusd.com", "_event_name":"Extra Credit Code Meetup", "_event_details":"Come to work on ideation and any confusion with the Full Stack CPT project. No phones.", "_date":"02/25/2023", "_start_time":"9:00", "_end_time":"11:00"}]';
+    const json = '[{"_name":"Thomas Edison", "_email":"tedison@lightbulb.edu", "_event_name":"The Edison Troupe Meet", "_event_details":"We 10 selected geniuses will meet in the events room for a convergence.", "_date":"02/23/2023", "_start_time":"13:00", "_end_time":"14:00"}, {"_name":"John Mortensen", "_email":"jmortensen@powayusd.com", "_event_name":"Extra Credit Code Meetup", "_event_details":"Come to work on ideation and any confusion with the Full Stack CPT project. No phones.", "_date":"02/25/2023", "_start_time":"10:00", "_end_time":"12:00"}]';
 
     // Convert JSON string to JSON object
     const data = JSON.parse(json);
