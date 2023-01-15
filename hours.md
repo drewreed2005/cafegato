@@ -89,11 +89,9 @@ Here are the sort of things you can expect to see each day.
 </div>
 <script>
 function openPopup(id){
-  pop = document.getElementById(id);
-  pop.classList.add("open-popup");
+  document.getElementById(id).classList.add("open-popup");
 }
 function closePopup(id){
-  pop = document.getElementById(id)
-  pop.classList.remove("open-popup");
+  document.getElementById(id).classList.remove("open-popup");
 }
 </script>
