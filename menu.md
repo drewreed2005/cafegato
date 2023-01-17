@@ -138,7 +138,7 @@
               <th><label for="email">Email</label></th>
           </tr>
           <tr>
-              <td><input type="text" name="name" id="name" placeholder = 'First Last'required="" /></td>
+              <td><input type="text" name="name" id="name" placeholder = 'First Last' required="" /></td>
               <td><input type="email" name="email" id="email" placeholder="abc@xyz.org" required="" /></td>
           </tr>
           <tr>
