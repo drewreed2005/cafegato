@@ -86,14 +86,36 @@
       </div>
     </div>
   </div>
+
+  <h1 style="color:black">Adopt A Cat!</h1>
+  <h3 style="color:grey">Apply For Adoption By Filling In The Information Below</h3>
+  <table>
+    <tr>
+      <th><label for="name">Name</label></th>
+      <th><label for="email">Email</label></th>
+      <th><label for="cat">Cat</label></th>
+      <th></th>
+    </tr>
+    <tr>
+      <td><input type="text" name="name" id="name" required></td>
+      <td><input type="email" name="email" id="email" placeholder="abc@xyz.org" required></td>
+      <td><select name="cat" id="cat">
+        <option value="apollo">Apollo</option>
+        <option value="morgana">Morgana</option>
+        <option value="garfield">Garfield</option>
+        <option value="dali">Dali</option>
+      </select></td>
+      <td ><button onclick="create_User()">Submit</button></td>  
+    </tr>
+  </table>
   
-<script>
-function openPopup(givid){
-  document.getElementById(givid).classList.add("open-popup");
-}
-function closePopup(givid){
-  document.getElementById(givid).classList.remove("open-popup");
-}
-</script>
+  <script>
+  function openPopup(givid){
+    document.getElementById(givid).classList.add("open-popup");
+  }
+  function closePopup(givid){
+    document.getElementById(givid).classList.remove("open-popup");
+  }
+  </script>
 </body>
 </html>
