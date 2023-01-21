@@ -94,6 +94,7 @@
       <th><label for="name">Name</label></th>
       <th><label for="email">Email</label></th>
       <th><label for="cat">Cat</label></th>
+      <th><label for="pin">Custom Pin</label></th>
       <th></th>
     </tr>
     <tr>
@@ -105,6 +106,7 @@
         <option value="garfield">Garfield</option>
         <option value="dali">Dali</option>
       </select></td>
+      <td><input type="pin" name="pin" id="pin" required></td>
       <td ><button onclick="create_User()">Submit</button></td>  
     </tr>
   </table>
