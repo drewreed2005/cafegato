@@ -25,7 +25,7 @@
   </div>
 
   <div class="eventbox" style="border:solid 6px #805900;background:#EDA500">
-    <img src="/images/morgana.jpg" width="250px" style="float:right;padding: 5px 5px 5px 5px">   
+    <img src="{{site.baseurl}}/images/morgana.jpg" width="250px" style="float:right;padding: 5px 5px 5px 5px">   
     <h1 style="color:white"><b>Morgana</b></h1>
     Homo Sapian  <br>
     Sex: Yes  <br>
@@ -46,7 +46,7 @@
   </div>
 
   <div class="eventbox" style="border:solid 6px #805900;background:#EDA500">
-    <img src="/images/garfield.jpg" width="250px" style="float:right;padding: 5px 5px 5px 5px">   
+    <img src="{{site.baseurl}}/images/garfield.jpg" width="250px" style="float:right;padding: 5px 5px 5px 5px">   
     <h1 style="color:white"><b>Garfield</b></h1>
     Orange  <br>
     Sex: Male  <br>
@@ -67,7 +67,7 @@
   </div>
 
   <div class="eventbox" style="border:solid 6px #805900;background:#EDA500">
-    <img src="/images/dali.jpg" width="250px" style="float:right;padding: 5px 5px 5px 5px">   
+    <img src="{{site.baseurl}}/images/dali.jpg" width="250px" style="float:right;padding: 5px 5px 5px 5px">   
     <h1 style="color:white"><b>Dali</b></h1>
     Tool  <br>
     Sex: Male  <br>
