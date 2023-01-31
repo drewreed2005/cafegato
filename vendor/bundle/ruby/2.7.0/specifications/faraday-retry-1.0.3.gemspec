@@ -15,8 +15,15 @@ Gem::Specification.new do |s|
   s.homepage = "https://github.com/lostisland/faraday-retry".freeze
   s.licenses = ["MIT".freeze]
   s.required_ruby_version = Gem::Requirement.new([">= 2.4".freeze, "< 4".freeze])
+<<<<<<< HEAD
   s.rubygems_version = "3.1.2".freeze
   s.summary = "Catches exceptions and retries each request a limited number of times".freeze
 
   s.installed_by_version = "3.1.2" if s.respond_to? :installed_by_version
+=======
+  s.rubygems_version = "3.3.20".freeze
+  s.summary = "Catches exceptions and retries each request a limited number of times".freeze
+
+  s.installed_by_version = "3.3.20" if s.respond_to? :installed_by_version
+>>>>>>> 74c566bd54db25b02b92f08f416ddd1f10505e81
 end

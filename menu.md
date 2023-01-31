@@ -53,6 +53,7 @@
       background: white;
       width: 100%;
     }
+<<<<<<< HEAD
     .popup{
       width: 400px; 
       background: #fff;
@@ -74,6 +75,8 @@
       margin-top: -50px;
       border-radius: 50%
     }
+=======
+>>>>>>> 74c566bd54db25b02b92f08f416ddd1f10505e81
    </style>
   <body class="bodydefault">
     <div class="wrapper">
@@ -189,6 +192,7 @@
               <td colspan="2"><textarea name="review" id="event details" rows="2" cols="45" style="resize:none" required=""></textarea></td>
               <td><input type="date" name="date" id="date" required="" /></td>
           </tr>
+<<<<<<< HEAD
 <body>
   <div class="container">
     <button type="submit" class="btn" onclick = "openPopup()">Submit Review</button>
@@ -260,3 +264,52 @@ function myFunction() {
 }
 </script>
 
+=======
+          <button type="button">Submit Review!</button>
+<table>
+  <thead>
+    <tr>
+      <th>Hot Drinks</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Esspresso 12oz…………..</td>
+      <td>$3.00</td>
+    </tr>
+    <tr>
+      <td>Cappuciono 12oz…………</td>
+      <td>$3.50</td>
+    </tr>
+  </tbody>
+</table>
+<table>
+  <thead>
+    <tr>
+      <th>Food</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Assorted Pastries…………..</td>
+      <td>$3.00</td>
+    </tr>
+    <tr>
+      <td>Fruit Yogurt Parfait…………</td>
+      <td>$5.00</td>
+    </tr>
+    <tr>
+      <td>Fluffy Cat Buns…………</td>
+      <td>$6.00</td>
+    </tr>
+  </tbody>
+</table>
+<p>| <img src="/images/cupcake.png" alt="" />   | <img src="/images/donut.png" alt="" />  | <img src="/images/macaron.png" alt="" />  |
+|—  |—  |—  |</p>
+      </section>
+    </div>
+  </body>
+</html>
+>>>>>>> 74c566bd54db25b02b92f08f416ddd1f10505e81

@@ -12,10 +12,17 @@ Gem::Specification.new do |s|
   s.email = "dblock@dblock.org".freeze
   s.homepage = "http://github.com/dblock/ruby-enum".freeze
   s.licenses = ["MIT".freeze]
+<<<<<<< HEAD
   s.rubygems_version = "3.1.2".freeze
   s.summary = "Enum-like behavior for Ruby.".freeze
 
   s.installed_by_version = "3.1.2" if s.respond_to? :installed_by_version
+=======
+  s.rubygems_version = "3.3.20".freeze
+  s.summary = "Enum-like behavior for Ruby.".freeze
+
+  s.installed_by_version = "3.3.20" if s.respond_to? :installed_by_version
+>>>>>>> 74c566bd54db25b02b92f08f416ddd1f10505e81
 
   if s.respond_to? :specification_version then
     s.specification_version = 4

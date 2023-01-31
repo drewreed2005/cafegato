@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 current directory: /home/tanisha1234/vscode/cafegato/cafegato/vendor/bundle/ruby/2.7.0/gems/commonmarker-0.17.13/ext/commonmarker
 /usr/bin/ruby2.7 -I /usr/lib/ruby/2.7.0 -r ./siteconf20230112-4651-133zz1.rb extconf.rb
 creating Makefile
@@ -58,3 +59,13 @@ linking shared-object commonmarker/commonmarker.so
 current directory: /home/tanisha1234/vscode/cafegato/cafegato/vendor/bundle/ruby/2.7.0/gems/commonmarker-0.17.13/ext/commonmarker
 make "DESTDIR=" install
 /usr/bin/install -c -m 0755 commonmarker.so ./.gem.20230112-4651-1jm0h07/commonmarker
+=======
+current directory: /home/kkcbal/vscode/cafegato/vendor/bundle/ruby/2.7.0/gems/commonmarker-0.17.13/ext/commonmarker
+/usr/bin/ruby2.7 -I /usr/lib/ruby/2.7.0 -r ./siteconf20230113-3894-14u3nn9.rb extconf.rb
+mkmf.rb can't find header files for ruby at /usr/lib/ruby/include/ruby.h
+
+You might have to install separate package for the ruby development
+environment, ruby-dev or ruby-devel for example.
+
+extconf failed, exit code 1
+>>>>>>> 74c566bd54db25b02b92f08f416ddd1f10505e81

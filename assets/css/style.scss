@@ -5,11 +5,12 @@
 
 /* "row style" is flexible size and aligns pictures in center */
 .row {
-    align-items: center;
-    display: flex;
-  }
+  align-items: center;
+  display: flex;
+}
   
   /* "column style" is one-third of the width with padding */
+<<<<<<< HEAD
   .column {
     flex: 33.33%;
     padding: 5px;
@@ -48,6 +49,46 @@
     font-size: 22px;
     font-weight: 500;
     border-radius: 15px;
+=======
+.column {
+  flex: 33.33%;
+  padding: 5px;
+}
+  /* this is intended to be used with a span tag for an extra large break */
+.widebr {
+  display: block;
+  margin-bottom: 1em;
+}
+.eventbox {
+  font-size: 20px;
+  letter-spacing: 2px;
+  margin: 10px;
+  background: #444444;
+  position: relative;
+  line-height: 2;
+  border: solid 6px black;
+  border-radius: 50px;
+  padding: 16px 30px 16px;
+  color: white;
+}
+.button{
+  width: 100%;
+  height: 7vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn{
+  padding: 10px 25px;
+  background: #ffffe0;
+  border: 3;
+  border-color: #FFDB45; 
+  outline: none;
+  cursor: pointer;
+  font-size: 22px;
+  font-weight: 500;
+  border-radius: 15px;
+>>>>>>> 74c566bd54db25b02b92f08f416ddd1f10505e81
 }
 .popup{
   width: 400px;
@@ -62,6 +103,10 @@
   color: #333;
   visibility: hidden;
   transition: transform 0.3s, top 0.3s;
+<<<<<<< HEAD
+=======
+  z-index: 99;
+>>>>>>> 74c566bd54db25b02b92f08f416ddd1f10505e81
 }
 .open-popup{
   visibility: visible;
