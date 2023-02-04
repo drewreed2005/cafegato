@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="en-US">
 <head>
+  <title>Not Bubsy 3D</title>
 <style>
   .flex-container {
     display: flex;
@@ -37,7 +38,7 @@
     justify-content: space-around;
   }
 
-  .flex-container2 > div {
+  .flex-container2 > button {
     background-color: black;
     font-family: 'Courier New';
     color: rgb(6, 240, 6);
@@ -45,27 +46,29 @@
     padding: 20px;
     font-size: 30px;
   }
-  #inv {
-    background-color: White;
-  }
 </style>
 </head>
 <body>
 
   <div class="flex-container">
-    <div style="flex-grow: 1;flex-shrink: 0;" id="inv"></div>
+    <div style="flex-grow: 1;flex-shrink: 0;background-color: White;"></div>
     <div class="terminalbox" style="flex-grow: 8">
-        <div>THIS IS THE TERMINAL</div>
+        <div id="terminal">THIS IS THE TERMINAL</div>
     </div>
-    <div style="flex-grow: 1;flex-shrink: 0;" id="inv"></div>  
+    <div style="flex-grow: 1;flex-shrink: 0;background-color: White;"></div>  
   </div>
   <div class="flex-container2">
-    <div id="inv"></div>
-    <div>A</div>
-    <div>B</div>
-    <div>X</div>
-    <div>Y</div>
-    <div id="inv"></div>
+    <div style="background-color: White;"></div>
+    <button type="button" onclick="click()">A</button>
+    <button type="button">B</button>
+    <button type="button">X</button>
+    <button type="button">Y</button>
+    <div style="background-color: White;"></div>
   </div>
+  <script>
+    function click() {
+      console.log("hello");
+    }
+  </script>
 </body>
 </html>
