@@ -55,34 +55,45 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
     <tr>
         <th><label for="name">Name</label></th>
         <th><label for="email">Email</label></th>
-        <th><label for="text">Event Name</label></th>
+        <th><label for="event_name">Event Name</label></th>
     </tr>
     <tr>
         <td><input type="text" name="name" id="name" required></td>
         <td><input type="email" name="email" id="email" placeholder="abc@xyz.org" required></td>
-        <td><input type="text" name="event name" id="event name" required></td>
+        <td><input type="text" name="event_name" id="event_name" required></td>
     </tr>
     <tr>
-        <th colspan="2"><label for="text">Details</label></th>
+        <th colspan="2"><label for="event_details">Details</label></th>
         <th><label for="date">Date</label></th>
     </tr>
     <tr>
-        <td colspan="2"><textarea name="event details" id="event details" rows="2" cols="45" style="resize:none" required></textarea></td>
+        <td colspan="2"><textarea name="event_details" id="event_details" rows="2" cols="47" style="resize:none" required></textarea></td>
         <td><input type="date" name="date" id="date" required></td>
     </tr>
     <tr>
-        <th><label for="time">Start Time</label></th>
-        <th><label for="time">End Time</label></th>
+        <th><label for="start_time">Start Time</label></th>
+        <th><label for="end_time">End Time</label></th>
+        <th><label for="password">Secret Password</label></th>
     </tr>
     <tr>
         <td><input type="time" name="start_time" id="start_time" min="8:00" max="18:00" required></td>
         <td><input type="time" name="end_time" id="end_time" min="8:00" max="18:00" required></td>
-        <td><button onclick="submit_Form()">Submit</button></td>
+        <td><input type="password" name="password" id="password" required></td>
     </tr>
 </table>
+<button class='btn' onclick="submit_Form()">Submit</button>
 
 <h2 style="color:black" class="widebr">Current Event Log</h2>
-<button class="btn" id="evlogbtn" onclick="showEvTable()">Show Event Log</button>
+<button class="btn" id="evlogbtn" onclick="showEvTable()">Show Event Log</button><button class="btn" id="logrefbtn" style="display:none" onclick="create_Table()">Refresh Log</button>
+<div style="font-size:25px;display:none" id="filters" name="filters">
+    Filters: <select id="timesort" name="timesort">
+    <option value="time_submitted">Time Submitted</option>
+    <option value="soonest">Soonest</option>
+    <option value="latest">Latest</option>
+    </select>
+    <input type="month" id="monthfil" name="monthfil" value="2023-02">
+    <button class="btn" id="sortbtn">Sort</button>
+</div>
 
 <table id="evtable" style="display:none;width:50%">
   <thead>
@@ -90,11 +101,11 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
     <th>Name</th>
     <th>Email</th>
     <th>Event Name</th>
-    <th>Event Description</th>
+    <th>Event Details</th>
     <th>Event Date</th>
     <th>Start Time</th>
     <th>End Time</th>
-    <th>ADMIN FUNCTIONS</th>
+    <th>Edit Your Event</th>
   </tr>
   </thead>
   <tbody id="evtablecont">
@@ -103,82 +114,164 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
 </table>
 
 <script>
+    // Static json, this can be used to test data prior to API and Model being ready
+    const json = '[{"id":1, "_name":"Thomas Edison", "_email":"tedison@lightbulb.edu", "_event_name":"The Edison Troupe Meet", "_event_details":"We 10 selected geniuses will meet in the events room for a convergence.", "_date":"02/23/2023", "_start_time":"13:00", "_end_time":"14:00", "_password":"theGOAT302"}, {"id":2, "_name":"John Mortensen", "_email":"jmortensen@powayusd.com", "_event_name":"Extra Credit Code Meetup", "_event_details":"Come to work on ideation and any confusion with the Full Stack CPT project. No phones.", "_date":"02/25/2023", "_start_time":"10:00", "_end_time":"12:00", "_password":"compsciyo34"}]';
+
+    // Convert JSON string to JSON object
+    const data = JSON.parse(json);
+    const table = document.getElementById("evtablecont");
+
     function showEvTable() {
+        create_Table();
         document.getElementById('evlogbtn').style = "display:none";
+        document.getElementById('logrefbtn').style = "display:block";
         document.getElementById('evtable').style = "display:block";
-        document.getElementById('evtablecontent').style = "display:block";
+        document.getElementById('filters').style = "font-size:25px;display:block";
+    }
+
+    function time_Dif(start, end) {
+        var hourdif = 60 * (Number(end.substring(0, 2)) - Number(start.substring(0, 2)));
+        var mindif = Number(end.substring(3, 5)) - Number(start.substring(3, 5));
+        return hourdif + mindif
     }
 
     // THIS IS A PLACEHOLDER FUNCTION FOR WHEN THE API IS RUNNING
     function submit_Form() {
-        var tempname = document.getElementById('name').value;
-        alert("Thank you, " + tempname + ", for submitting an event! Watch your email for a confirmation message. \n\n(Warning: Please do not submit two events at a time! Your events may end up being cancelled as a result.)"); 
-    }
-
-    // Static json, this can be used to test data prior to API and Model being ready
-    const json = '[{"_name":"Thomas Edison", "_email":"tedison@lightbulb.edu", "_event_name":"The Edison Troupe Meet", "_event_details":"We 10 selected geniuses will meet in the events room for a convergence.", "_date":"02/23/2023", "_start_time":"13:00", "_end_time":"14:00"}, {"_name":"John Mortensen", "_email":"jmortensen@powayusd.com", "_event_name":"Extra Credit Code Meetup", "_event_details":"Come to work on ideation and any confusion with the Full Stack CPT project. No phones.", "_date":"02/25/2023", "_start_time":"10:00", "_end_time":"12:00"}]';
-
-    // Convert JSON string to JSON object
-    const data = JSON.parse(json);
+        try {
+            // THERE WOULD BE A PULL FROM THE DATABASE HERE
+            // The variable "JSON", being the pre-API test JSON, is used as a validation test in its place.
+            var form_list = [document.getElementById('name').value, document.getElementById('email').value, document.getElementById('event_name').value, document.getElementById('event_details').value, document.getElementById('date').value, document.getElementById('start_time').value, document.getElementById('end_time').value, document.getElementById('password').value];
+            // for loop to ensure all fields were filled in
+            for (let i = 0; i < form_list.length; i++) {
+                if (form_list[i] == '') {
+                    alert("There was an error processing your form. Make sure all fields are filled in.");
+                    return;
+                };
+            };
+            for (let i = 0; i < 4; i++) {
+                if (form_list[i].length > 100) {
+                    alert("There was an error processing your form. Certain input fields have too many characters. Make sure that your name, email, event name, and details are all no more than 100 characters long. (This is a measure to prevent spam.)")
+                    return;
+                }
+            }
+            // Defining some variables for validation
+            var tempdate = document.getElementById('date').value;
+            var tempstime = document.getElementById('start_time').value;
+            var tempetime = document.getElementById('end_time').value;
+            var datefix = tempdate.substr(5, 2) + '/' + tempdate.substr(8, 10) + '/' + tempdate.substr(0, 4);
+            const hourdict = [{"open":10, "close":18}, {"open":8, "close":17}, {"open":8, "close":17}, {"open":8, "close":17}, {"open":8, "close":17}, {"open":8, "close":17}, {"open":10, "close":18}];
+            form_list[4] = datefix;
+            var fulldate = datefix + " " + tempstime;
+            let ev_date = new Date(fulldate);
+            let cur_date = new Date();
+            console.log(ev_date, cur_date);
+            let ev_dow = ev_date.getDay()
+            // validating date
+            var datedif = Math.ceil((ev_date - cur_date) / (1000 * 60 * 60 * 24));
+            if (1 > datedif || 365 < datedif) {
+                alert("There was an error processing your form. Make sure the date you have inputted is less than a year in the future.");
+                return;
+            };
+            // validating day of the week considering open hours
+            if (Number(tempstime.substring(0, 2)) < hourdict[ev_dow]["open"] || Number(tempstime.substring(0, 2)) >= hourdict[ev_dow]["close"]) {
+                alert("There was an error processing your form. It seems that your event starts before opening/after closing on " + datefix + ".");
+                return;
+            } else if (Number(tempetime.substring(0, 2)) <= hourdict[ev_dow]["open"] || Number(tempetime.substring(0, 2)) > hourdict[ev_dow]["close"]) {
+                alert("There was an error processing your form. It seems that your event ends before opening/after closing on " + datefix + ".");
+                return;
+            };
+            // validating event duration (must be at least 15 minutes, less than 3 hours, start must be before end)
+            var timedif = time_Dif(tempstime, tempetime); //in minutes
+            if (timedif < 15 || timedif > 180) {
+                alert("There was an error processing your form. Make sure that your event lasts at least 15 minutes, but no more than 3 hours.")
+                return;
+            };
+            // validating coincidence and email; JSON data is placeholder
+            var coinc = 0;
+            for (let i = 0; i < data.length; i++) {
+                temppull = data[i];
+                if (temppull['_date'] == datefix) {
+                    if (Number(tempstime.substring(0, 2)) <= Number(temppull['_start_time'].substr(0, 2)) < Number(tempetime.substring(0, 2)) || Number(tempstime.substring(0, 2)) < Number(temppull['_end_time'].substr(0, 2)) <= Number(tempetime.substring(0, 2))) {coinc = coinc + 1;};
+                };
+                if (temppull['_email'] == form_list[1]) {
+                    alert("There was an error processing your form. It seems that an event has already been created by that email. If someone has used your address to create an event without your consent, contact our staff.");
+                    return;
+                };
+            };
+            if (coinc > 5) {
+                alert("There was an error processing your form. Make sure that your event's timing does not coincide with the timing of more than five other events.");
+                return;
+            };
+            // if all validations successful
+            newid = data[data.length - 1]["id"] + 1;
+            jsonentry = {"id":newid, "_name":form_list[0], "_email":form_list[1], "_event_name":form_list[2], "_event_details":form_list[3], "_date":datefix, "_start_time":form_list[5], "_end_time":form_list[6], "_password":form_list[7]};
+            data.push(jsonentry);
+            alert("Thank you, " + form_list[0] + ", for submitting an event! Watch your email for a confirmation message.\n\n(Warning: Please do not submit two events at a time! Your events may end up being cancelled as a result.)");
+        } catch (err) {
+            alert("There was an error processing your form. (Failed to send to/pull from the database, or there was an error in the formatting of your form. Make sure you're on unrestricted WiFi.)");
+        };
+    };
 
     // prepare HTML result container for new output
-    const table = document.getElementById("evtablecont");
-    data.forEach(user => {
-        // build a row for each user
-        const tr = document.createElement("tr");
+    function create_Table() {
+        table.innerHTML = "";
+        data.forEach(user => {
+            // build a row for each user
+            const tr = document.createElement("tr");
 
-        // td's to build out each column of data
-        const name = document.createElement("td");
-        const email = document.createElement("td");
-        const event_name = document.createElement("td");
-        const event_details = document.createElement("td");
-        const date = document.createElement("td");
-        const start_time = document.createElement("td");
-        const end_time = document.createElement("td");
-        const action = document.createElement("td");
-            
-        // add content from user data          
-        name.innerHTML = user._name; 
-        email.innerHTML = user._email; 
-        event_name.innerHTML = user._event_name; 
-        event_details.innerHTML = user._event_details;
-        date.innerHTML = user._date; 
-        start_time.innerHTML = user._start_time; 
-        end_time.innerHTML = user._end_time;
+            // td's to build out each column of data
+            const name = document.createElement("td");
+            const email = document.createElement("td");
+            const event_name = document.createElement("td");
+            const event_details = document.createElement("td");
+            const date = document.createElement("td");
+            const start_time = document.createElement("td");
+            const end_time = document.createElement("td");
+            const action = document.createElement("td");
+                
+            // add content from user data          
+            name.innerHTML = user._name; 
+            email.innerHTML = user._email; 
+            event_name.innerHTML = user._event_name; 
+            event_details.innerHTML = user._event_details;
+            date.innerHTML = user._date; 
+            start_time.innerHTML = user._start_time; 
+            end_time.innerHTML = user._end_time;
 
-        // add action for update button
-        var updateBtn = document.createElement('input');
-        updateBtn.type = "button";
-        updateBtn.className = "btn";
-        updateBtn.value = "Update";
-        updateBtn.style = "margin-right:16px";
-        updateBtn.onclick = function () {
-        alert("Update: " + user._name);
+            // add action for update button
+            var updateBtn = document.createElement('input');
+            updateBtn.type = "button";
+            updateBtn.className = "btn";
+            updateBtn.value = "Update";
+            updateBtn.style = "margin-right:16px";
+            updateBtn.onclick = function () {
+            alert("Update: " + user._name);
+            };
+            action.appendChild(updateBtn);
+
+            // add action for delete button
+            var deleteBtn = document.createElement('input');
+            deleteBtn.type = "button";
+            deleteBtn.className = "btn";
+            deleteBtn.value = "Delete";
+            deleteBtn.style = "margin-right:16px"
+            deleteBtn.onclick = function () {
+            alert("Delete: " + user._name);
+            };
+            action.appendChild(deleteBtn);  
+
+            // add data to row
+            tr.appendChild(name);
+            tr.appendChild(email);
+            tr.appendChild(event_name);
+            tr.appendChild(event_details);
+            tr.appendChild(date);
+            tr.appendChild(start_time);
+            tr.appendChild(end_time);
+            tr.appendChild(action);
+
+            // add row to table
+            table.appendChild(tr);
+        });
         };
-        action.appendChild(updateBtn);
-
-        // add action for delete button
-        var deleteBtn = document.createElement('input');
-        deleteBtn.type = "button";
-        deleteBtn.className = "btn";
-        deleteBtn.value = "Delete";
-        deleteBtn.style = "margin-right:16px"
-        deleteBtn.onclick = function () {
-        alert("Delete: " + user._name);
-        };
-        action.appendChild(deleteBtn);  
-
-        // add data to row
-        tr.appendChild(name);
-        tr.appendChild(email);
-        tr.appendChild(event_name);
-        tr.appendChild(event_details);
-        tr.appendChild(date);
-        tr.appendChild(start_time);
-        tr.appendChild(end_time);
-        tr.appendChild(action);
-
-        // add row to table
-        table.appendChild(tr);
-    });
 </script>
