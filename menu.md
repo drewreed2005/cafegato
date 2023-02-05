@@ -169,49 +169,4 @@
               <td><input type="date" name="date" id="date" required="" /></td>
           </tr>
           <button type="button">Submit Review!</button>
-<table>
-  <thead>
-    <tr>
-      <th>Hot Drinks</th>
-      <th>Price</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Esspresso 12oz…………..</td>
-      <td>$3.00</td>
-    </tr>
-    <tr>
-      <td>Cappuciono 12oz…………</td>
-      <td>$3.50</td>
-    </tr>
-  </tbody>
-</table>
-<table>
-  <thead>
-    <tr>
-      <th>Food</th>
-      <th>Price</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Assorted Pastries…………..</td>
-      <td>$3.00</td>
-    </tr>
-    <tr>
-      <td>Fruit Yogurt Parfait…………</td>
-      <td>$5.00</td>
-    </tr>
-    <tr>
-      <td>Fluffy Cat Buns…………</td>
-      <td>$6.00</td>
-    </tr>
-  </tbody>
-</table>
-<p>| <img src="/images/cupcake.png" alt="" />   | <img src="/images/donut.png" alt="" />  | <img src="/images/macaron.png" alt="" />  |
-|—  |—  |—  |</p>
-      </section>
-    </div>
-  </body>
 </html>
