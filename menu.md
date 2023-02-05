@@ -116,6 +116,27 @@
 .rate > input:checked ~ label {
     color: #F840E3;
 }
+.popup{
+      width: 400px; 
+      background: #fff;
+      border-radius: 6px;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, -4%) scale(1);
+      visibility: hidden;
+      transition: transform 0.4s, top 0.4s;
+    }
+.open-popup{
+      visibility: visible;
+      top: 50%
+      transform: translate(-50%, -50%) scale(1);
+    }
+.popup img{
+      width: 100px;
+      margin-top: -50px;
+      border-radius: 50%
+    }
 </style>
 <p class="navbar">
     <table class="navbar">
@@ -169,4 +190,74 @@
               <td><input type="date" name="date" id="date" required="" /></td>
           </tr>
           <button type="button">Submit Review!</button>
-</html>
+<body>
+  <div class="container">
+    <button type="submit" class="btn" onclick = "openPopup()">Submit Review</button>
+    <div class="popup" id="popup">
+      <img src="/images/tick.png">
+      <h2>Thank you!</h2>
+      <p>Your review has been successfully recorded.</p>
+      <button type="button" onclick = "closePopup()">OK</button>
+    </div>
+  </div>
+<script>
+let popup = document.getElementById("popup");
+function openPopup(){
+    popup.classList.add("open-popup");
+}
+function closePopup(){
+    popup.classList.remove("open-popup");
+}
+</script>
+</body>
+
+    <tbody id="data-output">
+     <!-- from js file -->
+    </tbody>
+  </table>
+
+  <script>
+    const api_url = 'http://127.0.0.1:8086/api/users/'
+    async function getData() {
+        const response = await fetch(api_url);
+        const data = await response.json();
+        console.log(data)
+    getData()
+    }
+  </script>
+
+
+<head>
+<style>
+#panel, .flip {
+  font-size: 16px;
+  padding: 10px;
+  text-align: center;
+  background-color: #AA336A;
+  color: white;
+  border: solid 1px #A6D8A8;
+  margin: auto;
+}
+#panel {
+  display: none;
+}
+</style>
+</head>
+<body>
+<p class="flip" onclick="myFunction()">See Other Reviews</p>
+<div id="panel">
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Review</th>
+        <th>Rate</th>
+      </tr>
+    </thead>
+    <p>Json formated data here</p>
+<script>
+function myFunction() {
+  document.getElementById("panel").style.display = "block";
+}
+</script>
+
