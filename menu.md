@@ -253,7 +253,7 @@ function closePopup(){
 <body>
 <p class="flip" onclick="myFunction()">See Other Reviews</p>
 <div id="panel">
-<img src="/images/ss1.png">
+
   <table>
     <thead>
       <tr>
