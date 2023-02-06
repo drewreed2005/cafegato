@@ -137,6 +137,9 @@
       margin-top: -50px;
       border-radius: 50%
     }
+respond:valid {
+  openPopup()
+}
 </style>
 
 <div id="respond">
@@ -166,7 +169,7 @@
                   </div>
     <br>
     <br>
-    <input name="submit" type="submit" value="Submit Review" class="btn" onclick = "openPopup()" />
+    <input name="submit" type="submit" value="Submit Review" class="btn" />
   </form>
 </div>
 
