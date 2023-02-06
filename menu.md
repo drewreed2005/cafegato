@@ -137,9 +137,6 @@
       margin-top: -50px;
       border-radius: 50%
     }
-respond:valid {
-  this.openPopup.onsubmitClick()
-}
 </style>
 
 <div id="respond">
