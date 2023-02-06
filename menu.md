@@ -189,7 +189,6 @@
 
 <body>
   <div class="container">
-    <button type="submit" class="btn" onclick = "openPopup()">Submit Review</button>
     <div class="popup" id="popup">
       <img src="/images/tick1.png">
       <h2>Thank you!</h2>
