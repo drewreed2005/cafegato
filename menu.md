@@ -166,7 +166,7 @@
                   </div>
     <br>
     <br>
-    <input name="submit" type="submit" value="Submit Review" />
+    <input name="submit" type="submit" value="Submit Review" class="btn" onclick = "openPopup()" />
   </form>
 </div>
 
