@@ -140,7 +140,7 @@
 </style>
 
 <div id="respond">
-  <h3>Leave a Review!</h3>
+  <h2>Leave a Review!</h2>
   <form action="post_comment.php" method="post" id="commentform">
     <label for="comment_author" class="required">Your name *</label>
     <input type="text" name="comment_author" id="comment_author" value="" tabindex="1" required="required"><br>
@@ -150,6 +150,7 @@
     <textarea name="comment" id="comment" rows="10" tabindex="4"  required="required"></textarea><br>
     <input type="hidden" name="comment_post_ID" value="1" id="comment_post_ID" />
     <input type="hidden" name="comment_post_ID" value="<?php echo($comment_post_ID); ?>" id="comment_post_ID" />
+    <br>
     <label class="required">Your Rating *</label>
                   <div class="rate">
                     <input type="radio" id="star5" name="rate" value="5" />
