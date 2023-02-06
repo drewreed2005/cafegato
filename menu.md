@@ -182,134 +182,158 @@
 * {
   box-sizing: border-box;
 }
-body {
-  font-family: Arial;
-  margin: 0 auto; /* Center website */
-  max-width: 800px; /* Max width */
-  padding: 20px;
-}
-.heading {
-  font-size: 25px;
-  margin-right: 25px;
-}
-.fa {
-  font-size: 25px;
-}
-.checked {
-  color: orange;
-}
-/* Three column layout */
-.side {
-  float: left;
-  width: 15%;
-  margin-top:10px;
-}
-.middle {
-  margin-top:10px;
-  float: left;
-  width: 70%;
-}
-/* Place text to the right */
-.right {
-  text-align: right;
-}
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-/* The bar container */
-.bar-container {
-  width: 100%;
-  background-color: #F1F1F1;
-  text-align: center;
-  color: white;
-}
-/* Individual bars */
-.bar-5 {width: 60%; height: 18px; background-color: #04AA6D;}
-.bar-4 {width: 30%; height: 18px; background-color: #2196F3;}
-.bar-3 {width: 10%; height: 18px; background-color: #00BCD4;}
-.bar-2 {width: 4%; height: 18px; background-color: #FF9800;}
-.bar-1 {width: 15%; height: 18px; background-color: #F44336;}
-/* Responsive layout - make the columns stack on top of each other instead of next to each other */
-@media (max-width: 400px) {
-  .side, .middle {
-    width: 100%;
-  }
-  .right {
-    display: none;
-  }
-}
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+<style>
+   * {
+      box-sizing: border-box;
+   }
+   body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      margin: 30px;
+      max-width: 800px;
+      padding: 20px;
+   }
+   .rateHeader {
+      font-size: 25px;
+      margin-right: 25px;
+   }
+   .fa {
+      font-size: 25px;
+      color: grey;
+   }
+   .rated {
+      color: rgb(255, 0, 0);
+      border: 2px solid yellow;
+   }
+   .data {
+      float: left;
+      width: 15%;
+      margin-top: 10px;
+      font-weight: bold;
+   }
+   .progressBar {
+      margin-top: 10px;
+      float: left;
+      width: 70%;
+   }
+   .right {
+      text-align: right;
+   }
+   .row:after {
+      content: "";
+      display: table;
+      clear: both;
+   }
+   .progressContainer {
+      width: 100%;
+      background-color: #F1F1F1;
+      text-align: center;
+      color: white;
+      border-radius: 10px;
+   }
+   .bar-1, .bar-2, .bar-3, .bar-4, .bar-5 {
+      border-radius: 10px;
+   }
+   .bar-5 {
+      width: 70%;
+      height: 18px;
+      background-color: rgb(76, 175, 162);
+   }
+   .bar-4 {
+      width: 50%;
+      height: 18px;
+      background-color: rgb(243, 222, 33);
+   }
+   .bar-3 {
+      width: 20%;
+      height: 18px;
+      background-color: #12D400;
+   }
+   .bar-2 {
+      width: 65%;
+      height: 18px;
+      background-color: #FF0055;
+   }
+   .bar-1 {
+      width: 40%;
+      height: 18px;
+      background-color: #A836F4;
+   }
 </style>
 </head>
 <body>
-<span class="heading">User Rating</span>
-<span class="fa fa-star checked"></span>
-<span class="fa fa-star checked"></span>
-<span class="fa fa-star checked"></span>
-<span class="fa fa-star checked"></span>
+<span class="rateHeader">User Rating</span>
+<span class="fa fa-star rated"></span>
+<span class="fa fa-star rated"></span>
+<span class="fa fa-star rated"></span>
+<span class="fa fa-star rated"></span>
 <span class="fa fa-star"></span>
-<p>4.1 average based on 254 reviews.</p>
-<hr style="border:3px solid #F1F1F1">
+<p>3.9 average based on 200 foodies.</p>
 <div class="row">
-  <div class="side">
-    <div>5 star</div>
-  </div>
-  <div class="middle">
-    <div class="bar-container">
-      <div class="bar-5"></div>
-    </div>
-  </div>
-  <div class="side right">
-    <div>150</div> <br>
-  </div>
-  <div class="side">
-    <div>4 star</div>
-  </div>
-  <div class="middle">
-    <div class="bar-container">
-      <div class="bar-4"></div>
-    </div>
-  </div>
-  <div class="side right">
-    <div>63</div> <br>
-  </div>
-  <div class="side">
-    <div>3 star</div>
-  </div>
-  <div class="middle">
-    <div class="bar-container">
-      <div class="bar-3"></div>
-    </div>
-  </div>
-  <div class="side right">
-    <div>15</div> <br>
-  </div>
-  <div class="side">
-    <div>2 star</div>
-  </div>
-  <div class="middle">
-    <div class="bar-container">
-      <div class="bar-2"></div>
-    </div>
-  </div>
-  <div class="side right">
-    <div>6</div> <br>
-  </div>
-  <div class="side">
-    <div>1 star</div>
-  </div>
-  <div class="middle">
-    <div class="bar-container">
-      <div class="bar-1"></div>
-    </div>
-  </div>
-  <div class="side right">
-    <div>20</div> <br>
-  </div>
+<div class="data">
+<div>5 star</div>
+</div>
+<div class="progressBar">
+<div class="progressContainer">
+<div class="bar-5"></div>
+</div>
+</div>
+<div class="data right">
+<div>120</div>
+</div>
+<div class="data">
+<div>4 star</div>
+</div>
+<div class="progressBar">
+<div class="progressContainer">
+<div class="bar-4"></div>
+</div>
+</div>
+<div class="data right">
+<div>110</div>
+</div>
+<div class="data">
+<div>3 star</div>
+</div>
+<div class="progressBar">
+<div class="progressContainer">
+<div class="bar-3"></div>
+</div>
+</div>
+<div class="data right">
+<div>30</div>
+</div>
+<div class="data">
+<div>2 star</div>
+</div>
+<div class="progressBar">
+<div class="progressContainer">
+<div class="bar-2"></div>
+</div>
+</div>
+<div class="data right">
+<div>20</div>
+</div>
+<div class="data">
+<div>1 star</div>
+</div>
+<div class="progressBar">>
+<div class="progressContainer">
+<div class="bar-1"></div>
+</div>
+</div>
+<div class="data right">
+<div>12</div>
+</div>
 </div>
 </body>
+</html>
+
 <p class="navbar">
     <table class="navbar">
         <tr>
