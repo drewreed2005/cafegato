@@ -455,3 +455,48 @@ li:last-child .hentry, #content > .hentry {border: 0; margin: 0;}
 
 #add-comment input[type='submit'] {float: right; margin: 0 .5em;}
 #add-comment * {margin-bottom: .5em;}
+
+body {
+    font-family: Arial;
+    margin: 0 auto; /* Center website */
+    max-width: 800px; /* Max width */
+    padding: 20px;
+  }
+  .heading {
+    font-size: 25px;
+    margin-right: 25px;
+  }
+  .fa {
+    font-size: 25px;
+  }
+  .checked {
+    color: orange;
+  }
+  /* Three column layout */
+  .side {
+    float: left;
+    width: 15%;
+    margin-top:10px;
+  }
+  .middle {
+    margin-top:10px;
+    float: left;
+    width: 70%;
+  }
+  /* Place text to the right */
+  .right {
+    text-align: right;
+  }
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  /* The bar container */
+  .bar-container {
+    width: 100%;
+    background-color: #F1F1F1;
+    text-align: center;
+    color: white;
+  }
