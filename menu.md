@@ -150,7 +150,6 @@
     <textarea name="comment" id="comment" rows="10" tabindex="4"  required="required"></textarea><br>
     <input type="hidden" name="comment_post_ID" value="1" id="comment_post_ID" />
     <input type="hidden" name="comment_post_ID" value="<?php echo($comment_post_ID); ?>" id="comment_post_ID" />
-    <input name="submit" type="submit" value="Submit Review" />
     <table>
               <th><label for="text">Rating</label></th>
               <td>
@@ -169,8 +168,8 @@
                   </div>
                 </body>
               </td>
-          </tr>
           </table>
+    <input name="submit" type="submit" value="Submit Review" />
   </form>
 </div>
 
