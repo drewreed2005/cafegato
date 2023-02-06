@@ -163,7 +163,8 @@
                     <input type="radio" id="star1" name="rate" value="1" />
                     <label for="star1" title="text"></label>
                   </div>
-                </body>
+    <br>
+    <br>
     <input name="submit" type="submit" value="Submit Review" />
   </form>
 </div>
