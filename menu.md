@@ -148,7 +148,7 @@
 body {
  font-family: Arial;
  margin: 0 auto; /* Center website */
-  max-width: 1500px; /* Max width */
+  max-width: 9000px; /* Max width */
   padding: 20px;
 }
 .heading {
@@ -195,7 +195,7 @@ body {
 .bar-2 {width: 4%; height: 18px; background-color: #FF9800;}
 .bar-1 {width: 15%; height: 18px; background-color: #F44336;}
 /* Responsive layout - make the columns stack on top of each other instead of next to each other */
-@media (max-width: 400px) {
+@media (max-width: 9000px) {
   .side, .middle {
     width: 100%;
   }
