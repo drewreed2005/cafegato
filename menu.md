@@ -245,11 +245,19 @@ function closePopup(){
     <thead>
       <tr>
         <th>Name</th>
+          <p>Mr. Yeung</p>
+          <p>John Doe</p>
+          <p>Avagadro</p>
         <th>Review</th>
+          <p>So amazing, it's actually insane</p>
+          <p>Disgusting get out</p>
+          <p>WOWWW</p>
         <th>Rate</th>
+          <p>5/5</p>
+          <p>1/5</p>
+          <p>4/5</p>
       </tr>
     </thead>
-    <p>Json formated data here</p>
 <script>
 function myFunction() {
   document.getElementById("panel").style.display = "block";
