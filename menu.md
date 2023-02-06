@@ -150,25 +150,8 @@
     <textarea name="comment" id="comment" rows="10" tabindex="4"  required="required"></textarea><br>
     <input type="hidden" name="comment_post_ID" value="1" id="comment_post_ID" />
     <input type="hidden" name="comment_post_ID" value="<?php echo($comment_post_ID); ?>" id="comment_post_ID" />
-  </form>
-</div>
-
-<p class="navbar">
-    <table class="navbar">
-        <tr>
-            <td><a href="."><img src="/images/Studio_Project.png" width="150px"></a></td><!--ABOUT US IN HERE-->
-            <td><a href="cats" class="headlink">Cats</a></td>
-            <td><a href="menu" class="headlink">Menu</a></td>
-            <td><a href="hours" class="headlink">Hours</a></td>
-            <td><a href="events" class="headlink">Events</a></td>
-            <td><a href="shop" class="headlink">Shop</a></td>
-        </tr>
-    </table>
-</p>
-          <br>
-        </div>
-        <!-- this is Jekyll magic, each md file in site will be inserted here -->
-        <table>
+    <input name="submit" type="submit" value="Submit Review" />
+    <table>
               <th><label for="text">Rating</label></th>
               <td>
                 <body>
@@ -187,6 +170,27 @@
                 </body>
               </td>
           </tr>
+          </table>
+  </form>
+</div>
+
+<p class="navbar">
+    <table class="navbar">
+        <tr>
+            <td><a href="."><img src="/images/Studio_Project.png" width="150px"></a></td><!--ABOUT US IN HERE-->
+            <td><a href="cats" class="headlink">Cats</a></td>
+            <td><a href="menu" class="headlink">Menu</a></td>
+            <td><a href="hours" class="headlink">Hours</a></td>
+            <td><a href="events" class="headlink">Events</a></td>
+            <td><a href="shop" class="headlink">Shop</a></td>
+        </tr>
+    </table>
+</p>
+          <br>
+        </div>
+        <!-- this is Jekyll magic, each md file in site will be inserted here -->
+        
+
 <body>
   <div class="container">
     <button type="submit" class="btn" onclick = "openPopup()">Submit Review</button>
@@ -211,8 +215,7 @@ function closePopup(){
     <tbody id="data-output">
      <!-- from js file -->
     </tbody>
-  </table>
-
+  
   <script>
     const api_url = 'http://127.0.0.1:8086/api/users/'
     async function getData() {
