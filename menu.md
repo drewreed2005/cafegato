@@ -142,7 +142,6 @@
       border-radius: 50%
     }
 </style>
-<!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -232,7 +231,7 @@ body {
     </div>
   </div>
   <div class="side right">
-    <div>150</div>
+    <div>150</div><br>
   </div>
   <div class="side">
     <div>4 star</div>
