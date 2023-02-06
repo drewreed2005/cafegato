@@ -359,7 +359,7 @@ body {
     </div>
   </div>
   <div class="side right">
-    <div>150</div>
+    <div>150</div> <br>
   </div>
   <div class="side">
     <div>4 star</div>
@@ -370,7 +370,7 @@ body {
     </div>
   </div>
   <div class="side right">
-    <div>63</div>
+    <div>63</div> <br>
   </div>
   <div class="side">
     <div>3 star</div>
@@ -381,7 +381,7 @@ body {
     </div>
   </div>
   <div class="side right">
-    <div>15</div>
+    <div>15</div> <br>
   </div>
   <div class="side">
     <div>2 star</div>
@@ -392,7 +392,7 @@ body {
     </div>
   </div>
   <div class="side right">
-    <div>6</div>
+    <div>6</div> <br>
   </div>
   <div class="side">
     <div>1 star</div>
@@ -403,7 +403,7 @@ body {
     </div>
   </div>
   <div class="side right">
-    <div>20</div>
+    <div>20</div> <br>
   </div>
 </div>
 </body>
