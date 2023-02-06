@@ -138,7 +138,7 @@
       border-radius: 50%
     }
 respond:valid {
-  respond.openPopup.onsubmitClick()
+  this.openPopup.onsubmitClick()
 }
 </style>
 
