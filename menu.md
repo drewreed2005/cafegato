@@ -150,10 +150,7 @@
     <textarea name="comment" id="comment" rows="10" tabindex="4"  required="required"></textarea><br>
     <input type="hidden" name="comment_post_ID" value="1" id="comment_post_ID" />
     <input type="hidden" name="comment_post_ID" value="<?php echo($comment_post_ID); ?>" id="comment_post_ID" />
-    <table>
-    <p>Rate</p>
-              <td>
-                <body>
+    <label class="required">Your Rating *</label>
                   <div class="rate">
                     <input type="radio" id="star5" name="rate" value="5" />
                     <label for="star5" title="text"></label>
@@ -167,8 +164,6 @@
                     <label for="star1" title="text"></label>
                   </div>
                 </body>
-              </td>
-          </table>
     <input name="submit" type="submit" value="Submit Review" />
   </form>
 </div>
