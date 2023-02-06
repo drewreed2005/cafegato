@@ -150,7 +150,6 @@
     <textarea name="comment" id="comment" rows="10" tabindex="4"  required="required"></textarea><br>
     <input type="hidden" name="comment_post_ID" value="1" id="comment_post_ID" />
     <input type="hidden" name="comment_post_ID" value="<?php echo($comment_post_ID); ?>" id="comment_post_ID" />
-    <input name="submit" type="submit" value="Submit Review" />
   </form>
 </div>
 
@@ -170,15 +169,6 @@
         </div>
         <!-- this is Jekyll magic, each md file in site will be inserted here -->
         <table>
-          <tr>
-              <th><label for="name">Name</label></th>
-              <th><label for="email">Email</label></th>
-          </tr>
-          <tr>
-              <td><input type="text" name="name" id="name" placeholder = 'First Last' required="" /></td>
-              <td><input type="email" name="email" id="email" placeholder="abc@xyz.org" required="" /></td>
-          </tr>
-          <tr>
               <th><label for="text">Rating</label></th>
               <td>
                 <body>
@@ -196,14 +186,6 @@
                   </div>
                 </body>
               </td>
-          </tr>
-          <tr>
-            <th colspan="2"><label for="text">Review</label></th>
-              <th><label for="date">Date</label></th>
-          </tr>
-          <tr>
-              <td colspan="2"><textarea name="review" id="event details" rows="2" cols="45" style="resize:none" required=""></textarea></td>
-              <td><input type="date" name="date" id="date" required="" /></td>
           </tr>
 <body>
   <div class="container">
