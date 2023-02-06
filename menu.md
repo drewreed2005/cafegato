@@ -189,11 +189,11 @@ body {
  text-align: center;
  color: white;
 }
-.bar-5 {width: 60%; height: 18px; background-color: #04AA6D;}
-.bar-4 {width: 30%; height: 18px; background-color: #2196F3;}
-.bar-3 {width: 10%; height: 18px; background-color: #00BCD4;}
-.bar-2 {width: 4%; height: 18px; background-color: #FF9800;}
-.bar-1 {width: 15%; height: 18px; background-color: #F44336;}
+.bar-5 {width: 60%; height: 18px; background-color: #F840E3;}
+.bar-4 {width: 30%; height: 18px; background-color: #F840E3;}
+.bar-3 {width: 10%; height: 18px; background-color: #F840E3;}
+.bar-2 {width: 4%; height: 18px; background-color: #F840E3;}
+.bar-1 {width: 15%; height: 18px; background-color: #F840E3;}
 /* Responsive layout - make the columns stack on top of each other instead of next to each other */
 @media (max-width: 20000px) {
   .side, .middle {
