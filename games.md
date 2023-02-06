@@ -116,6 +116,13 @@ function closePopup1(){
         color: #000000;
         font-size: 4rem;
     }
+    h2 {
+      /* Title Design */
+        text-align: center;
+        font-family: Serif;
+        color: #000000;
+        font-size: 3rem;
+    }
     .howto-container{
         width: 100%
         background: #3c5077;
@@ -124,53 +131,53 @@ function closePopup1(){
         justify-content: left;
     }
     /* How To button design: */
-    .howto-button{
-        font-size: 1.5rem;
-        font-weight: 600;
-        font-family: Courier, Times New Roman,Times, Serif;
-        padding: 0.5rem;
-        cursor: pointer;
-        text-transform: uppercase;
-        color: #a36c54;
-        background-color: #ebd1ae;
-        border: 2px solid #7C826B;
+    .howto-button{    
+      background: #ffffe0;
+      border: 3;
+      border-color: #FFDB45; 
+      outline: none;
+      cursor: pointer;
+      font-size: 20px;
+      font-weight: 500;
+      border-radius: 10px;
+      padding: 5 10px 5px;
     }
     .howto-popup{
-        width: 100px
-        background: #f6f4ee
-        border-radius: 5px;
-        postion: absolute;
-        top: 0
-        left: 50%
-        transform: translate(-50%,-50%) scale(0.1);
-        padding: 0 30px 30px;
-        visibility: hidden;
-        font-size: 1.5rem;
-        font-weight: 600;
-        font-family: Courier, Times New Roman,Times, Serif;
-        border: 2px solid #7C826B;
-        color: #a36c54;
-        background-color: #f6f4ee;
+      width: 400px;
+      background: #F8E69A;
+      border-radius: 20px;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%,-50%) scale(0.1);
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: 400;
+      padding: 0 30px 30px;
+      visibility: hidden;
+      transition: transform 0.3s, top 0.3s;
     }
     .open-popup{
       visibility: visible;
-      top: 50%
+      top: 50%;
+      transform: translate(-50%,-50%) scale(1);
     }
     .howto-popup h2{
         font-weight: 30px
-        margin: 30px 0 10px
+        margin: 30px 10 10px
     }
     .howto-popup button{
         width: 10%
-        margin-top: 2px;]
+        margin-top: 2px;
         font-size: 18px;
         border-radius: 4px;
         cursor: pointer;
-        font-family: Courier, Times New Roman,Times, Serif;
+        background-color:#ffad51
+
     }
     .howto-popup button:hover{
-      background-color:#e2e2e2;
-      transition: 0.3s;
+      background-color:#ff941c;
+      transition: 0.1s;
     }
     /* Keyboard button display: */
        #keyboard {
@@ -188,25 +195,18 @@ function closePopup1(){
     /* Keyboard button design: */
       .keyboard-button {
         font-size: 1.5rem;
-        font-weight: 600;
-        font-family: Courier, Times New Roman,Times, Serif;
+        font-weight: 400;
         padding: 0.5rem;
         margin: 0 3px;
         cursor: pointer;
         text-transform: uppercase;
-        color: #7c826b;
-        background-color: #ebd1ae;
-        border: 2px solid #a36c54;
+        color: #000000;
+        background-color: #ffffe0;
+        border: 2px solid #FFDB45;
       }
     /* Mouse hover over button color change: */
     .howto-button:hover, .keyboard-button:hover {
-      background-color:#d9b88d;
-      transition: 0.1s;
-    } outline: */
-    .howto-button:focus, .keyboard-button:focus {
-      outline-color: transparent;
-      outline-style:solid;
-      box-shadow: 0 0 0 2px #ff941c;
+      background-color: #ffee87;
       transition: 0.1s;
     }
     .container {
