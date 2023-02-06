@@ -140,12 +140,12 @@
 </style>
 
 <div id="respond">
-  <h3>Leave a Comment</h3>
+  <h3>Leave a Review!</h3>
   <form action="post_comment.php" method="post" id="commentform">
     <label for="comment_author" class="required">Your name</label>
     <input type="text" name="comment_author" id="comment_author" value="" tabindex="1" required="required">
     <label for="email" class="required">Your email;</label>
-    <input type="email" name="email" id="email" value="" tabindex="2" required="required">
+    <input type="email" name="email" id="email" value="" tabindex="2" required="required"><br>
     <label for="comment" class="required">Your Review</label>
     <textarea name="comment" id="comment" rows="10" tabindex="4"  required="required"></textarea>
     <input type="hidden" name="comment_post_ID" value="1" id="comment_post_ID" />
@@ -204,7 +204,6 @@
               <td colspan="2"><textarea name="review" id="event details" rows="2" cols="45" style="resize:none" required=""></textarea></td>
               <td><input type="date" name="date" id="date" required="" /></td>
           </tr>
-          <button type="button">Submit Review!</button>
 <body>
   <div class="container">
     <button type="submit" class="btn" onclick = "openPopup()">Submit Review</button>
