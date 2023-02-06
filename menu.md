@@ -150,6 +150,7 @@
     <textarea name="comment" id="comment" rows="10" tabindex="4"  required="required"></textarea><br>
     <input type="hidden" name="comment_post_ID" value="1" id="comment_post_ID" />
     <input type="hidden" name="comment_post_ID" value="<?php echo($comment_post_ID); ?>" id="comment_post_ID" />
+    <input data-role="rating" data-value="5" data-star-color="#aa00ff" data-starred-color='dc4fad'>
     <br>
     <label class="required">Your Rating *</label>
                   <div class="rate">
