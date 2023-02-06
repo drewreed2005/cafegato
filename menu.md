@@ -45,14 +45,19 @@
 <!-- You can set your favicon here -->
 <!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
 <!-- end custom head snippets -->
+
   </head>
   <style>
-    .bodydefault {
+.bodydefault {
       font-family: 'OpenSansRegular', Geneva, Verdana, sans-serif;
       color: black;
       background: white;
       width: 100%;
     }
+  <link rel="stylesheet" href="https://cdn.korzh.com/metroui/v4.5.1/css/metro-all.min.css">
+
+
+
    </style>
   <body class="bodydefault">
     <div class="wrapper">
@@ -137,10 +142,142 @@
       margin-top: -50px;
       border-radius: 50%
     }
+* {
+ box-sizing: border-box;
+}
+body {
+ font-family: Arial;
+ margin: 0 auto; /* Center website */
+  max-width: 9000px; /* Max width */
+  padding: 20px;
+}
+.heading {
+ font-size: 25px;
+ margin-right: 25px;
+}
+.fa {
+ font-size: 25px;
+}
+.checked {
+  color: orange;
+}
+/* Three column layout */
+.side {
+ float: left;
+  width: 15%;
+  margin-top: 10px;
+}
+.middle {
+  float: left;
+  width: 70%;
+  margin-top: 10px;
+}
+/* Place text to the right */
+.right {
+ text-align: right;
+}
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+/* The bar container */
+.bar-container {
+ width: 100%;
+ background-color: #F1F1F1;
+ text-align: center;
+ color: white;
+}
+.bar-5 {width: 60%; height: 18px; background-color: #F840E3;}
+.bar-4 {width: 30%; height: 18px; background-color: #F840E3;}
+.bar-3 {width: 10%; height: 18px; background-color: #F840E3;}
+.bar-2 {width: 4%; height: 18px; background-color: #F840E3;}
+.bar-1 {width: 15%; height: 18px; background-color: #F840E3;}
+/* Responsive layout - make the columns stack on top of each other instead of next to each other */
+@media (max-width: 20000px) {
+  .side, .middle {
+    width: 100%;
+  }
+  /* Hide the right column on small screens */
+  .right {
+   display: none;
+  }
+}
 </style>
 
+
+
+<!-- Add icon library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<span class="heading">User Rating</span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star"></span>
+<p>4.1 average based on 254 reviews.</p>
+<hr style="border:3px solid #F1F1F1">
+<div class="row">
+  <div class="side">
+    <div>5 star</div>
+  </div>
+  <div class="middle">
+    <div class="bar-container">
+      <div class="bar-5"></div>
+    </div>
+  </div>
+  <div class="side right">
+    <div>150</div>
+  </div>
+  <div class="side">
+    <div>4 star</div>
+  </div>
+  <div class="middle">
+    <div class="bar-container">
+      <div class="bar-4"></div>
+    </div>
+  </div>
+  <div class="side right">
+    <div>63</div>
+  </div>
+  <div class="side">
+    <div>3 star</div>
+  </div>
+  <div class="middle">
+    <div class="bar-container">
+      <div class="bar-3"></div>
+    </div>
+  </div>
+  <div class="side right">
+    <div>15</div>
+  </div>
+  <div class="side">
+    <div>2 star</div>
+  </div>
+  <div class="middle">
+    <div class="bar-container">
+      <div class="bar-2"></div>
+    </div>
+  </div>
+  <div class="side right">
+    <div>6</div>
+  </div>
+  <div class="side">
+    <div>1 star</div>
+  </div>
+  <div class="middle">
+    <div class="bar-container">
+      <div class="bar-1"></div>
+    </div>
+  </div>
+  <div class="side right">
+    <div>20</div>
+  </div>
+</div>
+
 <div id="respond">
-  <h3>Leave a Review!</h3>
+  <h2>Leave a Review!</h2>
   <form action="post_comment.php" method="post" id="commentform">
     <label for="comment_author" class="required">Your name *</label>
     <input type="text" name="comment_author" id="comment_author" value="" tabindex="1" required="required"><br>
@@ -150,9 +287,33 @@
     <textarea name="comment" id="comment" rows="10" tabindex="4"  required="required"></textarea><br>
     <input type="hidden" name="comment_post_ID" value="1" id="comment_post_ID" />
     <input type="hidden" name="comment_post_ID" value="<?php echo($comment_post_ID); ?>" id="comment_post_ID" />
-    <input name="submit" type="submit" value="Submit Review" />
+    <br>
+    <label class="required">Your Rating *</label>
+                  <div class="rate">
+                    <input type="radio" id="star5" name="rate" value="5" />
+                    <label for="star5" title="text"></label>
+                    <input type="radio" id="star4" name="rate" value="4" />
+                    <label for="star4" title="text"></label>
+                    <input type="radio" id="star3" name="rate" value="3" />
+                    <label for="star3" title="text"></label>
+                    <input type="radio" id="star2" name="rate" value="2" />
+                    <label for="star2" title="text"></label>
+                    <input type="radio" id="star1" name="rate" value="1" />
+                    <label for="star1" title="text"></label>
+                  </div>
+    <br>
+    <br>
+    <input name="submit" type="submit" value="Submit Review" class="btn" onclick = "openPopup()" />
   </form>
 </div>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Font Awesome Icon Library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+* {
+  box-sizing: border-box;
+}
 
 <p class="navbar">
     <table class="navbar">
@@ -169,45 +330,10 @@
           <br>
         </div>
         <!-- this is Jekyll magic, each md file in site will be inserted here -->
-        <table>
-          <tr>
-              <th><label for="name">Name</label></th>
-              <th><label for="email">Email</label></th>
-          </tr>
-          <tr>
-              <td><input type="text" name="name" id="name" placeholder = 'First Last' required="" /></td>
-              <td><input type="email" name="email" id="email" placeholder="abc@xyz.org" required="" /></td>
-          </tr>
-          <tr>
-              <th><label for="text">Rating</label></th>
-              <td>
-                <body>
-                  <div class="rate">
-                    <input type="radio" id="star5" name="rate" value="5" />
-                    <label for="star5" title="text"></label>
-                    <input type="radio" id="star4" name="rate" value="4" />
-                    <label for="star4" title="text"></label>
-                    <input type="radio" id="star3" name="rate" value="3" />
-                    <label for="star3" title="text"></label>
-                    <input type="radio" id="star2" name="rate" value="2" />
-                    <label for="star2" title="text"></label>
-                    <input type="radio" id="star1" name="rate" value="1" />
-                    <label for="star1" title="text"></label>
-                  </div>
-                </body>
-              </td>
-          </tr>
-          <tr>
-            <th colspan="2"><label for="text">Review</label></th>
-              <th><label for="date">Date</label></th>
-          </tr>
-          <tr>
-              <td colspan="2"><textarea name="review" id="event details" rows="2" cols="45" style="resize:none" required=""></textarea></td>
-              <td><input type="date" name="date" id="date" required="" /></td>
-          </tr>
+        
+
 <body>
   <div class="container">
-    <button type="submit" class="btn" onclick = "openPopup()">Submit Review</button>
     <div class="popup" id="popup">
       <img src="/images/tick1.png">
       <h2>Thank you!</h2>
@@ -229,8 +355,7 @@ function closePopup(){
     <tbody id="data-output">
      <!-- from js file -->
     </tbody>
-  </table>
-
+  
   <script>
     const api_url = 'http://127.0.0.1:8086/api/users/'
     async function getData() {
@@ -269,12 +394,31 @@ function closePopup(){
         <th>Rate</th>
       </tr>
     </thead>
-    <p>Json formated data here</p>
+      <tr>
+        <td>Mr. Yeung</td>
+        <td>Amazing food and amazing website</td>
+        <td>5/5</td>
+      </tr>
+      <tr>
+        <td>John Doe</td>
+        <td>I'm allergic to cats</td>
+        <td>2/5</td>
+      </tr>
+      <tr>
+        <td>Jennifer Lopez</td>
+        <td>LOVE LOVE LOVE</td>
+        <td>4/5</td>
+      </tr>
+    
 <script>
 function myFunction() {
   document.getElementById("panel").style.display = "block";
 }
 </script>
+
+
+
+
 
 
 
