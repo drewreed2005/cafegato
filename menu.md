@@ -151,7 +151,7 @@
     <input type="hidden" name="comment_post_ID" value="1" id="comment_post_ID" />
     <input type="hidden" name="comment_post_ID" value="<?php echo($comment_post_ID); ?>" id="comment_post_ID" />
     <table>
-              <th><label for="text">Rating</label></th>
+    <p>Rate</p>
               <td>
                 <body>
                   <div class="rate">
