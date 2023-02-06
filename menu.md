@@ -279,6 +279,50 @@ function myFunction() {
 * {
   box-sizing: border-box;
 }
+body {
+  font-family: Arial;
+  margin: 0 auto; /* Center website */
+  max-width: 800px; /* Max width */
+  padding: 20px;
+}
+.heading {
+  font-size: 25px;
+  margin-right: 25px;
+}
+.fa {
+  font-size: 25px;
+}
+.checked {
+  color: orange;
+}
+/* Three column layout */
+.side {
+  float: left;
+  width: 15%;
+  margin-top:10px;
+}
+.middle {
+  margin-top:10px;
+  float: left;
+  width: 70%;
+}
+/* Place text to the right */
+.right {
+  text-align: right;
+}
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+/* The bar container */
+.bar-container {
+  width: 100%;
+  background-color: #F1F1F1;
+  text-align: center;
+  color: white;
+}
 /* Individual bars */
 .bar-5 {width: 60%; height: 18px; background-color: #04AA6D;}
 .bar-4 {width: 30%; height: 18px; background-color: #2196F3;}
