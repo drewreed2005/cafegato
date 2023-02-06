@@ -148,7 +148,7 @@
 body {
  font-family: Arial;
  margin: 0 auto; /* Center website */
-  max-width: 800px; /* Max width */
+  max-width: 1500px; /* Max width */
   padding: 20px;
 }
 .heading {
