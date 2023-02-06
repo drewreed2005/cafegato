@@ -169,108 +169,6 @@
     <input name="submit" type="submit" value="Submit Review" class="btn" onclick = "openPopup()" />
   </form>
 </div>
-
-<p class="navbar">
-    <table class="navbar">
-        <tr>
-            <td><a href="."><img src="/images/Studio_Project.png" width="150px"></a></td><!--ABOUT US IN HERE-->
-            <td><a href="cats" class="headlink">Cats</a></td>
-            <td><a href="menu" class="headlink">Menu</a></td>
-            <td><a href="hours" class="headlink">Hours</a></td>
-            <td><a href="events" class="headlink">Events</a></td>
-            <td><a href="shop" class="headlink">Shop</a></td>
-        </tr>
-    </table>
-</p>
-          <br>
-        </div>
-        <!-- this is Jekyll magic, each md file in site will be inserted here -->
-        
-
-<body>
-  <div class="container">
-    <div class="popup" id="popup">
-      <img src="/images/tick1.png">
-      <h2>Thank you!</h2>
-      <p>Your review has been successfully recorded.</p>
-      <button type="button" onclick = "closePopup()">OK</button>
-    </div>
-  </div>
-<script>
-let popup = document.getElementById("popup");
-function openPopup(){
-    popup.classList.add("open-popup");
-}
-function closePopup(){
-    popup.classList.remove("open-popup");
-}
-</script>
-</body>
-
-    <tbody id="data-output">
-     <!-- from js file -->
-    </tbody>
-  
-  <script>
-    const api_url = 'http://127.0.0.1:8086/api/users/'
-    async function getData() {
-        const response = await fetch(api_url);
-        const data = await response.json();
-        console.log(data)
-    getData()
-    }
-  </script>
-
-
-<head>
-<style>
-#panel, .flip {
-  font-size: 16px;
-  padding: 10px;
-  text-align: center;
-  background-color: #AA336A;
-  color: white;
-  border: solid 1px #A6D8A8;
-  margin: auto;
-}
-#panel {
-  display: none;
-}
-</style>
-</head>
-<body>
-<p class="flip" onclick="myFunction()">See Other Reviews</p>
-<div id="panel">
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Review</th>
-        <th>Rate</th>
-      </tr>
-    </thead>
-      <tr>
-        <td>Mr. Yeung</td>
-        <td>Amazing food and amazing website</td>
-        <td>5/5</td>
-      </tr>
-      <tr>
-        <td>John Doe</td>
-        <td>I'm allergic to cats</td>
-        <td>2/5</td>
-      </tr>
-      <tr>
-        <td>Jennifer Lopez</td>
-        <td>LOVE LOVE LOVE</td>
-        <td>4/5</td>
-      </tr>
-    
-<script>
-function myFunction() {
-  document.getElementById("panel").style.display = "block";
-}
-</script>
-
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Font Awesome Icon Library -->
@@ -407,6 +305,108 @@ body {
   </div>
 </div>
 </body>
+<p class="navbar">
+    <table class="navbar">
+        <tr>
+            <td><a href="."><img src="/images/Studio_Project.png" width="150px"></a></td><!--ABOUT US IN HERE-->
+            <td><a href="cats" class="headlink">Cats</a></td>
+            <td><a href="menu" class="headlink">Menu</a></td>
+            <td><a href="hours" class="headlink">Hours</a></td>
+            <td><a href="events" class="headlink">Events</a></td>
+            <td><a href="shop" class="headlink">Shop</a></td>
+        </tr>
+    </table>
+</p>
+          <br>
+        </div>
+        <!-- this is Jekyll magic, each md file in site will be inserted here -->
+        
+
+<body>
+  <div class="container">
+    <div class="popup" id="popup">
+      <img src="/images/tick1.png">
+      <h2>Thank you!</h2>
+      <p>Your review has been successfully recorded.</p>
+      <button type="button" onclick = "closePopup()">OK</button>
+    </div>
+  </div>
+<script>
+let popup = document.getElementById("popup");
+function openPopup(){
+    popup.classList.add("open-popup");
+}
+function closePopup(){
+    popup.classList.remove("open-popup");
+}
+</script>
+</body>
+
+    <tbody id="data-output">
+     <!-- from js file -->
+    </tbody>
+  
+  <script>
+    const api_url = 'http://127.0.0.1:8086/api/users/'
+    async function getData() {
+        const response = await fetch(api_url);
+        const data = await response.json();
+        console.log(data)
+    getData()
+    }
+  </script>
+
+
+<head>
+<style>
+#panel, .flip {
+  font-size: 16px;
+  padding: 10px;
+  text-align: center;
+  background-color: #AA336A;
+  color: white;
+  border: solid 1px #A6D8A8;
+  margin: auto;
+}
+#panel {
+  display: none;
+}
+</style>
+</head>
+<body>
+<p class="flip" onclick="myFunction()">See Other Reviews</p>
+<div id="panel">
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Review</th>
+        <th>Rate</th>
+      </tr>
+    </thead>
+      <tr>
+        <td>Mr. Yeung</td>
+        <td>Amazing food and amazing website</td>
+        <td>5/5</td>
+      </tr>
+      <tr>
+        <td>John Doe</td>
+        <td>I'm allergic to cats</td>
+        <td>2/5</td>
+      </tr>
+      <tr>
+        <td>Jennifer Lopez</td>
+        <td>LOVE LOVE LOVE</td>
+        <td>4/5</td>
+      </tr>
+    
+<script>
+function myFunction() {
+  document.getElementById("panel").style.display = "block";
+}
+</script>
+
+
 
 
 
