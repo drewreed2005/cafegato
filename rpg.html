@@ -7,7 +7,6 @@
   .flex-container {
     display: flex;
     justify-content: center;
-    height: 400px;
   }
 
   .flex-container > div {
@@ -23,6 +22,16 @@
   .terminalbox {
     display: flex;
     align-items: flex-end;
+    overflow: hidden;
+  }
+  .terminalbox > p {
+    font-family: 'Courier New';
+    color: rgb(6, 240, 6);
+    text-align: left;
+    margin: 10px;
+    padding: 20px;
+    font-size: 20px;
+    overflow: hidden;
   }
   .terminalbox > div {
     font-family: 'Courier New';
@@ -31,6 +40,7 @@
     margin: 10px;
     padding: 20px;
     font-size: 20px;
+    overflow: hidden;
   }
 
   .flex-container2 {
@@ -38,7 +48,7 @@
     justify-content: space-around;
   }
 
-  .flex-container2 > button {
+  .flex-container2 > input {
     background-color: black;
     font-family: 'Courier New';
     color: rgb(6, 240, 6);
@@ -49,25 +59,89 @@
 </style>
 </head>
 <body>
+    <p id="no"></p>
 
-  <div class="flex-container">
+  <div class="flex-container" style="height: 400px;">
     <div style="flex-grow: 1;flex-shrink: 0;background-color: White;"></div>
-    <div class="terminalbox" style="flex-grow: 8">
-        <div id="terminal">THIS IS THE TERMINAL</div>
+    <div id="emptu" class="terminalbox" style="flex-grow: 8">
+        <p id="terminal">THIS IS THE TERMINAL <br> TYPE "PLAY" TO PLAY</p>
     </div>
     <div style="flex-grow: 1;flex-shrink: 0;background-color: White;"></div>  
   </div>
+
   <div class="flex-container2">
-    <div style="background-color: White;"></div>
-    <button type="button" onclick="click()">A</button>
-    <button type="button">B</button>
-    <button type="button">X</button>
-    <button type="button">Y</button>
-    <div style="background-color: White;"></div>
+    <div style="flex-grow: 1;flex-shrink: 0;background-color: White;"></div>
+    <input id="textinput" contentEditable="true" style="flex-grow: 4;"></input>
+    <div style="flex-grow: 1;flex-shrink: 0;background-color: White;"></div>
   </div>
+
+
   <script>
-    function click() {
-      console.log("hello");
+    let doc = document;
+    let terminallimit = "13 lines";
+    let gamestate = "0"
+    let buffstate = "0"
+    let buffcounter = 0
+    let phealth = 3;
+    let ophealth = 3;
+    let time = 0;
+    let inpbox = document.getElementById("textinput");
+    let uinp = document.getElementById("textinput").value;
+
+    inpbox.addEventListener("keypress", function(event) {
+      if (event.key === "Enter") {
+        uinp = document.getElementById("textinput").value;
+        enter();
+        document.getElementById("textinput").value = ""
+      }
+    });
+    
+    function timeincrease() {time++}
+    function terminaltext() {
+      return document.getElementById("terminal").innerHTML
+    }
+    function attack(health) {
+      health = health - 1;
+    }
+    function writeterm(inputtext) {
+      doc.getElementById("terminal").innerHTML = terminaltext() + "<br>" + inputtext
+    }
+    function grabinput() {
+      let userchoice = doc.getElementById("textinput").value;
+      return userchoice
+    }
+    function enter() {
+      if (gamestate == "0") {
+        gamestate0()
+      } else if (gamestate == "1") {
+        turn()
+      }
+    }
+    function gamestate0() {
+      if (uinp == "play") {
+        writeterm("THE GAME HAS BEGUN")
+        setInterval(timeincrease, 1000)
+        gamestate = "1"
+      } else {
+        writeterm('TYPE "PLAY" TO PLAY')
+      }
+    }
+    function playerturn(){
+      if (uinp == "attack") {
+        attack(ophealth)
+      } else if (uinp == "persona") {
+        writeterm("YOU CAN'T CHANGE PERSONAS")
+      } else if (uinp == "penis") {
+        writeterm("haha penis")
+      } else if (uinp == "check") {
+        writeterm("PLAYER HEALTH: " + phealth)
+        writeterm("OPPONENT HEALTH: " + ophealth)
+      } else if (uinp = "time") {
+        writeterm(time + " SECONDS") 
+      }
+    }
+    function turn() {
+      playerturn()
     }
   </script>
 </body>
