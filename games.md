@@ -41,36 +41,32 @@ src="https://code.jquery.com/jquery-3.6.0.min.js"
 integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <h1>Purr-dle</h1>
+
     
-<div id="game-board">
-<div class="howto-container">
-    <button type="submit" class="howto-button" onclick="openPopup1()">How to Play</button>
-    <div class="howto-popup" id="howto-popup">
-            <h2>How to Play</h2>
-            <p>Guess the word in 6 tries.</p>
-            <p>Each guess must be a valid 5-letter word.</p>
-            <p>The color of the squares will change to show how close your guess was to the word.</p>
-            <p>Green - Letter is in the word and in the correct spot.</p>
-            <p>Yellow - Letter is in the word but in the wrong spot.</p>
-            <p>Grey - Letter is not in the word in any spot.</p>
-            <button type="button" onclick="closePopup1()">Close</button>
-            </div>
+<div class = "flex-all">
+  <div class="flex-left">
+    <div>
+      <div id="game-board">
     </div>
-</div>
+  </div>
 
-<script>
-let popup1 = document.getElementById("howto-popup")
-function openPopup1(){
-    popup1.classList.add("open-popup");
-}
-function closePopup1(){
-    popup1.classList.remove("open-popup");
-}
-</script>
-    
-
-<div id="keyboard">
+  <div class="flex-right">
+    <div>
+      <h1>Purr-dle</h1>
+      <div class="howto-container">
+      <button type="submit" class="howto-button" onclick="openPopup1()">How to Play</button>
+      <div class="howto-popup" id="howto-popup">
+              <h2>How to Play</h2>
+              <p>Guess the word in 6 tries.</p>
+              <p>Each guess must be a valid 5-letter word.</p>
+              <p>The color of the squares will change to show how close your guess was to the word.</p>
+              <p>Green - Letter is in the word and in the correct spot.</p>
+              <p>Yellow - Letter is in the word but in the wrong spot.</p>
+              <p>Grey - Letter is not in the word in any spot.</p>
+              <button type="button" onclick="closePopup1()">Close</button>
+              </div>
+      </div>
+      <div id="keyboard">
         <div class="row1">
             <button class="keyboard-button">q</button>
             <button class="keyboard-button">w</button>
@@ -84,7 +80,7 @@ function closePopup1(){
             <button class="keyboard-button">p</button>
             <button class="keyboard-button">Del</button>
         </div>
-        <div class="row2">
+          <div class="row2">
             <button class="keyboard-button">a</button>
             <button class="keyboard-button">s</button>
             <button class="keyboard-button">d</button>
@@ -96,7 +92,7 @@ function closePopup1(){
             <button class="keyboard-button">l</button>
             <button class="keyboard-button">Enter</button>
         </div>
-        <div class="row3">
+      <div class="row3">
             <button class="keyboard-button">z</button>
             <button class="keyboard-button">x</button>
             <button class="keyboard-button">c</button>
@@ -104,11 +100,37 @@ function closePopup1(){
             <button class="keyboard-button">b</button>
             <button class="keyboard-button">n</button>
             <button class="keyboard-button">m</button>
-        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<script>
+let popup1 = document.getElementById("howto-popup")
+function openPopup1(){
+    popup1.classList.add("open-popup");
+}
+function closePopup1(){
+    popup1.classList.remove("open-popup");
+}
+</script>
+    
 
 <style>
  {background-color: #f1f0e2;}
+    .flex-all {
+        display: flex;
+        justify-content: center;
+    }
+    .flex-left {
+        display: flex;
+        padding: 0 30px 30px;
+    }
+    .flex-right {
+        display: flex;
+        padding: 0 30px 30px;
+    }
+
     h1 {
       /* Title Design */
         text-align: center;
@@ -128,7 +150,7 @@ function closePopup1(){
         background: #3c5077;
         display: flex;
         align-items: center;
-        justify-content: left;
+        justify-content: center;
     }
     /* How To button design: */
     .howto-button{    
@@ -160,7 +182,7 @@ function closePopup1(){
     .open-popup{
       visibility: visible;
       top: 50%;
-      transform: translate(-50%,-50%) scale(1);
+      transform: translate(-50%,-35%) scale(1);
     }
     .howto-popup h2{
         font-weight: 30px
@@ -223,7 +245,6 @@ function closePopup1(){
       display: flex;
       align-items: center;
       flex-direction: column;
-      display: inline-block
     }
     .letter-box {
       border: 2px solid gray;
@@ -245,13 +266,13 @@ function closePopup1(){
       display: flex;
     } 
 </style>
+
+
 <script>  
     const NUMBER_OF_GUESSES = 6;
     let guessesRemaining = NUMBER_OF_GUESSES;
     let currentGuess = [];
     let nextLetter = 0;
-    //let rightGuessString = WORDS[Math.floor(Math.random() * WORDS.length)]
-    //console.log(rightGuessString)
     function initBoard() {
         let board = document.getElementById("game-board");
         for (let i = 0; i < NUMBER_OF_GUESSES; i++) {
