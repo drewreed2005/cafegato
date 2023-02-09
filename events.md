@@ -115,12 +115,48 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
 
 <script>
     let sorted = false;
+    var pulldata = "";
+
+    // api fetch function
+    // prepare fetch options
+    function api_Fetch() {
+        try {
+        const url = "http://127.0.0.1:8086/api/events/";
+        const options = {
+            method: 'GET', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, *cors, same-origin
+            cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'omit', // include, *same-origin, omit
+            headers: {
+            'Content-Type': 'application/json'
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+        };
+        // fetch the API
+        fetch(url, options)
+            // response is a RESTful "promise" on any successful fetch
+            .then(response => {
+            // check for response errors
+            if (response.status !== 200) {
+                const errorMsg = 'Database response error: ' + response.status;
+                console.log(errorMsg);
+            }
+            // valid response will have json data
+            response.json().then(data => {
+                var pulldata = data;
+                console.log(pulldata);
+                })
+            })
+        } catch (err) {
+            console.log(err);
+        };
+    };
 
     // Static json, this can be used to test data prior to API and Model being ready
-    const json = '[{"id":1, "name":"Thomas Edison", "email":"tedison@lightbulb.edu", "event_name":"The Edison Troupe Meet", "event_details":"We 10 selected geniuses will meet in the events room for a convergence.", "date":"02/23/2023", "start_time":"13:00", "end_time":"14:00", "password":"theGOAT302"}, {"id":2, "name":"John Mortensen", "email":"jmortensen@powayusd.com", "event_name":"Extra Credit Code Meetup", "event_details":"Come to work on ideation and any confusion with the Full Stack CPT project. No phones.", "date":"02/25/2023", "start_time":"10:00", "end_time":"12:00". "password":"compsciyo34"}]';
+    const json = '[{"id":1, "name":"Thomas Edison", "email":"tedison@lightbulb.edu", "event_name":"The Edison Troupe Meet", "event_details":"We 10 selected geniuses will meet in the events room for a convergence.", "date":"02/23/2023", "start_time":"13:00", "end_time":"14:00", "password":"theGOAT302"}, {"id":2, "name":"John Mortensen", "email":"jmortensen@powayusd.com", "event_name":"Extra Credit Code Meetup", "event_details":"Come to work on ideation and any confusion with the Full Stack CPT project. No phones.", "date":"02/25/2023", "start_time":"10:00", "end_time":"12:00", "password":"compsciyo34"}]';
 
     // Convert JSON string to JSON object
-    const data = JSON.parse(json);
+    const testdata = JSON.parse(json);
     const table = document.getElementById("evtablecont");
 
     function showEvTable() {
@@ -190,8 +226,8 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
             };
             // validating coincidence and email; JSON data is placeholder
             var coinc = 0;
-            for (let i = 0; i < data.length; i++) {
-                temppull = data[i];
+            for (let i = 0; i < testdata.length; i++) {
+                temppull = testdata[i];
                 if (temppull['date'] == datefix) {
                     if (Number(tempstime.substring(0, 2)) <= Number(temppull['start_time'].substr(0, 2)) < Number(tempetime.substring(0, 2)) || Number(tempstime.substring(0, 2)) < Number(temppull['end_time'].substr(0, 2)) <= Number(tempetime.substring(0, 2))) {coinc = coinc + 1;};
                 };
@@ -205,9 +241,8 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
                 return;
             };
             // if all validations successful
-            newid = data[data.length - 1]["id"] + 1;
-            jsonentry = {"id":newid, "name":form_list[0], "email":form_list[1], "event_name":form_list[2], "event_details":form_list[3], "date":datefix, "start_time":form_list[5], "end_time":form_list[6], "password":form_list[7]};
-            data.push(jsonentry);
+            jsonentry = {"name":form_list[0], "email":form_list[1], "event_name":form_list[2], "event_details":form_list[3], "date":datefix, "start_time":form_list[5], "end_time":form_list[6], "password":form_list[7]};
+            testdata.push(jsonentry);
             alert("Thank you, " + form_list[0] + ", for submitting an event! Watch your email for a confirmation message.\n\n(Warning: Please do not submit two events at a time! Your events may end up being cancelled as a result.)");
         } catch (err) {
             alert("There was an error processing your form. (Failed to send to/pull from the database, or there was an error in the formatting of your form. Make sure you're on unrestricted WiFi.)");
@@ -216,8 +251,9 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
 
     // prepare HTML result container for new output
     function create_Table() {
+        api_Fetch();
         table.innerHTML = "";
-        data.forEach(user => {
+        testdata.forEach(user => {
             // build a row for each user
             const tr = document.createElement("tr");
 
@@ -232,13 +268,13 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
             const action = document.createElement("td");
                 
             // add content from user data          
-            name.innerHTML = user._name; 
-            email.innerHTML = user._email; 
-            event_name.innerHTML = user._event_name; 
-            event_details.innerHTML = user._event_details;
-            date.innerHTML = user._date; 
-            start_time.innerHTML = user._start_time; 
-            end_time.innerHTML = user._end_time;
+            name.innerHTML = user.name; 
+            email.innerHTML = user.email; 
+            event_name.innerHTML = user.event_name; 
+            event_details.innerHTML = user.event_details;
+            date.innerHTML = user.date; 
+            start_time.innerHTML = user.start_time; 
+            end_time.innerHTML = user.end_time;
 
             // add action for update button
             var updateBtn = document.createElement('input');
@@ -247,7 +283,7 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
             updateBtn.value = "Update";
             updateBtn.style = "margin-right:16px";
             updateBtn.onclick = function () {
-            alert("Update: " + user._name);
+            alert("Update: " + user.name);
             };
             action.appendChild(updateBtn);
 
@@ -258,7 +294,7 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
             deleteBtn.value = "Delete";
             deleteBtn.style = "margin-right:16px"
             deleteBtn.onclick = function () {
-            alert("Delete: " + user._name);
+            alert("Delete: " + user.name);
             };
             action.appendChild(deleteBtn);  
 
