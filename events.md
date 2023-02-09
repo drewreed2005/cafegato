@@ -143,10 +143,10 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
             }
             // valid response will have json data
             response.json().then(data => {
-                var pulldata = data;
+                setTimeout(() => {var pulldata = data;
                 console.log(pulldata);
                 return pulldata
-                })
+               }})
             })
         } catch (err) {
             console.log(err);
