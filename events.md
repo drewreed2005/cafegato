@@ -92,7 +92,7 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
     <option value="latest">Latest</option>
     </select>
     <input type="month" id="monthfil" name="monthfil" value="2023-02">
-    <button class="btn" id="sortbtn">Sort</button>
+    <button class="btn" id="sortbtn" onclick="sort_Events()">Sort</button>
 </div>
 
 <table id="evtable" style="display:none;width:50%">
@@ -114,8 +114,10 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
 </table>
 
 <script>
+    let sorted = false;
+
     // Static json, this can be used to test data prior to API and Model being ready
-    const json = '[{"id":1, "_name":"Thomas Edison", "_email":"tedison@lightbulb.edu", "_event_name":"The Edison Troupe Meet", "_event_details":"We 10 selected geniuses will meet in the events room for a convergence.", "_date":"02/23/2023", "_start_time":"13:00", "_end_time":"14:00", "_password":"theGOAT302"}, {"id":2, "_name":"John Mortensen", "_email":"jmortensen@powayusd.com", "_event_name":"Extra Credit Code Meetup", "_event_details":"Come to work on ideation and any confusion with the Full Stack CPT project. No phones.", "_date":"02/25/2023", "_start_time":"10:00", "_end_time":"12:00", "_password":"compsciyo34"}]';
+    const json = '[{"id":1, "name":"Thomas Edison", "email":"tedison@lightbulb.edu", "event_name":"The Edison Troupe Meet", "event_details":"We 10 selected geniuses will meet in the events room for a convergence.", "date":"02/23/2023", "start_time":"13:00", "end_time":"14:00", "password":"theGOAT302"}, {"id":2, "name":"John Mortensen", "email":"jmortensen@powayusd.com", "event_name":"Extra Credit Code Meetup", "event_details":"Come to work on ideation and any confusion with the Full Stack CPT project. No phones.", "date":"02/25/2023", "start_time":"10:00", "end_time":"12:00". "password":"compsciyo34"}]';
 
     // Convert JSON string to JSON object
     const data = JSON.parse(json);
@@ -152,8 +154,8 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
                 if (form_list[i].length > 100) {
                     alert("There was an error processing your form. Certain input fields have too many characters. Make sure that your name, email, event name, and details are all no more than 100 characters long. (This is a measure to prevent spam.)")
                     return;
-                }
-            }
+                };
+            };
             // Defining some variables for validation
             var tempdate = document.getElementById('date').value;
             var tempstime = document.getElementById('start_time').value;
@@ -190,10 +192,10 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
             var coinc = 0;
             for (let i = 0; i < data.length; i++) {
                 temppull = data[i];
-                if (temppull['_date'] == datefix) {
-                    if (Number(tempstime.substring(0, 2)) <= Number(temppull['_start_time'].substr(0, 2)) < Number(tempetime.substring(0, 2)) || Number(tempstime.substring(0, 2)) < Number(temppull['_end_time'].substr(0, 2)) <= Number(tempetime.substring(0, 2))) {coinc = coinc + 1;};
+                if (temppull['date'] == datefix) {
+                    if (Number(tempstime.substring(0, 2)) <= Number(temppull['start_time'].substr(0, 2)) < Number(tempetime.substring(0, 2)) || Number(tempstime.substring(0, 2)) < Number(temppull['end_time'].substr(0, 2)) <= Number(tempetime.substring(0, 2))) {coinc = coinc + 1;};
                 };
-                if (temppull['_email'] == form_list[1]) {
+                if (temppull['email'] == form_list[1]) {
                     alert("There was an error processing your form. It seems that an event has already been created by that email. If someone has used your address to create an event without your consent, contact our staff.");
                     return;
                 };
@@ -204,7 +206,7 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
             };
             // if all validations successful
             newid = data[data.length - 1]["id"] + 1;
-            jsonentry = {"id":newid, "_name":form_list[0], "_email":form_list[1], "_event_name":form_list[2], "_event_details":form_list[3], "_date":datefix, "_start_time":form_list[5], "_end_time":form_list[6], "_password":form_list[7]};
+            jsonentry = {"id":newid, "name":form_list[0], "email":form_list[1], "event_name":form_list[2], "event_details":form_list[3], "date":datefix, "start_time":form_list[5], "end_time":form_list[6], "password":form_list[7]};
             data.push(jsonentry);
             alert("Thank you, " + form_list[0] + ", for submitting an event! Watch your email for a confirmation message.\n\n(Warning: Please do not submit two events at a time! Your events may end up being cancelled as a result.)");
         } catch (err) {
@@ -274,4 +276,16 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
             table.appendChild(tr);
         });
         };
+
+    function parse_Data(dataset) {
+        for (let i = 0; i < dataset.length; i++) {
+            
+        }
+    };
+    
+    function sort_Events() {
+        var orderval = document.getElementById("timesort").value;
+        var monthval = document.getElementById("monthfil").value;
+        console.log(orderval, monthval.substring(0, 4), monthval.substring(5, 7));
+    };
 </script>
