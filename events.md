@@ -253,7 +253,7 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
     function create_Table() {
         api_Fetch();
         table.innerHTML = "";
-        testdata.forEach(user => {
+        pulldata.forEach(user => {
             // build a row for each user
             const tr = document.createElement("tr");
 
