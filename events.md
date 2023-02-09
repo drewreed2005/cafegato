@@ -145,6 +145,7 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
             response.json().then(data => {
                 var pulldata = data;
                 console.log(pulldata);
+                return pulldata
                 })
             })
         } catch (err) {
@@ -251,10 +252,10 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
 
     // prepare HTML result container for new output
     function create_Table() {
-        api_Fetch();
+        var pulled_data = api_Fetch();
         setTimeout(() => {
         table.innerHTML = "";
-        pulldata.forEach(user => {
+        pulled_data.forEach(user => {
             // build a row for each user
             const tr = document.createElement("tr");
 
