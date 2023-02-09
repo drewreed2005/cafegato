@@ -252,6 +252,7 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
     // prepare HTML result container for new output
     function create_Table() {
         api_Fetch();
+        setTimeout(() => {
         table.innerHTML = "";
         pulldata.forEach(user => {
             // build a row for each user
@@ -311,7 +312,8 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
             // add row to table
             table.appendChild(tr);
         });
-        };
+    }, "3000");
+    }
 
     function parse_Data(dataset) {
         for (let i = 0; i < dataset.length; i++) {
