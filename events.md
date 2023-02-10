@@ -146,8 +146,7 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
                 setTimeout(() => {var pulldata = data;
                 console.log(pulldata);
                 return pulldata
-                )}})
-            } catch (err) {console.log(err)};
+                )})}} catch (err) {console.log(err)};
     };
 
     // Static json, this can be used to test data prior to API and Model being ready
