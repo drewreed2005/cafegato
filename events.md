@@ -248,70 +248,87 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
     // prepare HTML result container for new output
     function create_Table() {
         table.innerHTML = "";
-        console.log(api_Fetch());
-        const pulled_data = api_Fetch();
-        setTimeout(() => {
-        console.log(pulled_data);
-        pulled_data.forEach(user => {
-            // build a row for each user
-            const tr = document.createElement("tr");
+        const url = "http://127.0.0.1:8086/api/events/";
+        const options = {
+            method: 'GET', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, *cors, same-origin
+            cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'omit', // include, *same-origin, omit
+            headers: {
+            'Content-Type': 'application/json'
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+        };
+        // fetch the API
+        fetch(url, options)
+            // response is a RESTful "promise" on any successful fetch
+            .then(response => {
+            // check for response errors
+            if (response.status !== 200) {
+                const errorMsg = 'Database response error: ' + response.status;
+                console.log(errorMsg);
+            }
+            // valid response will have json data
+            response.json().then(data => {
+                data.forEach(user => {
+                // build a row for each user
+                const tr = document.createElement("tr");
 
-            // td's to build out each column of data
-            const name = document.createElement("td");
-            const email = document.createElement("td");
-            const event_name = document.createElement("td");
-            const event_details = document.createElement("td");
-            const date = document.createElement("td");
-            const start_time = document.createElement("td");
-            const end_time = document.createElement("td");
-            const action = document.createElement("td");
-                
-            // add content from user data          
-            name.innerHTML = user.name; 
-            email.innerHTML = user.email; 
-            event_name.innerHTML = user.event_name; 
-            event_details.innerHTML = user.event_details;
-            date.innerHTML = user.date; 
-            start_time.innerHTML = user.start_time; 
-            end_time.innerHTML = user.end_time;
+                // td's to build out each column of data
+                const name = document.createElement("td");
+                const email = document.createElement("td");
+                const event_name = document.createElement("td");
+                const event_details = document.createElement("td");
+                const date = document.createElement("td");
+                const start_time = document.createElement("td");
+                const end_time = document.createElement("td");
+                const action = document.createElement("td");
+                    
+                // add content from user data          
+                name.innerHTML = user.name; 
+                email.innerHTML = user.email; 
+                event_name.innerHTML = user.event_name; 
+                event_details.innerHTML = user.event_details;
+                date.innerHTML = user.date; 
+                start_time.innerHTML = user.start_time; 
+                end_time.innerHTML = user.end_time;
 
-            // add action for update button
-            var updateBtn = document.createElement('input');
-            updateBtn.type = "button";
-            updateBtn.className = "btn";
-            updateBtn.value = "Update";
-            updateBtn.style = "margin-right:16px";
-            updateBtn.onclick = function () {
-            alert("Update: " + user.name);
-            };
-            action.appendChild(updateBtn);
+                // add action for update button
+                var updateBtn = document.createElement('input');
+                updateBtn.type = "button";
+                updateBtn.className = "btn";
+                updateBtn.value = "Update";
+                updateBtn.style = "margin-right:16px";
+                updateBtn.onclick = function () {
+                alert("Update: " + user.name);
+                };
+                action.appendChild(updateBtn);
 
-            // add action for delete button
-            var deleteBtn = document.createElement('input');
-            deleteBtn.type = "button";
-            deleteBtn.className = "btn";
-            deleteBtn.value = "Delete";
-            deleteBtn.style = "margin-right:16px"
-            deleteBtn.onclick = function () {
-            alert("Delete: " + user.name);
-            };
-            action.appendChild(deleteBtn);  
+                // add action for delete button
+                var deleteBtn = document.createElement('input');
+                deleteBtn.type = "button";
+                deleteBtn.className = "btn";
+                deleteBtn.value = "Delete";
+                deleteBtn.style = "margin-right:16px"
+                deleteBtn.onclick = function () {
+                alert("Delete: " + user.name);
+                };
+                action.appendChild(deleteBtn);  
 
-            // add data to row
-            tr.appendChild(name);
-            tr.appendChild(email);
-            tr.appendChild(event_name);
-            tr.appendChild(event_details);
-            tr.appendChild(date);
-            tr.appendChild(start_time);
-            tr.appendChild(end_time);
-            tr.appendChild(action);
+                // add data to row
+                tr.appendChild(name);
+                tr.appendChild(email);
+                tr.appendChild(event_name);
+                tr.appendChild(event_details);
+                tr.appendChild(date);
+                tr.appendChild(start_time);
+                tr.appendChild(end_time);
+                tr.appendChild(action);
 
-            // add row to table
-            table.appendChild(tr);
-        });
-    }, "3500");
-    }
+                // add row to table
+                table.appendChild(tr);
+            })})})
+        };
 
     function parse_Data(dataset) {
         for (let i = 0; i < dataset.length; i++) {
