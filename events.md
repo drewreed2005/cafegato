@@ -248,7 +248,8 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
     // prepare HTML result container for new output
     function create_Table() {
         table.innerHTML = "";
-        var pulled_data = api_Fetch();
+        console.log(api_Fetch());
+        const pulled_data = api_Fetch();
         setTimeout(() => {
         console.log(pulled_data);
         pulled_data.forEach(user => {
