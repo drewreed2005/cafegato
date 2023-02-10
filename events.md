@@ -120,7 +120,6 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
     // api fetch function
     // prepare fetch options
     function api_Fetch() {
-        try {
         const url = "http://127.0.0.1:8086/api/events/";
         const options = {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
@@ -146,7 +145,7 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
                 setTimeout(() => {var pulldata = data;
                 console.log(pulldata);
                 return pulldata
-                )})}} catch (err) {console.log(err)};
+                }, "3000")})});
     };
 
     // Static json, this can be used to test data prior to API and Model being ready
@@ -248,10 +247,10 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
 
     // prepare HTML result container for new output
     function create_Table() {
-        var pulled_data = api_Fetch();
-        console.log(pulled_data);
-        setTimeout(() => {
         table.innerHTML = "";
+        var pulled_data = api_Fetch();
+        setTimeout(() => {
+        console.log(pulled_data);
         pulled_data.forEach(user => {
             // build a row for each user
             const tr = document.createElement("tr");
@@ -310,7 +309,7 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
             // add row to table
             table.appendChild(tr);
         });
-    }, "3000");
+    }, "3500");
     }
 
     function parse_Data(dataset) {
