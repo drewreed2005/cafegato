@@ -117,35 +117,16 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
     let sorted = false;
     var pulldata = "";
 
-    // api fetch function
-    // prepare fetch options
-    function api_Fetch() {
-        const url = "http://127.0.0.1:8086/api/events/";
-        const options = {
-            method: 'GET', // *GET, POST, PUT, DELETE, etc.
-            mode: 'cors', // no-cors, *cors, same-origin
-            cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
-            credentials: 'omit', // include, *same-origin, omit
-            headers: {
-            'Content-Type': 'application/json'
-            // 'Content-Type': 'application/x-www-form-urlencoded',
-            },
-        };
-        // fetch the API
-        fetch(url, options)
-            // response is a RESTful "promise" on any successful fetch
-            .then(response => {
-            // check for response errors
-            if (response.status !== 200) {
-                const errorMsg = 'Database response error: ' + response.status;
-                console.log(errorMsg);
-            }
-            // valid response will have json data
-            response.json().then(data => {
-                setTimeout(() => {var pulldata = data;
-                console.log(pulldata);
-                return pulldata
-                }, "3000")})});
+    const read_url = "http://127.0.0.1:8086/api/events/";
+    const read_options = {
+        method: 'GET', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, *cors, same-origin
+        cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'omit', // include, *same-origin, omit
+        headers: {
+        'Content-Type': 'application/json'
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
     };
 
     // Static json, this can be used to test data prior to API and Model being ready
@@ -248,19 +229,8 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
     // prepare HTML result container for new output
     function create_Table() {
         table.innerHTML = "";
-        const url = "http://127.0.0.1:8086/api/events/";
-        const options = {
-            method: 'GET', // *GET, POST, PUT, DELETE, etc.
-            mode: 'cors', // no-cors, *cors, same-origin
-            cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
-            credentials: 'omit', // include, *same-origin, omit
-            headers: {
-            'Content-Type': 'application/json'
-            // 'Content-Type': 'application/x-www-form-urlencoded',
-            },
-        };
         // fetch the API
-        fetch(url, options)
+        fetch(read_url, read_options)
             // response is a RESTful "promise" on any successful fetch
             .then(response => {
             // check for response errors
@@ -269,8 +239,12 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
                 console.log(errorMsg);
             }
             // valid response will have json data
-            response.json().then(data => {
-                data.forEach(user => {
+            response.json().then(data => {table_Make(data)})
+        });
+    };
+    
+    function table_Make(dict) {
+        dict.forEach(user => {
                 // build a row for each user
                 const tr = document.createElement("tr");
 
@@ -327,18 +301,46 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
 
                 // add row to table
                 table.appendChild(tr);
-            })})})
-        };
-
-    function parse_Data(dataset) {
-        for (let i = 0; i < dataset.length; i++) {
-            
-        }
+        });
     };
     
     function sort_Events() {
         var orderval = document.getElementById("timesort").value;
         var monthval = document.getElementById("monthfil").value;
         console.log(orderval, monthval.substring(0, 4), monthval.substring(5, 7));
+        var sorted_List = [];
+        // fetch the API
+        fetch(read_url, read_options)
+            // response is a RESTful "promise" on any successful fetch
+            .then(response => {
+            // check for response errors
+            if (response.status !== 200) {
+                const errorMsg = 'Database response error: ' + response.status;
+                console.log(errorMsg);
+            }
+            // valid response will have json data
+            response.json().then(data => {
+                data_copy = [...data];
+                if (orderval == "time_submitted") {
+                    data_copy.forEach(event => {sorted_List.push(event)});
+                } else if (orderval == "soonest") {
+                    let i = 0;
+                    data_copy.forEach(event => {
+                        if (i == 0) {
+                            var soonval = event;
+                        } else {
+                            var temp_fulldate = event.date + " " + event.start_time;
+                            var soon_fulldate = soonval.date + " " + soonval.start_time;
+                            var temp_evdate = new Date(temp_fulldate);
+                            var temp_soondate = new Date(soon_fulldate);
+                            if (temp_evdate.getTime() < temp_soondate) {
+                                soonval = event;
+                            };
+                        };
+                        console.log(soonval)
+                    });
+                };
+            });
+        });
     };
 </script>
