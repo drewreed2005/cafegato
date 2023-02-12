@@ -332,7 +332,7 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
                             testcopy.forEach(event => {sorted_List.push(event)});
                             console.log(sorted_List)
                 } else if (orderval == "soonest") {
-                    for (let j = 0; j < _length; j++) {
+                    for (let j = 0; j < d_length; j++) {
                         let i = 0;
                         testcopy.forEach(event => {
                             if (i == 0) {
