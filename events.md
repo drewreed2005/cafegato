@@ -248,6 +248,8 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
                     };
                     fetch(post_url, post_options);
                     alert("Thank you, " + form_list[0] + ", for submitting an event! Watch your email for a confirmation message.\n\n(Warning: Please do not submit two events at a time! Your events may end up being cancelled as a result.)");
+                });
+            });
         } catch (err) {
             alert("There was an error processing your form. (Failed to send to/pull from the database, or there was an error in the formatting of your form. Make sure you're on unrestricted WiFi.)");
         };
