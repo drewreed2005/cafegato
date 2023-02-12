@@ -84,7 +84,12 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
 <button class='btn' onclick="submit_Form()">Submit</button>
 
 <h2 style="color:black" class="widebr">Current Event Log</h2>
-<button class="btn" id="evlogbtn" onclick="showEvTable()">Show Event Log</button><button class="btn" id="logrefbtn" style="display:none" onclick="create_Table()">Refresh Log</button>
+<button class="btn" id="evlogbtn" onclick="showEvTable()">Show Event Log</button>
+<div id="logControls" style="display:flex">
+    <th><button class="btn" id="logrefbtn" style="display:none" onclick="create_Table()">Refresh Log</button></th>
+    <th><button class="btn" id="updatebtn" style="display:none" onclick="event_Update()">Update Event</button></th>
+    <th><button class="btn" id="deletebtn" style="display:none" onclick="delete_Event()">Delete Event</button></th>
+</div>
 <div style="font-size:25px;display:none" id="filters" name="filters">
     Filters: <select id="timesort" name="timesort">
     <option value="time_submitted">Time Submitted</option>
@@ -105,7 +110,6 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
     <th>Event Date</th>
     <th>Start Time</th>
     <th>End Time</th>
-    <th>Edit Your Event</th>
   </tr>
   </thead>
   <tbody id="evtablecont">
@@ -128,18 +132,16 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
         // 'Content-Type': 'application/x-www-form-urlencoded',
         },
     };
+    const post_url = "http://127.0.0.1:8086/api/events/create/";
 
-    // Static json, this can be used to test data prior to API and Model being ready
-    const json = '[{"id":1, "name":"Thomas Edison", "email":"tedison@lightbulb.edu", "event_name":"The Edison Troupe Meet", "event_details":"We 10 selected geniuses will meet in the events room for a convergence.", "date":"02/25/2023", "start_time":"13:00", "end_time":"14:00", "password":"theGOAT302"}, {"id":2, "name":"John Mortensen", "email":"jmortensen@powayusd.com", "event_name":"Extra Credit Code Meetup", "event_details":"Come to work on ideation and any confusion with the Full Stack CPT project. No phones.", "date":"02/23/2023", "start_time":"10:00", "end_time":"12:00", "password":"compsciyo34"}, {"id":3, "name":"Karl Giant", "email":"karlgiant@wallstreet.com", "event_name":"Money Money Money", "event_details":"Call me Mr. Krabs, por favor.", "date":"02/24/2023", "start_time":"14:00", "end_time":"15:00", "password":"thekarl3893"}]';
-
-    // Convert JSON string to JSON object
-    const testdata = JSON.parse(json);
     const table = document.getElementById("evtablecont");
 
     function showEvTable() {
         create_Table();
         document.getElementById('evlogbtn').style = "display:none";
         document.getElementById('logrefbtn').style = "display:block";
+        document.getElementById('updatebtn').style = "display:block";
+        document.getElementById('deletebtn').style = "display:block";
         document.getElementById('evtable').style = "display:block";
         document.getElementById('filters').style = "font-size:25px;display:block";
     }
@@ -153,74 +155,99 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
     // THIS IS A PLACEHOLDER FUNCTION FOR WHEN THE API IS RUNNING
     function submit_Form() {
         try {
-            // THERE WOULD BE A PULL FROM THE DATABASE HERE
-            // The variable "JSON", being the pre-API test JSON, is used as a validation test in its place.
-            var form_list = [document.getElementById('name').value, document.getElementById('email').value, document.getElementById('event_name').value, document.getElementById('event_details').value, document.getElementById('date').value, document.getElementById('start_time').value, document.getElementById('end_time').value, document.getElementById('password').value];
-            // for loop to ensure all fields were filled in
-            for (let i = 0; i < form_list.length; i++) {
-                if (form_list[i] == '') {
-                    alert("There was an error processing your form. Make sure all fields are filled in.");
-                    return;
+            fetch(read_url, read_options)
+                // response is a RESTful "promise" on any successful fetch
+                .then(response => {
+                // check for response errors
+                if (response.status !== 200) {
+                    const errorMsg = 'Database response error: ' + response.status;
+                    console.log(errorMsg);
                 };
-            };
-            for (let i = 0; i < 4; i++) {
-                if (form_list[i].length > 100) {
-                    alert("There was an error processing your form. Certain input fields have too many characters. Make sure that your name, email, event name, and details are all no more than 100 characters long. (This is a measure to prevent spam.)")
-                    return;
-                };
-            };
-            // Defining some variables for validation
-            var tempdate = document.getElementById('date').value;
-            var tempstime = document.getElementById('start_time').value;
-            var tempetime = document.getElementById('end_time').value;
-            var datefix = tempdate.substr(5, 2) + '/' + tempdate.substr(8, 10) + '/' + tempdate.substr(0, 4);
-            const hourdict = [{"open":10, "close":18}, {"open":8, "close":17}, {"open":8, "close":17}, {"open":8, "close":17}, {"open":8, "close":17}, {"open":8, "close":17}, {"open":10, "close":18}];
-            form_list[4] = datefix;
-            var fulldate = datefix + " " + tempstime;
-            let ev_date = new Date(fulldate);
-            let cur_date = new Date();
-            console.log(ev_date, cur_date);
-            let ev_dow = ev_date.getDay()
-            // validating date
-            var datedif = Math.ceil((ev_date - cur_date) / (1000 * 60 * 60 * 24));
-            if (1 > datedif || 365 < datedif) {
-                alert("There was an error processing your form. Make sure the date you have inputted is less than a year in the future.");
-                return;
-            };
-            // validating day of the week considering open hours
-            if (Number(tempstime.substring(0, 2)) < hourdict[ev_dow]["open"] || Number(tempstime.substring(0, 2)) >= hourdict[ev_dow]["close"]) {
-                alert("There was an error processing your form. It seems that your event starts before opening/after closing on " + datefix + ".");
-                return;
-            } else if (Number(tempetime.substring(0, 2)) <= hourdict[ev_dow]["open"] || Number(tempetime.substring(0, 2)) > hourdict[ev_dow]["close"]) {
-                alert("There was an error processing your form. It seems that your event ends before opening/after closing on " + datefix + ".");
-                return;
-            };
-            // validating event duration (must be at least 15 minutes, less than 3 hours, start must be before end)
-            var timedif = time_Dif(tempstime, tempetime); //in minutes
-            if (timedif < 15 || timedif > 180) {
-                alert("There was an error processing your form. Make sure that your event lasts at least 15 minutes, but no more than 3 hours.")
-                return;
-            };
-            // validating coincidence and email; JSON data is placeholder
-            var coinc = 0;
-            for (let i = 0; i < testdata.length; i++) {
-                temppull = testdata[i];
-                if (temppull['date'] == datefix) {
-                    if (Number(tempstime.substring(0, 2)) <= Number(temppull['start_time'].substr(0, 2)) < Number(tempetime.substring(0, 2)) || Number(tempstime.substring(0, 2)) < Number(temppull['end_time'].substr(0, 2)) <= Number(tempetime.substring(0, 2))) {coinc = coinc + 1;};
-                };
-                if (temppull['email'] == form_list[1]) {
-                    alert("There was an error processing your form. It seems that an event has already been created by that email. If someone has used your address to create an event without your consent, contact our staff.");
-                    return;
-                };
-            };
-            if (coinc > 5) {
-                alert("There was an error processing your form. Make sure that your event's timing does not coincide with the timing of more than five other events.");
-                return;
-            };
-            // if all validations successful
-            jsonentry = {"name":form_list[0], "email":form_list[1], "event_name":form_list[2], "event_details":form_list[3], "date":datefix, "start_time":form_list[5], "end_time":form_list[6], "password":form_list[7]};
-            testdata.push(jsonentry);
-            alert("Thank you, " + form_list[0] + ", for submitting an event! Watch your email for a confirmation message.\n\n(Warning: Please do not submit two events at a time! Your events may end up being cancelled as a result.)");
+                // valid response will have json data
+                response.json().then(data => {
+                    var form_list = [document.getElementById('name').value, document.getElementById('email').value, document.getElementById('event_name').value, document.getElementById('event_details').value, document.getElementById('date').value, document.getElementById('start_time').value, document.getElementById('end_time').value, document.getElementById('password').value];
+                    // for loop to ensure all fields were filled in
+                    for (let i = 0; i < form_list.length; i++) {
+                        if (form_list[i] == '') {
+                            alert("There was an error processing your form. Make sure all fields are filled in.");
+                            return;
+                        };
+                    };
+                    for (let i = 0; i < 4; i++) {
+                        if (form_list[i].length > 100) {
+                            alert("There was an error processing your form. Certain input fields have too many characters. Make sure that your name, email, event name, and details are all no more than 100 characters long. (This is a measure to prevent spam.)")
+                            return;
+                        };
+                    };
+                    // Defining some variables for validation
+                    var tempdate = document.getElementById('date').value;
+                    var tempstime = document.getElementById('start_time').value;
+                    var tempetime = document.getElementById('end_time').value;
+                    var datefix = tempdate.substr(5, 2) + '/' + tempdate.substr(8, 10) + '/' + tempdate.substr(0, 4);
+                    const hourdict = [{"open":10, "close":18}, {"open":8, "close":17}, {"open":8, "close":17}, {"open":8, "close":17}, {"open":8, "close":17}, {"open":8, "close":17}, {"open":10, "close":18}];
+                    form_list[4] = datefix;
+                    var fulldate = datefix + " " + tempstime;
+                    let ev_date = new Date(fulldate);
+                    let cur_date = new Date();
+                    console.log(ev_date, cur_date);
+                    let ev_dow = ev_date.getDay()
+                    // validating date
+                    var datedif = Math.ceil((ev_date - cur_date) / (1000 * 60 * 60 * 24));
+                    if (1 > datedif || 365 < datedif) {
+                        alert("There was an error processing your form. Make sure the date you have inputted is less than a year in the future.");
+                        return;
+                    };
+                    // validating day of the week considering open hours
+                    if (Number(tempstime.substring(0, 2)) < hourdict[ev_dow]["open"] || Number(tempstime.substring(0, 2)) >= hourdict[ev_dow]["close"]) {
+                        alert("There was an error processing your form. It seems that your event starts before opening/after closing on " + datefix + ".");
+                        return;
+                    } else if (Number(tempetime.substring(0, 2)) <= hourdict[ev_dow]["open"] || Number(tempetime.substring(0, 2)) > hourdict[ev_dow]["close"]) {
+                        alert("There was an error processing your form. It seems that your event ends before opening/after closing on " + datefix + ".");
+                        return;
+                    };
+                    // validating event duration (must be at least 15 minutes, less than 3 hours, start must be before end)
+                    var timedif = time_Dif(tempstime, tempetime); //in minutes
+                    if (timedif < 15 || timedif > 180) {
+                        alert("There was an error processing your form. Make sure that your event lasts at least 15 minutes, but no more than 3 hours.")
+                        return;
+                    };
+                    // validating coincidence and email
+                    var coinc = 0;
+                    for (let i = 0; i < data.length; i++) {
+                        temppull = data[i];
+                        if (temppull['date'] == datefix) {
+                            if (Number(tempstime.substring(0, 2)) <= Number(temppull['start_time'].substr(0, 2)) < Number(tempetime.substring(0, 2)) || Number(tempstime.substring(0, 2)) < Number(temppull['end_time'].substr(0, 2)) <= Number(tempetime.substring(0, 2))) {coinc = coinc + 1;};
+                        };
+                        if (temppull['email'] == form_list[1]) {
+                            alert("There was an error processing your form. It seems that an event has already been created by that email. If someone has used your address to create an event without your consent, contact our staff.");
+                            return;
+                        };
+                    };
+                    if (coinc > 5) {
+                        alert("There was an error processing your form. Make sure that your event's timing does not coincide with the timing of more than five other events.");
+                        return;
+                    };
+                    // if all validations successful
+                    const body = {
+                        name: document.getElementById('name').value,
+                        email: document.getElementById('email').value,
+                        event_name: document.getElementById('event_name').value,
+                        event_details: document.getElementById('event_details').value,
+                        date: document.getElementById('date').value,
+                        start_time: document.getElementById('start_time').value,
+                        end_time: document.getElementById('end_time').value,
+                        password: document.getElementById('password').value
+                    };
+                    const post_options = {
+                        method: 'POST',
+                        body: JSON.stringify(body),
+                        headers: {
+                            "content-type": "application/json",
+                            'Authorization': 'Bearer my-token',
+                        },
+                    };
+                    fetch(post_url, post_options);
+                    alert("Thank you, " + form_list[0] + ", for submitting an event! Watch your email for a confirmation message.\n\n(Warning: Please do not submit two events at a time! Your events may end up being cancelled as a result.)");
         } catch (err) {
             alert("There was an error processing your form. (Failed to send to/pull from the database, or there was an error in the formatting of your form. Make sure you're on unrestricted WiFi.)");
         };
@@ -256,7 +283,6 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
                 const date = document.createElement("td");
                 const start_time = document.createElement("td");
                 const end_time = document.createElement("td");
-                const action = document.createElement("td");
                     
                 // add content from user data          
                 name.innerHTML = user.name; 
@@ -267,28 +293,6 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
                 start_time.innerHTML = user.start_time; 
                 end_time.innerHTML = user.end_time;
 
-                // add action for update button
-                var updateBtn = document.createElement('input');
-                updateBtn.type = "button";
-                updateBtn.className = "btn";
-                updateBtn.value = "Update";
-                updateBtn.style = "margin-right:16px";
-                updateBtn.onclick = function () {
-                alert("Update: " + user.name);
-                };
-                action.appendChild(updateBtn);
-
-                // add action for delete button
-                var deleteBtn = document.createElement('input');
-                deleteBtn.type = "button";
-                deleteBtn.className = "btn";
-                deleteBtn.value = "Delete";
-                deleteBtn.style = "margin-right:16px"
-                deleteBtn.onclick = function () {
-                alert("Delete: " + user.name);
-                };
-                action.appendChild(deleteBtn);  
-
                 // add data to row
                 tr.appendChild(name);
                 tr.appendChild(email);
@@ -297,7 +301,6 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
                 tr.appendChild(date);
                 tr.appendChild(start_time);
                 tr.appendChild(end_time);
-                tr.appendChild(action);
 
                 // add row to table
                 table.appendChild(tr);
