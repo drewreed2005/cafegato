@@ -130,7 +130,7 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
     };
 
     // Static json, this can be used to test data prior to API and Model being ready
-    const json = '[{"id":1, "name":"Thomas Edison", "email":"tedison@lightbulb.edu", "event_name":"The Edison Troupe Meet", "event_details":"We 10 selected geniuses will meet in the events room for a convergence.", "date":"02/23/2023", "start_time":"13:00", "end_time":"14:00", "password":"theGOAT302"}, {"id":2, "name":"John Mortensen", "email":"jmortensen@powayusd.com", "event_name":"Extra Credit Code Meetup", "event_details":"Come to work on ideation and any confusion with the Full Stack CPT project. No phones.", "date":"02/25/2023", "start_time":"10:00", "end_time":"12:00", "password":"compsciyo34"}]';
+    const json = '[{"id":1, "name":"Thomas Edison", "email":"tedison@lightbulb.edu", "event_name":"The Edison Troupe Meet", "event_details":"We 10 selected geniuses will meet in the events room for a convergence.", "date":"02/25/2023", "start_time":"13:00", "end_time":"14:00", "password":"theGOAT302"}, {"id":2, "name":"John Mortensen", "email":"jmortensen@powayusd.com", "event_name":"Extra Credit Code Meetup", "event_details":"Come to work on ideation and any confusion with the Full Stack CPT project. No phones.", "date":"02/23/2023", "start_time":"10:00", "end_time":"12:00", "password":"compsciyo34"}, {"id":3, "name":"Karl Giant", "email":"karlgiant@wallstreet.com", "event_name":"Money Money Money", "event_details":"Call me Mr. Krabs, por favor.", "date":"02/24/2023", "start_time":"14:00", "end_time":"15:00", "password":"thekarl3893"}]';
 
     // Convert JSON string to JSON object
     const testdata = JSON.parse(json);
@@ -228,7 +228,6 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
 
     // prepare HTML result container for new output
     function create_Table() {
-        table.innerHTML = "";
         // fetch the API
         fetch(read_url, read_options)
             // response is a RESTful "promise" on any successful fetch
@@ -243,8 +242,9 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
         });
     };
     
-    function table_Make(dict) {
-        dict.forEach(user => {
+    function table_Make(list) {
+        table.innerHTML = "";
+        list.forEach(user => {
                 // build a row for each user
                 const tr = document.createElement("tr");
 
@@ -303,8 +303,115 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
                 table.appendChild(tr);
         });
     };
-    
+
+    var soonval = "placeholder";
+    var soon_fulldate = "placeholder";
+    var temp_soondate = "placeholder";
+    var lateval = "placeholder";
+    var late_fulldate = "placeholder";
+    var temp_latedate = "placeholder";
+
     function sort_Events() {
+        var orderval = document.getElementById("timesort").value;
+        var monthval = document.getElementById("monthfil").value;
+        var sorted_List = [];
+        // fetch the API
+        fetch(read_url, read_options)
+            // response is a RESTful "promise" on any successful fetch
+            .then(response => {
+            // check for response errors
+            if (response.status !== 200) {
+                const errorMsg = 'Database response error: ' + response.status;
+                console.log(errorMsg);
+            };
+            // valid response will have json data
+            response.json().then(data => {
+                var testcopy = [...data];
+                var d_length = testcopy.length;
+                if (orderval == "time_submitted") {
+                            testcopy.forEach(event => {sorted_List.push(event)});
+                            console.log(sorted_List)
+                } else if (orderval == "soonest") {
+                    for (let j = 0; j < _length; j++) {
+                        let i = 0;
+                        testcopy.forEach(event => {
+                            if (i == 0) {
+                                soon_fulldate = event['date'] + " " + event['start_time'];
+                                console.log(soon_fulldate);
+                                temp_soondate = new Date(soon_fulldate);
+                                console.log(temp_soondate);
+                                soonval = event;
+                            } else {
+                                console.log(soonval);
+                                console.log(soon_fulldate);
+                                var temp_fulldate = event['date'] + " " + event['start_time'];
+                                var temp_evdate = new Date(temp_fulldate);
+                                console.log(temp_evdate)
+                                console.log(temp_soondate)
+                                if (temp_evdate.getTime() < temp_soondate.getTime()) {
+                                    soon_fulldate = event.date + " " + event.start_time;
+                                    temp_soondate = new Date(soon_fulldate);
+                                    soonval = event;
+                                };
+                            };
+                            i = i + 1;
+                        });
+                        console.log(soonval);
+                        sorted_List.push(soonval);
+                        for (let i = 0; i < testcopy.length; i++) {
+                            if (testcopy[i] == soonval) {
+                                testcopy.splice(i, 1);
+                            };
+                        };
+                    };
+                } else if (orderval == "latest") {
+                    for (let j = 0; j < d_length; j++) {
+                        let i = 0;
+                        testcopy.forEach(event => {
+                            if (i == 0) {
+                                late_fulldate = event['date'] + " " + event['start_time'];
+                                console.log(late_fulldate);
+                                temp_latedate = new Date(late_fulldate);
+                                console.log(temp_latedate);
+                                lateval = event;
+                            } else {
+                                console.log(lateval);
+                                console.log(late_fulldate);
+                                var temp_fulldate = event['date'] + " " + event['start_time'];
+                                var temp_evdate = new Date(temp_fulldate);
+                                console.log(temp_evdate)
+                                console.log(temp_latedate)
+                                if (temp_evdate.getTime() > temp_latedate.getTime()) {
+                                    late_fulldate = event.date + " " + event.start_time;
+                                    temp_latedate = new Date(late_fulldate);
+                                    lateval = event;
+                                };
+                            };
+                            i = i + 1;
+                        });
+                        console.log(lateval);
+                        sorted_List.push(lateval);
+                        for (let i = 0; i < testcopy.length; i++) {
+                            if (testcopy[i] == lateval) {
+                                testcopy.splice(i, 1);
+                            };
+                        };
+                    };
+                };
+                console.log(sorted_List);
+                clone_Sort = [...sorted_List];
+                for (let k = 0, t = 0; t < sorted_List.length; t++) {
+                    if (sorted_List[k]['date'].substring(6, 10) == monthval.substring(0, 4)) {
+                        if (sorted_List[k]['date'].substring(0, 2) == monthval.substring(5, 7)) {k = k + 1} else {clone_Sort.splice(k, 1)};
+                    } else {clone_Sort.splice(k, 1)};
+                    console.log(clone_Sort)
+                };
+                table_Make(clone_Sort);
+            });
+        });
+    };
+    
+    function sort_Events1() {
         var orderval = document.getElementById("timesort").value;
         var monthval = document.getElementById("monthfil").value;
         console.log(orderval, monthval.substring(0, 4), monthval.substring(5, 7));
@@ -317,28 +424,39 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
             if (response.status !== 200) {
                 const errorMsg = 'Database response error: ' + response.status;
                 console.log(errorMsg);
-            }
+            };
             // valid response will have json data
             response.json().then(data => {
-                data_copy = [...data];
+                var data_copy = [...data];
+                var d_length = data_copy.length;
                 if (orderval == "time_submitted") {
                     data_copy.forEach(event => {sorted_List.push(event)});
                 } else if (orderval == "soonest") {
-                    let i = 0;
-                    data_copy.forEach(event => {
-                        if (i == 0) {
-                            var soonval = event;
-                        } else {
-                            var temp_fulldate = event.date + " " + event.start_time;
-                            var soon_fulldate = soonval.date + " " + soonval.start_time;
-                            var temp_evdate = new Date(temp_fulldate);
-                            var temp_soondate = new Date(soon_fulldate);
-                            if (temp_evdate.getTime() < temp_soondate) {
-                                soonval = event;
+                    for (let j = 0; j < d_length; j++) {
+                        let i = 0;
+                        data_copy.forEach(event => {
+                            if (i == 0) {
+                                var soon_fulldate = event.date + " " + event.start_time;
+                                var soonval = event;
+                            } else {
+                                var temp_fulldate = event.date + " " + event.start_time;
+                                var temp_evdate = new Date(temp_fulldate);
+                                var temp_soondate = new Date(soon_fulldate);
+                                if (temp_evdate.getTime() < temp_soondate.getTime()) {
+                                    var soon_fulldate = event.date + " " + event.start_time;
+                                    soonval = event;
+                                };
+                            };
+                            i = i + 1;
+                        });
+                        console.log(soonval);
+                        sorted_List.push(soonval);
+                        for (let i = 0; i < data_copy.length; i++) {
+                            if (data_copy[i] == soonval) {
+                                data_copy.splice(i, 1);
                             };
                         };
-                        console.log(soonval)
-                    });
+                    };
                 };
             });
         });
