@@ -405,7 +405,7 @@ function closePopup(){
         });
     };
 
-<th><button class="btn" id="viewreviews" style="display:none" onclick="createTable()">See Other Reviews</button></th> 
+<p><button class="btn" id="viewreviews" style="display:none" onclick="createTable()">See Other Reviews</button></p> 
 
 
 
