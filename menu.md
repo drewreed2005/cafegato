@@ -209,7 +209,7 @@ body {
 
 
 <!-- Stars-->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <span class="heading">User Rating</span>
 <span class="fa fa-star checked"></span>
 <span class="fa fa-star checked"></span>
@@ -403,7 +403,6 @@ function closePopup(){
       'Access-Control-Allow-Methods':'POST'}
       // 'Content-Type': 'application/x-www-form-urlencoded',
     },
-  };
 
   // fetch the API
   fetch(url, options)
