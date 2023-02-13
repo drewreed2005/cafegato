@@ -1,4 +1,4 @@
-async function loadIntoTable(url, table) {
+async function fillTable(url, table) {
     const tableBody = table.querySelector("tbody");
     const response = await fetch(url);
     const data = await response.json();
@@ -6,4 +6,4 @@ async function loadIntoTable(url, table) {
     console.log(data);
 }
 
-loadIntoTable("http://localhost:5000/", document.querySelector("table"));
+fillTable("http://localhost:5000/", document.querySelector("table"));

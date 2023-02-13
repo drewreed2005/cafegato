@@ -118,28 +118,3 @@ label {font-size: 1.1em; height: 25px; line-height: 25px;}
 .notice a {color: #514721;}
 .success a {color: #264409;}
 
-.table {
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	border-collapse: collapse;
-	font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-	overflow: hidden;
-	font-weight: bold;
-}
-
-.table thead th {
-	background: #009578;
-	color: white;
-}
-
-.table td,
-.table th {
-	padding: 10px 20px;
-}
-
-.table tbody tr:nth-of-type(even) {
-	background: #fff;
-}
-
-.table tbody tr:last-of-type {
-	border-bottom: 2px solid #009578;
-}
