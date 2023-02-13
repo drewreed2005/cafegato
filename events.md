@@ -229,14 +229,14 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
                     };
                     // if all validations successful
                     const body = {
-                        name: document.getElementById('name').value,
-                        email: document.getElementById('email').value,
-                        event_name: document.getElementById('event_name').value,
-                        event_details: document.getElementById('event_details').value,
-                        date: document.getElementById('date').value,
-                        start_time: document.getElementById('start_time').value,
-                        end_time: document.getElementById('end_time').value,
-                        password: document.getElementById('password').value
+                        "name": document.getElementById('name').value,
+                        "email": document.getElementById('email').value,
+                        "event_name": document.getElementById('event_name').value,
+                        "event_details": document.getElementById('event_details').value,
+                        "date": datefix,
+                        "start_time": document.getElementById('start_time').value,
+                        "end_time": document.getElementById('end_time').value,
+                        "password": document.getElementById('password').value
                     };
                     const post_options = {
                         method: 'POST',
@@ -245,6 +245,15 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
                             "content-type": "application/json",
                             'Authorization': 'Bearer my-token',
                         },
+                    };
+                    const post_options = {
+                        method: 'POST',
+                        body: JSON.stringify(body),
+                        headers: {
+                            'Content-Type':'application/json',
+                            'Access-Control-Allow-Origin':'*',
+                            'Access-Control-Allow-Methods':'POST'
+                        };
                     };
                     fetch(post_url, post_options);
                     alert("Thank you, " + form_list[0] + ", for submitting an event! Watch your email for a confirmation message.\n\n(Warning: Please do not submit two events at a time! Your events may end up being cancelled as a result.)");
