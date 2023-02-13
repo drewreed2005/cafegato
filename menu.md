@@ -398,7 +398,9 @@ function closePopup(){
     cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
     credentials: 'omit', // include, *same-origin, omit
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin':'*',
+      'Access-Control-Allow-Methods':'POST'}
       // 'Content-Type': 'application/x-www-form-urlencoded',
     },
   };
