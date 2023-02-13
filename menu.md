@@ -281,8 +281,6 @@ body {
   <form action="post_comment.php" method="post" id="commentform">
     <label for="comment_author" class="required">Your name *</label>
     <input type="text" name="comment_author" id="comment_author" value="" tabindex="1" required="required"><br>
-    <label for="email" class="required">Your email *</label>
-    <input type="email" name="email" id="email" value="" tabindex="2" required="required"><br>
     <label for="comment" class="required">Your Review *</label>
     <textarea name="comment" id="comment" rows="10" tabindex="4"  required="required"></textarea><br>
     <input type="hidden" name="comment_post_ID" value="1" id="comment_post_ID" />
@@ -354,9 +352,6 @@ function closePopup(){
 </script>
 </body>
 
-    <tbody id="data-output">
-     <!-- from js file -->
-    </tbody>
   
 
 <head>
@@ -376,42 +371,30 @@ function closePopup(){
 </style>
 
 <!--- See other reviews--->
-<script>
-    let sorted = false;
-    var pulldata = "";
 
-    const read_url = "http://localhost:5000/";
-    const read_options = {
-        method: 'GET', // *GET, POST, PUT, DELETE, etc.
-        mode: 'cors', // no-cors, *cors, same-origin
-        cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: 'omit', // include, *same-origin, omit
-        headers: {
-        'Content-Type': 'application/json'
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-        },
-    };
-    function createTable() {
-        // fetch the API
-        fetch(read_url, read_options)
-            // response is a RESTful "promise" on any successful fetch
-            .then(response => {
-            // check for response errors
-            if (response.status !== 200) {
-                const errorMsg = 'Database response error: ' + response.status;
-                console.log(errorMsg);
-            }
-            // valid response will have json data
-            response.json().then(data => {table_Make(data)})
-        });
-    };
-    
+<body>
+  <h1>Reviews</h1>
+    <div class="container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Review</th>
+            <th scope="col">Rate</th>
+          </tr>
+         </thead>
+        <tbody id="table_body">
+          <tr>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-<p class="flip" onclick="createTable()">See Other Reviews</p>
-<div id="panel">
-
-<th><button class="btn" id="viewreviews" style="display:none" onclick="createTable()">See Other Reviews</button></th> 
-
+  <script src="menu.js"></script>
+</body>
 
 
 
