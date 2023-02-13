@@ -305,7 +305,7 @@ body {
     <br>
     <input name="submit" type="submit" value="Submit Review" class="btn" onclick = "openPopup()" />
   </form>
-  <input name="view" type="submit" value="View Reviews" class="btn" onclick = "createTable()" />
+  <button class="btn" id="viewreviews" onclick="createTable()">View Reviews</button>
 </div>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
