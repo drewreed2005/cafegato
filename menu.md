@@ -404,8 +404,12 @@ function closePopup(){
             response.json().then(data => {table_Make(data)})
         });
     };
+    
 
-<p><button class="btn" id="viewreviews" style="display:none" onclick="createTable()">See Other Reviews</button></p> 
+<p class="flip" onclick="createTable()">See Other Reviews</p>
+<div id="panel">
+
+<th><button class="btn" id="viewreviews" style="display:none" onclick="createTable()">See Other Reviews</button></th> 
 
 
 
