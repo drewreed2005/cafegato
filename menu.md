@@ -371,34 +371,12 @@ function closePopup(){
 </style>
 
 <!--- See other reviews--->
-
 <body>
-  <h1>Reviews</h1>
-    <div class="container">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Review</th>
-            <th scope="col">Rate</th>
-          </tr>
-         </thead>
-        <tbody id="table_body">
-          <tr>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
+  <table class="table">
+    <thead>Name</thead>
+    <thead>Review</thead>
+    <thead>Rate</thead>
+    <tbody></tbody>
+  </table>
   <script src="menu.js"></script>
 </body>
-
-
-
-
-
-
-

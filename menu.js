@@ -1,10 +1,9 @@
-fetch("http://localhost:5000/").then((data)=>{
-    return data.json();
-}).then((objectData)=>{
-    console.log(objectData);
-    let tableData="";
-    objectData.map((values)=>{
-        tableData=`<h1>${values.name}</h1>`;
-    });
-    document.getElementById("table_bod").innerHTML=tableData;
-})
+async function loadIntoTable(url, table) {
+    const tableBody = table.querySelector("tbody");
+    const response = await fetch(url);
+    const data = await response.json();
+
+    console.log(data);
+}
+
+loadIntoTable("http://localhost:5000/", document.querySelector("table"));
