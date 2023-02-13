@@ -208,7 +208,7 @@ body {
 
 
 
-<!-- Add icon library -->
+<!-- Stars-->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <span class="heading">User Rating</span>
 <span class="fa fa-star checked"></span>
@@ -315,6 +315,7 @@ body {
   box-sizing: border-box;
 }
 
+<!--- Nav bar--->
 <p class="navbar">
     <table class="navbar">
         <tr>
@@ -331,7 +332,7 @@ body {
         </div>
         <!-- this is Jekyll magic, each md file in site will be inserted here -->
         
-
+<!--- Pop up CSS--->
 <body>
   <div class="container">
     <div class="popup" id="popup">
@@ -356,16 +357,6 @@ function closePopup(){
      <!-- from js file -->
     </tbody>
   
-  <script>
-    const api_url = 'http://127.0.0.1:8086/api/users/'
-    async function getData() {
-        const response = await fetch(api_url);
-        const data = await response.json();
-        console.log(data)
-    getData()
-    }
-  </script>
-
 
 <head>
 <style>
@@ -382,39 +373,40 @@ function closePopup(){
   display: none;
 }
 </style>
-</head>
-<body>
-<p class="flip" onclick="myFunction()">See Other Reviews</p>
-<div id="panel">
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Review</th>
-        <th>Rate</th>
-      </tr>
-    </thead>
-      <tr>
-        <td>Mr. Yeung</td>
-        <td>Amazing food and amazing website</td>
-        <td>5/5</td>
-      </tr>
-      <tr>
-        <td>John Doe</td>
-        <td>I'm allergic to cats</td>
-        <td>2/5</td>
-      </tr>
-      <tr>
-        <td>Jennifer Lopez</td>
-        <td>LOVE LOVE LOVE</td>
-        <td>4/5</td>
-      </tr>
-    
+
+<!--- See other reviews--->
 <script>
-function myFunction() {
-  document.getElementById("panel").style.display = "block";
-}
-</script>
+    let sorted = false;
+    var pulldata = "";
+
+    const read_url = "http://localhost:5000/";
+    const read_options = {
+        method: 'GET', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, *cors, same-origin
+        cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'omit', // include, *same-origin, omit
+        headers: {
+        'Content-Type': 'application/json'
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    };
+    function createTable() {
+        // fetch the API
+        fetch(read_url, read_options)
+            // response is a RESTful "promise" on any successful fetch
+            .then(response => {
+            // check for response errors
+            if (response.status !== 200) {
+                const errorMsg = 'Database response error: ' + response.status;
+                console.log(errorMsg);
+            }
+            // valid response will have json data
+            response.json().then(data => {table_Make(data)})
+        });
+    };
+
+<th><button class="btn" id="viewreviews" style="display:none" onclick="createTable()">See Other Reviews</button></th> 
+
 
 
 
