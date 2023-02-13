@@ -238,14 +238,14 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
                         "end_time": document.getElementById('end_time').value,
                         "password": document.getElementById('password').value
                     };
-                    const post_options = {
-                        method: 'POST',
-                        body: JSON.stringify(body),
-                        headers: {
-                            "content-type": "application/json",
-                            'Authorization': 'Bearer my-token',
-                        },
-                    };
+                    // const post_options = {
+                        // method: 'POST',
+                        // body: JSON.stringify(body),
+                        // headers: {
+                            // "content-type": "application/json",
+                            // 'Authorization': 'Bearer my-token',
+                        // },
+                    // };
                     const post_options = {
                         method: 'POST',
                         body: JSON.stringify(body),
