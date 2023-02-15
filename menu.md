@@ -46,8 +46,9 @@
 <!-- end custom head snippets -->
 
   </head>
+
 <head>
-  <title>Review's Average: </title>
+  <h1>Review's Average: </h1>
 </head>
 <body>
   <p id="response"></p>
