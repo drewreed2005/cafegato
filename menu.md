@@ -26,7 +26,6 @@
 <!-- End Jekyll SEO tag -->
     <link rel="stylesheet" href="/assets/css/style.css?v=d264d69bbf7c2f03d9740b370367f0c799fbe57e">
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
-    <script src="/assets/js/respond.js"></script>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -388,9 +387,6 @@ function closePopup(){
 
 <script>
   // prepare HTML result container for new output
-<html> 
-
-  
   <head>
     <title>Review's Average: </title>
   </head>
@@ -421,5 +417,4 @@ function closePopup(){
         });
       };
     </script>
-  </body>
-</html>
+</body>
