@@ -385,8 +385,6 @@ function closePopup(){
   </tbody>
 </table>
 
-<script>
-  // prepare HTML result container for new output
   <head>
     <title>Review's Average: </title>
   </head>
