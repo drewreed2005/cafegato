@@ -238,14 +238,14 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
                         "end_time": document.getElementById('end_time').value,
                         "password": document.getElementById('password').value
                     };
-                    const post_options = {
-                        method: 'POST',
-                        body: JSON.stringify(body),
-                        headers: {
-                            "content-type": "application/json",
-                            'Authorization': 'Bearer my-token',
-                        },
-                    };
+                    // const post_options = {
+                        // method: 'POST',
+                        // body: JSON.stringify(body),
+                        // headers: {
+                            // "content-type": "application/json",
+                            // 'Authorization': 'Bearer my-token',
+                        // },
+                    // };
                     const post_options = {
                         method: 'POST',
                         body: JSON.stringify(body),
@@ -253,7 +253,7 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
                             'Content-Type':'application/json',
                             'Access-Control-Allow-Origin':'*',
                             'Access-Control-Allow-Methods':'POST'
-                        };
+                        }
                     };
                     fetch(post_url, post_options);
                     alert("Thank you, " + form_list[0] + ", for submitting an event! Watch your email for a confirmation message.\n\n(Warning: Please do not submit two events at a time! Your events may end up being cancelled as a result.)");
