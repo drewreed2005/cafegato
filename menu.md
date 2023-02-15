@@ -388,65 +388,38 @@ function closePopup(){
 
 <script>
   // prepare HTML result container for new output
-  const resultContainer = document.getElementById("reviews");
+<html> 
 
-  // prepare fetch options
-  const url = "http://localhost:5000/";
-  const options = {
-    method: 'GET', // *GET, POST, PUT, DELETE, etc.
-    mode: 'cors', // no-cors, *cors, same-origin
-    cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
-    credentials: 'omit', // include, *same-origin, omit
-    headers: {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin':'*',
-      'Access-Control-Allow-Methods':'POST'}
+  
+  <head>
+    <title>Review's Average: </title>
+  </head>
+  <body>
+    <p id="response"></p>
+    <script>
+        const url = "http://localhost:5000/average";
+        const options = {
+          method: 'GET', // *GET, POST, PUT, DELETE, etc.
+          mode: 'cors', // no-cors, *cors, same-origin
+          cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
+          credentials: 'omit', // include, *same-origin, omit
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin':'http://localhost:5000/average',
+            'Access-Control-Allow-Methods':'GET'
+      },
+    };
       // 'Content-Type': 'application/x-www-form-urlencoded',
-    },
-
-  // fetch the API
-  fetch(url, options)
-      // response is a RESTful "promise" on any successful fetch
-    .then(response => {
-      // check for response errors
-      if (response.status !== 200) {
-          const errorMsg = 'Database response error: ' + response.status;
-          console.log(errorMsg);
-          const tr = document.createElement("tr");
-          const td = document.createElement("td");
-          td.innerHTML = errorMsg;
-          tr.appendChild(td);
-          resultContainer.appendChild(tr);
-          return;
-      }
-      // valid response will have json data
-      response.json().then(data => {
-          console.log(data);
-          for (let row in data) {
-            // tr and td build out for each row
-            const tr = document.createElement("tr");
-            const name = document.createElement("td");
-            const review = document.createElement("td");
-            const rate = document.createElement("td");
-            // data is specific to the API
-            name.innerHTML = data[row].name; 
-            review.innerHTML = data[row].review; 
-            rate.innerHTML = data[row].rate;
-            // add HTML to container
-            tr.appendChild(name);
-            tr.appendChild(review);
-            tr.appendChild(rate);
-            resultContainer.appendChild(tr);
-          }
-      })
-  })
-  // catch fetch errors (ie ACCESS to server blocked)
-  .catch(err => {
-    console.error(err);
-    const tr = document.createElement("tr");
-    const td = document.createElement("td");
-    td.innerHTML = err;
-    tr.appendChild(td);
-    resultContainer.appendChild(tr);
-  });
-</script>
+    function displayav() {
+      fetch(url, options)
+        .then(response => response.text())
+        .then(data => {
+          console.log('The average rate is: ' + data)
+          })
+        .catch(error => {
+          console.error('Error fetching')
+        });
+      };
+    </script>
+  </body>
+</html>
