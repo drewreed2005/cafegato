@@ -275,36 +275,31 @@ body {
   </div>
 </div>
 
-  <head>
-    <title>Review's Average: </title>
-  </head>
-  <body>
-    <p id="response"></p>
-    <script>
-        const url = "http://localhost:5000/average";
-        const options = {
-          method: 'GET', // *GET, POST, PUT, DELETE, etc.
-          mode: 'cors', // no-cors, *cors, same-origin
-          cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
-          credentials: 'omit', // include, *same-origin, omit
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin':'http://localhost:5000/average',
-            'Access-Control-Allow-Methods':'GET'
-      },
+<head>
+  <title>Review's Average: </title>
+</head>
+<body>
+  <p id="response"></p>
+  <script>
+    const url = "http://localhost:5000/average";
+    const options = {
+      method: 'GET',
+      mode: 'cors',
+      cache: 'default',
+      credentials: 'omit',
     };
-      // 'Content-Type': 'application/x-www-form-urlencoded',
     function displayav() {
       fetch(url, options)
         .then(response => response.text())
         .then(data => {
-          console.log('The average rate is: ' + data)
-          })
+          console.log('The average rate is: ' + data);
+          document.getElementById('response').innerText = data;
+        })
         .catch(error => {
-          console.error('Error fetching')
+          console.error('Error fetching');
         });
-      };
-    </script>
+    };
+  </script>
 </body>
 
 <div id="respond">
