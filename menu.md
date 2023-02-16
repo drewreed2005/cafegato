@@ -45,14 +45,15 @@
 <!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
 <!-- end custom head snippets -->
 
+  </head>
   <style>
-    p{text-align: center; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color: black;}
-    h1{text-align: center; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; letter-spacing: 0.2cm; color: #fc6428;}
-    h2{text-align: center; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color: black;}
-    h3{text-align: center ;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color: black;}
-    text{font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;color: black;}
-    center{font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;, text-align: center; color: black;}
-    btn{font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; background-color: darkorange; text-decoration-color: beige; color: black;}
+    p{text-align: center; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;}
+    h1{text-align: center; font-family:cursive; letter-spacing: 0.2cm; color: #fc6428;}
+    h2{text-align: center; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;}
+    h3{text-align: center ;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;;}
+    text{font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;}
+    center{font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;, text-align: center;}
+    btn{font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; background-color: darkorange; text-decoration-color: beige;}
     @import "https://unpkg.com/open-props";
 @import "https://unpkg.com/open-props/normalize.min.css";
 
@@ -156,6 +157,8 @@
 </style>
 </head>
 <body>
+
+</style>
 <head>
     <p>San Diego, CA</p>
     <p>$$$ • Brunch/Lunch </p>
@@ -296,6 +299,10 @@ async function postFormFieldsAsJson({ url, formData }) {
   <br>
   <div class="form-row mx-auto">
     <button type="submit" class="btn-submit" id="btnSubmit" onclick="submitForm()">Submit</button>
+  </div>
+
+  
+
   </div>
 
 </form>
@@ -550,3 +557,8 @@ async function postFormFieldsAsJson({ url, formData }) {
   </div>
   
   
+      </div>
+    </div>
+  
+  </div>
+</html>
