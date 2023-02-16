@@ -4,7 +4,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <script>
-var WORDS0 = ["hi"]
 function wrap_img(fn) {
 
     if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
@@ -120,7 +119,7 @@ function closePopup1(){
 
 <style>
  {background-color: #f1f0e2;}
-
+/*
     .flex-all {
         display: flex;
         justify-content: center;
@@ -133,7 +132,7 @@ function closePopup1(){
         display: flex;
         padding: 0 30px 30px;
     }
-
+*/
 
     h1 {
       /* Title Design */
@@ -446,24 +445,7 @@ function closePopup1(){
 	});
 </script> 
 
-<!--
-<h2 style="color:black">Enter Leaderboard:</h2>
-    <p><label>
-        Name:
-        <input type="text" name="name" id="name" required>
-    </label></p>
-    <p><label>
-        Pin:
-        <input type="password" name="pin" id="pin" required>
-    </label></p>
-    <p>
-        <button class='btn' onclick="submit_Form()">Submit</button>
-    </p>
-    </form>
-</div>
-
-<h2 style="color:black">Event Form Submission</h2>
-
+<h2 style="color:black">Enter Leaderboard</h2>
 <table>
     <tr>
         <th><label for="name">Name</label></th>
@@ -472,30 +454,14 @@ function closePopup1(){
     </tr>
     <tr>
         <td><input type="text" name="name" id="name" required></td>
-        <td><input type="text" name="pin" id="pin" required></td>
+        <td><input type="password" name="pin" id="pin" required></td>
         <td><input type="number" name="score" id="score" required></td>
+        <td ><button onclick="create_user()">Submit</button></td>
     </tr>
 </table>
-<button class='btn' onclick="submit_Form()">Submit</button>
 
-<h2 style="color:black" class="widebr">Current Leaderboard</h2>
-<button class="btn" id="lbbtn" onclick="showLbTable()">Show Leaderboard</button>
-<div id="lbControls" style="display:flex;justify-content:space-between;">
-    <th><button class="btn" id="lbrefbtn" style="display:none" onclick="create_Table()">Refresh Leaderboard</button></th>
-    <th><button class="btn" id="updatebtn" style="display:none" onclick="leaderboard_Update()">Update Postition</button></th>
-    <th><button class="btn" id="deletebtn" style="display:none" onclick="delete_leaderboard()">Delete Position</button></th>
-</div>
-<div style="font-size:25px;display:none" id="filters" name="filters">
-    Filters: <select id="score" name="score">
-    <option value="time_submitted">Time Submitted</option>
-    <option value="Highest">Highest</option>
-    <option value="Lowest">Lowest</option>
-    </select>
-    <input type="month" id="monthfil" name="monthfil" value="2023-02">
-    <button class="btn" id="sortbtn" onclick="sort_leaderboard()">Sort</button>
-</div>
 
-<table id="lbtable" style="display:none;width:50%">
+<table>
   <thead>
   <tr>
     <th>Name</th>
@@ -503,16 +469,138 @@ function closePopup1(){
     <th>Score</th>
   </tr>
   </thead>
-  <tbody id="lbtablecont">
-    
+  <tbody id="result">
+    <!-- javascript generated data -->
   </tbody>
 </table>
 
 
 <script>
-    let sorted = false;
-    var pulldata = "";
+  // prepare HTML result container for new output
+  const resultContainer = document.getElementById("result");
+  // prepare URL's to allow easy switch from deployment and localhost
+  // const url = "http://127.0.0.1:8086/api/wordles/"
+  const url = "https://cgato.duckdns.org/api/wordles/create/"
+  const create_fetch = url + '/create';
+  const read_fetch = url + '/';
 
+  // Load users on page entry
+  read_users();
+
+
+  // Display User Table, data is fetched from Backend Database
+  function read_users() {
+    // prepare fetch options
+    const read_options = {
+      method: 'GET', // *GET, POST, PUT, DELETE, etc.
+      mode: 'cors', // no-cors, *cors, same-origin
+      cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: 'omit', // include, *same-origin, omit
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    };
+
+    // fetch the data from API
+    fetch(read_fetch, read_options)
+      // response is a RESTful "promise" on any successful fetch
+      .then(response => {
+        // check for response errors
+        if (response.status !== 200) {
+            const errorMsg = 'Database read error: ' + response.status;
+            console.log(errorMsg);
+            const tr = document.createElement("tr");
+            const td = document.createElement("td");
+            td.innerHTML = errorMsg;
+            tr.appendChild(td);
+            resultContainer.appendChild(tr);
+            return;
+        }
+        // valid response will have json data
+        response.json().then(data => {
+            console.log(data);
+            for (let row in data) {
+              console.log(data[row]);
+              add_row(data[row]);
+            }
+        })
+    })
+    // catch fetch errors (ie ACCESS to server blocked)
+    .catch(err => {
+      console.error(err);
+      const tr = document.createElement("tr");
+      const td = document.createElement("td");
+      td.innerHTML = err;
+      tr.appendChild(td);
+      resultContainer.appendChild(tr);
+    });
+  }
+
+  function create_user(){
+    //Validate Password (must be 6-20 characters in len)
+    //verifyPassword("click");
+    const body = {
+        name: document.getElementById("name").value,
+        pin: document.getElementById("pin").value,
+        score: document.getElementById("score").value
+    };
+    const requestOptions = {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: {
+            "content-type": "application/json",
+            'Authorization': 'Bearer my-token',
+        },
+    };
+
+    // URL for Create API
+    // Fetch API call to the database to create a new user
+    fetch(create_fetch, requestOptions)
+      .then(response => {
+        // trap error response from Web API
+        if (response.status !== 200) {
+          const errorMsg = 'Database create error: ' + response.status;
+          console.log(errorMsg);
+          const tr = document.createElement("tr");
+          const td = document.createElement("td");
+          td.innerHTML = errorMsg;
+          tr.appendChild(td);
+          resultContainer.appendChild(tr);
+          return;
+        }
+        // response contains valid result
+        response.json().then(data => {
+            console.log(data);
+            //add a table row for the new/created userid
+            add_row(data);
+        })
+    })
+  }
+
+  function add_row(data) {
+    const tr = document.createElement("tr");
+    const name = document.createElement("td");
+    const pin = document.createElement("td");
+    const score = document.createElement("td");
+  
+
+    // obtain data that is specific to the API
+    name.innerHTML = data.name; 
+    pin.innerHTML = data.pin.length;
+    score.innerHTML = data.score; 
+
+    // add HTML to container
+    tr.appendChild(name);
+    tr.appendChild(pin);
+    tr.appendChild(score);
+
+    resultContainer.appendChild(tr);
+  }
+
+</script>
+
+<!--
+<script>
     const read_url = "http://127.0.0.1:8086/api/wordles/";
     const read_options = {
         method: 'GET', // *GET, POST, PUT, DELETE, etc.
@@ -524,124 +612,57 @@ function closePopup1(){
         // 'Content-Type': 'application/x-www-form-urlencoded',
         },
     };
-    const post_url = "http://127.0.0.1:8086/api/wordles/create/";
-
-    const table = document.getElementById("lbtablecont");
-
-    function showLbTable() {
-        create_Table();
-        document.getElementById('lbbtn').style = "display:none";
-        document.getElementById('lbrefbtn').style = "display:block";
-        document.getElementById('updatebtn').style = "display:block";
-        document.getElementById('deletebtn').style = "display:block";
-        document.getElementById('lbtable').style = "display:block";
-        document.getElementById('filters').style = "font-size:25px;display:block";
-    }
-
-
-    // THIS IS A PLACEHOLDER FUNCTION FOR WHEN THE API IS RUNNING
-    function submit_Form() {
-        try {
-            fetch(read_url, read_options)
-                // response is a RESTful "promise" on any successful fetch
-                .then(response => {
-                // check for response errors
-                if (response.status !== 200) {
-                    const errorMsg = 'Database response error: ' + response.status;
-                    console.log(errorMsg);
-                };
-                // valid response will have json data
-                response.json().then(data => {
-                    var form_list = [document.getElementById('name').value, document.getElementById('pin').value, document.getElementById('score').value];
-                    // for loop to ensure all fields were filled in
-                    for (let i = 0; i < form_list.length; i++) {
-                        if (form_list[i] == '') {
-                            alert("There was an error processing your form. Make sure all fields are filled in.");
-                            return;
-                        };
-                    };
-                    for (let i = 0; i < 4; i++) {
-                        if (form_list[i].length > 100) {
-                            alert("There was an error processing your form. Certain input fields have too many characters. Make sure that your name, email, event name, and details are all no more than 100 characters long. (This is a measure to prevent spam.)")
-                            return;
-                        };
-                    };
-                    // validating coincidence and email
-                    temppull = data[i];
-                    if (temppull['name'] == form_list[0]) {
-                        alert("There was an error processing your form. It seems that this name has already been taken.");
-                        return;
-                    };
-                    };
-                    // if all validations successful
-                    const body = {
-                        "name": document.getElementById('name').value,
-                        "pin": document.getElementById('pin').value
-                        "score": document.getElementById('score').value
-                    };
-                    // const post_options = {
-                        // method: 'POST',
-                        // body: JSON.stringify(body),
-                        // headers: {
-                            // "content-type": "application/json",
-                            // 'Authorization': 'Bearer my-token',
-                        // },
-                    // };
-                    const post_options = {
-                        method: 'POST',
-                        body: JSON.stringify(body),
-                        headers: {
-                            'Content-Type':'application/json',
-                            'Access-Control-Allow-Origin':'*',
-                            'Access-Control-Allow-Methods':'POST'
-                        }
-                    };
-                    fetch(post_url, post_options);
-                    alert("Thank you, " + form_list[0] + ", for entering the leaderboard!");
-                });
-            });
-        } catch (err) {
-            alert("There was an error processing your form. (Failed to send to/pull from the database, or there was an error in the formatting of your form. Make sure you're on unrestricted WiFi.)");
-        };
+    function create_User(){
+    // extract data from inputs
+    const name = document.getElementById("name").value;
+    const pin = document.getElementById("pin").value;
+    const score = document.getElementById("score").value;
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer my-token',
+        },
     };
-
-    // prepare HTML result container for new output
-    function create_Table() {
-        // fetch the API
-        fetch(read_url, read_options)
-            // response is a RESTful "promise" on any successful fetch
-            .then(response => {
-            // check for response errors
-            if (response.status !== 200) {
-                const errorMsg = 'Database response error: ' + response.status;
-                console.log(errorMsg);
+    //url for Create API
+    const post_url='http://127.0.0.1:8086/api/wordles/create' + name + '/' + pin+ '/' + score;
+    //Async fetch API call to the database to create a new user
+    fetch(url, requestOptions).then(response => {
+        // prepare HTML search result container for new output
+        const resultContainer = document.getElementById("result");
+        // trap error response from Web API
+        if (response.status !== 200) {
+            const errorMsg = 'Database response error: ' + response.status;
+            console.log(errorMsg);
+            // Email must be unique, no duplicates allowed
+            document.getElementById("pswError").innerHTML =
+                "Email already exists in the table";
+            return;
+        }
+        // response contains valid result
+        response.json().then(data => {
+            console.log(data);
+            //add a table row for the new/created userId
+            const tr = document.createElement("tr");
+            for (let key in data) {
+                if (key !== 'query') {
+                    //create a DOM element for the data(cells) in table rows
+                    const td = document.createElement("td");
+                    console.log(data[key]);
+                    //truncate the displayed password to length 20
+                    if (key === 'password'){
+                        td.innerHTML = data[key].substring(0,17)+"...";
+                    }
+                    else{
+                        td.innerHTML = data[key];}
+                    //add the DOM data element to the row
+                    tr.appendChild(td);
+                }
             }
-            // valid response will have json data
-            response.json().then(data => {table_Make(data)})
-        });
-    };
-    
-    function table_Make(list) {
-        table.innerHTML = "";
-        list.forEach(user => {
-                // build a row for each user
-                const tr = document.createElement("tr");
-
-                // td's to build out each column of data
-                const name = document.createElement("td");
-                const pin = document.createElement("td");
-                    
-                // add content from user data          
-                name.innerHTML = user.name; 
-                email.innerHTML = user.pin; 
-
-                // add data to row
-                tr.appendChild(name);
-                tr.appendChild(pin);
-
-                // add row to table
-                table.appendChild(tr);
-        });
-    };
+            //append the DOM row to the table
+            table.appendChild(tr);
+        })
+    })
+}
 </script>
 -->
