@@ -47,13 +47,13 @@
 
   </head>
   <style>
-    p{text-align: center; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;}
-    h1{text-align: center; font-family:cursive; letter-spacing: 0.2cm; color: #fc6428;}
-    h2{text-align: center; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;}
-    h3{text-align: center ;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;;}
-    text{font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;}
-    center{font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;, text-align: center;}
-    btn{font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; background-color: darkorange; text-decoration-color: beige;}
+    p{text-align: center; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color: black;}
+    h1{text-align: center; font-family:cursive; letter-spacing: 0.2cm; color: rgb(255, 182, 133);}
+    h2{text-align: center; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color: black;}
+    h3{text-align: center ;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color: black;}
+    text{font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color: black;}
+    center{font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;, text-align: center; color: black;}
+    btn{font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; background-color: #7d1c7a; text-decoration-color: beige;}
     @import "https://unpkg.com/open-props";
 @import "https://unpkg.com/open-props/normalize.min.css";
 
@@ -151,7 +151,7 @@
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: #fc6428;
+  background-color: #a734a3;
   color: white;
 }
 </style>
@@ -300,11 +300,6 @@ async function postFormFieldsAsJson({ url, formData }) {
   <div class="form-row mx-auto">
     <button type="submit" class="btn-submit" id="btnSubmit" onclick="submitForm()">Submit</button>
   </div>
-
-  
-
-  </div>
-
 </form>
 
 </body>
@@ -347,6 +342,145 @@ async function postFormFieldsAsJson({ url, formData }) {
 </body>
 
 <head>
+  <style>
+  #result {
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  #result td, #result th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  #result tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #result tr:hover {background-color: #ddd;}
+  
+  #result th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color:peachpuff ;
+    color: white;
+  }
+  </style>
+  </head><head>
+<style>
+#result {
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  border-collapse: collapse;
+  width: 100%;
+  
+}
+
+#result td, #result th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#result tr:nth-child(even){background-color: #f2f2f2;}
+
+#result tr:hover {background-color: #ddd;}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.header4 {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: rgb(255, 182, 133);
+  color: white;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+</style>
+</head>
+
+
+  <table class = "center">
+    <thead>
+    <tr>
+      <th class = "header4">Name:</th>
+      <th class = "header4">Review:</th>
+      <th class = "header4">  Rate:</th>
+    </tr>
+    </thead>
+    <tbody id="result">
+      <!-- javascript generated data -->
+    </tbody>
+  </table>
+
+  
+  <script>
+    // prepare HTML result container for new output
+    const resultContainer = document.getElementById("result");
+  
+    // prepare fetch options
+    const url2 = "http://127.0.0.1:5000/getrev";
+    const options2 = {
+      method: 'GET', // *GET, POST, PUT, DELETE, etc.
+      mode: 'cors', // no-cors, *cors, same-origin
+      cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: 'omit', // include, *same-origin, omit
+      headers: {
+        'Content-Type': 'application/json'
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    };
+  
+    // fetch the API
+    fetch(url2, options2)
+        // response is a RESTful "promise" on any successful fetch
+      .then(response => {
+        // check for response errors
+        if (response.status !== 200) {
+            const errorMsg = 'Database response error: ' + response.status;
+            console.log(errorMsg);
+            const tr = document.createElement("tr");
+            const td = document.createElement("td");
+            td.innerHTML = errorMsg;
+            tr.appendChild(td);
+            resultContainer.appendChild(tr);
+            return;
+        }
+        // valid response will have json data
+        response.json().then(data => {
+            console.log(data);
+            for (let row in data) {
+              // tr and td build out for each row
+              const tr = document.createElement("tr");
+              const name = document.createElement("td");
+              const review = document.createElement("td");
+              const rate = document.createElement("td");
+              // data is specific to the API
+              name.innerHTML = data[row].name; 
+              review.innerHTML = data[row].review; 
+              rate.innerHTML = data[row].rate; 
+              // add HTML to container
+              tr.appendChild(name);
+              tr.appendChild(review);
+              tr.appendChild(rate);
+              resultContainer.appendChild(tr);
+            }
+        })
+    })
+    // catch fetch errors (ie ACCESS to server blocked)
+    .catch(err => {
+      console.error(err);
+      const tr = document.createElement("tr");
+      const td = document.createElement("td");
+      td.innerHTML = err;
+      tr.appendChild(td);
+      resultContainer.appendChild(tr);
+    });
+  </script>
+  
+
+<head>
 	
 	<script src=
 "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
@@ -355,128 +489,12 @@ async function postFormFieldsAsJson({ url, formData }) {
 
 <body style = "text-align:center;" id = "body">
 	
-	<button class= "btn" onclick = "constructTable('#table')">
-		View Reviews!
-	</button>
-	
 	<br><br>
 	
 	<table align = "center"
 			id="table" border="1">
 	</table>
-	
-	<script>
-		var el_up = document.getElementById("GFG_UP");
-		
-		var list = [
-			{
-"id": 1,
-"name": "John Doe",
-"rate": 5,
-"review": "Great experience, I definitely recommend for small parties!"
-},
-{
-"id": 2,
-"name": "Katy Perry",
-"rate": 2,
-"review": "I'm allergic to cats!"
-},
-{
-"id": 3,
-"name": "Tanisha Patil",
-"rate": 5,
-"review": "Great food"
-},
-{
-"id": 4,
-"name": "Jane Doe",
-"rate": 1,
-"review": "So bad!"
-},
-{
-"id": 5,
-"name": "Mr. Mort",
-"rate": 5,
-"review": "Loved it so much!"
-},
-{
-"id": 6,
-"name": "Mr. Yeung",
-"rate": 4,
-"review": "Very Great"
-},
-{
-"id": 7,
-"name": "Cely Johnson",
-"rate": 3,
-"review": "Ok food."
-},
-{
-"id": 8,
-"name": "Test 1",
-"rate": 5,
-"review": "test1 review"
-},
-{
-"id": 9,
-"name": "Test2",
-"rate": 5,
-"review": "test2review"
-}
-		];
-		
-		el_up.innerHTML = "Click on the button to create "
-				+ "the table from the JSON data.<br><br>"
-				+ JSON.stringify(list[0]) + "<br>"
-				+ JSON.stringify(list[1]) + "<br>"
-				+ JSON.stringify(list[2]);
-			
-		function constructTable(selector) {
-			
-			// Getting the all column names
-			var cols = Headers(list, selector);
 
-			// Traversing the JSON data
-			for (var i = 0; i < list.length; i++) {
-				var row = $('<tr/>');
-				for (var colIndex = 0; colIndex < cols.length; colIndex++)
-				{
-					var val = list[i][cols[colIndex]];
-					
-					// If there is any key, which is matching
-					// with the column name
-					if (val == null) val = "";
-						row.append($('<td/>').html(val));
-				}
-				
-				// Adding each row to the table
-				$(selector).append(row);
-			}
-		}
-		
-		function Headers(list, selector) {
-			var columns = [];
-			var header = $('<tr/>');
-			
-			for (var i = 0; i < list.length; i++) {
-				var row = list[i];
-				
-				for (var k in row) {
-					if ($.inArray(k, columns) == -1) {
-						columns.push(k);
-						
-						// Creating the header
-						header.append($('<th/>').html(k));
-					}
-				}
-			}
-			
-			// Appending the header to the table
-			$(selector).append(header);
-				return columns;
-		}	
-	</script>
-</body>
 <div class="media-scroller snaps-inline">
     <div class="media-element">
       <img src="https://www.edithpatisserie.com//image/cache/catalog/Mini%20Bites/Cat%20Themed%20Cupcakes-512x299.jpg" alt="">
@@ -556,9 +574,3 @@ async function postFormFieldsAsJson({ url, formData }) {
     </div>
   </div>
   
-  
-      </div>
-    </div>
-  
-  </div>
-</html>
