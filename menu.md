@@ -155,10 +155,8 @@
   color: white;
 }
 </style>
-</head>
 <body>
 
-</style>
 <head>
     <p>San Diego, CA</p>
     <p>$$$ • Brunch/Lunch </p>
