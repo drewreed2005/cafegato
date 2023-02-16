@@ -47,7 +47,7 @@
 
   <style>
     p{text-align: center; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color: black;}
-    h1{text-align: center; font-family:cursive; letter-spacing: 0.2cm; color: #fc6428;}
+    h1{text-align: center; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; letter-spacing: 0.2cm; color: #fc6428;}
     h2{text-align: center; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color: black;}
     h3{text-align: center ;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color: black;}
     text{font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;color: black;}
@@ -162,7 +162,7 @@
     
     <h1>Cafe Gato</h1>
   <h2>Review's Average Value: </h2>
-  <img src="/tanisha/3stars.png" alt="3.5stars" style="width:100px;height:30px;" align="center">
+  <img src="https://img.freepik.com/premium-vector/star-rating-icon-clients-opinion-about-quality-our-services-symbol-sign-evalution-vector_744955-208.jpg?w=1800" alt="3.5stars" style="width:100px;height:30px;" align="center">
   <script>
     //Get the form element by id
 const sampleForm = document.getElementById("UserReviews");
