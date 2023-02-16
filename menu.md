@@ -49,9 +49,12 @@
 
 <head>
   <h1>Review's Average: </h1>
+
 </head>
 <body>
-  <p id="response"></p>
+  <p id="response">
+  
+  </p>
   <script>
     const url = "http://localhost:5000/average";
     const options = {
@@ -71,5 +74,7 @@
           console.error('Error fetching');
         });
     };
+    console.log("display average");
+    displayav();
   </script>
 </body>
