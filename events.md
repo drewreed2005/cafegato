@@ -251,7 +251,6 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
                         .then(response =>
                             response.json().then(data => {
                                 console.log(data);
-                                add_row(data);
                             })
                         )
                     alert("Thank you, " + form_list[0] + ", for submitting an event! Watch your email for a confirmation message.\n\n(Warning: Please do not submit two events at a time! Your events may end up being cancelled as a result.)");
