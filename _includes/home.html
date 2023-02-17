@@ -29,6 +29,49 @@
     .headlink:hover {
         text-decoration-color: #67401b;
     }
+    .subnav {
+  float: left;
+  overflow: hidden;
+}
+
+.subnav .subnavbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar a:hover, .subnav:hover .subnavbtn {
+  background-color: red;
+}
+
+.subnav-content {
+  display: none;
+  position: absolute;
+  left: 0;
+  background-color: red;
+  width: 100%;
+  z-index: 1;
+}
+
+.subnav-content a {
+  float: left;
+  color: white;
+  text-decoration: none;
+}
+
+.subnav-content a:hover {
+  background-color: #eee;
+  color: black;
+}
+
+.subnav:hover .subnav-content {
+  display: block;
+}
 </style>
 
 <p class="navbar">
@@ -39,7 +82,13 @@
             <td><a href="menu" class="headlink">Reviews</a></td>
             <td><a href="hours" class="headlink">Hours</a></td>
             <td><a href="events" class="headlink">Events</a></td>
-            <td><a href="games" class="headlink">Games</a></td>
+            <td><div class="headlink">
+                <button>Games <i class="fa fa-caret-down"></i></button>
+                <div>
+                    <a href="games"></a>
+                    <a href="rpg">Not Bubsy 3D</a>
+                </div>
+            </div></td>
         </tr>
     </table>
 </p>
