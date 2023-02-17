@@ -242,7 +242,7 @@ function closePopup1(){
       align-items: center;
       justify-content: center;
       flex-direction: column;
-        align-items: center;
+      align-items: center;
     }
     .game-board {
       display: flex;
@@ -484,8 +484,8 @@ function closePopup1(){
   // prepare HTML result container for new output
   const resultContainer = document.getElementById("result");
   // prepare URL's to allow easy switch from deployment and localhost
-  const url = "http://127.0.0.1:8086/api/wordles/"
-  // const url = "https://cgato.duckdns.org/api/wordles/"
+  // const url = "http://127.0.0.1:8086/api/wordles/"
+  const url = "https://cgato.duckdns.org/api/wordles/"
   const create_fetch = url + 'create';
   const read_fetch = url;
 
@@ -613,71 +613,3 @@ function closePopup1(){
   }
 
 </script>
-
-<!--
-<script>
-    const read_url = "http://127.0.0.1:8086/api/wordles/";
-    const read_options = {
-        method: 'GET', // *GET, POST, PUT, DELETE, etc.
-        mode: 'cors', // no-cors, *cors, same-origin
-        cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: 'omit', // include, *same-origin, omit
-        headers: {
-        'Content-Type': 'application/json'
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-        },
-    };
-    function create_User(){
-    // extract data from inputs
-    const name = document.getElementById("name").value;
-    const pin = document.getElementById("pin").value;
-    const score = document.getElementById("score").value;
-    const requestOptions = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer my-token',
-        },
-    };
-    //url for Create API
-    const post_url='http://127.0.0.1:8086/api/wordles/create' + name + '/' + pin+ '/' + score;
-    //Async fetch API call to the database to create a new user
-    fetch(url, requestOptions).then(response => {
-        // prepare HTML search result container for new output
-        const resultContainer = document.getElementById("result");
-        // trap error response from Web API
-        if (response.status !== 200) {
-            const errorMsg = 'Database response error: ' + response.status;
-            console.log(errorMsg);
-            // Email must be unique, no duplicates allowed
-            document.getElementById("pswError").innerHTML =
-                "Email already exists in the table";
-            return;
-        }
-        // response contains valid result
-        response.json().then(data => {
-            console.log(data);
-            //add a table row for the new/created userId
-            const tr = document.createElement("tr");
-            for (let key in data) {
-                if (key !== 'query') {
-                    //create a DOM element for the data(cells) in table rows
-                    const td = document.createElement("td");
-                    console.log(data[key]);
-                    //truncate the displayed password to length 20
-                    if (key === 'password'){
-                        td.innerHTML = data[key].substring(0,17)+"...";
-                    }
-                    else{
-                        td.innerHTML = data[key];}
-                    //add the DOM data element to the row
-                    tr.appendChild(td);
-                }
-            }
-            //append the DOM row to the table
-            table.appendChild(tr);
-        })
-    })
-}
-</script>
--->
