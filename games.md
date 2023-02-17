@@ -462,9 +462,8 @@ function closePopup1(){
 
 <h2 style="color:black" class="widebr">Leaderboard</h2>
 <!--
-<div id="lbControls">
-    <th><button class="btn" id="deletebtn" style="display:none" onclick="delete_Entry()">Delete Event</button></th>
-</div>
+    <th><button class="btn" id="updatebtn" style="display:none" onclick="update_Entry()">Update Entry</button></th>
+    <th><button class="btn" id="deletebtn" style="display:none" onclick="delete_Entry()">Delete Entry</button></th>
 -->
 
 <table>
@@ -486,7 +485,7 @@ function closePopup1(){
   const resultContainer = document.getElementById("result");
   // prepare URL's to allow easy switch from deployment and localhost
   const url = "http://127.0.0.1:8086/api/wordles/"
-  // const url = "https://cgato.duckdns.org/api/wordles/create"
+  // const url = "https://cgato.duckdns.org/api/wordles/"
   const create_fetch = url + 'create';
   const read_fetch = url;
 
