@@ -185,7 +185,7 @@ function closePopup1(){
     .open-popup{
       visibility: visible;
       top: 50%;
-      transform: translate(-50%,-35%) scale(1);
+      transform: translate(-50%,-120%) scale(1);
     }
     .howto-popup h2{
         font-weight: 30px
