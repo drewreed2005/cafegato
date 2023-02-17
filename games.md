@@ -481,7 +481,7 @@ function closePopup1(){
   // prepare URL's to allow easy switch from deployment and localhost
   const url = "http://127.0.0.1:8086/api/wordles/"
   // const url = "https://cgato.duckdns.org/api/wordles/create"
-  const create_fetch = url + '/create';
+  const create_fetch = url + 'create';
   const read_fetch = url;
 
   // Load users on page entry
