@@ -479,8 +479,8 @@ function closePopup1(){
   // prepare HTML result container for new output
   const resultContainer = document.getElementById("result");
   // prepare URL's to allow easy switch from deployment and localhost
-  // const url = "http://127.0.0.1:8086/api/wordles/"
-  const url = "https://cgato.duckdns.org/api/wordles/create"
+  const url = "http://127.0.0.1:8086/api/wordles/"
+  // const url = "https://cgato.duckdns.org/api/wordles/create"
   const create_fetch = url + '/create';
   const read_fetch = url;
 
@@ -586,7 +586,7 @@ function closePopup1(){
 
     // obtain data that is specific to the API
     name.innerHTML = data.name; 
-    pin.innerHTML = data.pin.length;
+    pin.innerHTML = data.pin;
     score.innerHTML = data.score; 
 
     // add HTML to container
