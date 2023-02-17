@@ -113,9 +113,173 @@
     <input class="uc-text-smooth" type="text" id="textinput" style="flex-grow: 4;"></input>
     <div style="flex-grow: 1;flex-shrink: 0;background-color: White;"></div>
   </div>
-  <div class="popup" id="signin">penis</div>
+  <div class="popup" id="signin">
+    <form action="javascript:create_piss()">
+      <p><label>
+          Name:
+          <input type="text" name="name" id="name" required>
+      </label></p>
+      <p><label>
+          Pin:
+          <input type="pin" name="pin" id="pin" required>
+      </label></p>
+      <p><label>
+          Level:
+          <input type="text" name="level" id="level" required>
+      </label></p>
+      <p><label>
+          Time:
+          <input type="number" name="time" id="time">
+      </label></p>
+      <p>
+          <button onclick="closepopup()">Create</button>
+      </p>
+  </form>
+  </div>
 
+  <p>Leaderboard (unorderd)</p>
 
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Pin</th>
+    <th>Level</th>
+    <th>Time</th>
+  </tr>
+  </thead>
+  <tbody id="result">
+    <!-- javascript generated data -->
+  </tbody>
+</table>
+
+  <script>
+    // prepare HTML result container for new output
+    const resultContainer = document.getElementById("result");
+    // prepare URL's to allow easy switch from deployment and localhost
+    const url = "https://cgato.duckdns.org/api/pisses"
+    //const url = "https://flask.nighthawkcodingsociety.com/api/users"
+    const create_fetch = url + '/create';
+    const read_fetch = url + '/';
+  
+    // Load users on page entry
+    read_pisses();
+  
+  
+    // Display User Table, data is fetched from Backend Database
+    function read_pisses() {
+      // prepare fetch options
+      const read_options = {
+        method: 'GET', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, *cors, same-origin
+        cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'omit', // include, *same-origin, omit
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      };
+  
+      // fetch the data from API
+      fetch(read_fetch, read_options)
+        // response is a RESTful "promise" on any successful fetch
+        .then(response => {
+          // check for response errors
+          if (response.status !== 200) {
+              const errorMsg = 'Database read error: ' + response.status;
+              console.log(errorMsg);
+              const tr = document.createElement("tr");
+              const td = document.createElement("td");
+              td.innerHTML = errorMsg;
+              tr.appendChild(td);
+              resultContainer.appendChild(tr);
+              return;
+          }
+          // valid response will have json data
+          response.json().then(data => {
+              console.log(data);
+              for (let row in data) {
+                console.log(data[row]);
+                add_row(data[row]);
+              }
+          })
+      })
+      // catch fetch errors (ie ACCESS to server blocked)
+      .catch(err => {
+        console.error(err);
+        const tr = document.createElement("tr");
+        const td = document.createElement("td");
+        td.innerHTML = err;
+        tr.appendChild(td);
+        resultContainer.appendChild(tr);
+      });
+    }
+  
+    function create_piss(){
+      //Validate Password (must be 6-20 characters in len)
+      //verifyPassword("click");
+      const body = {
+          name: document.getElementById("name").value,
+          time: document.getElementById("time").value,
+          level: document.getElementById("level").value,
+          pin: document.getElementById("pin").value
+      };
+      const requestOptions = {
+          method: 'POST',
+          body: JSON.stringify(body),
+          headers: {
+              "content-type": "application/json",
+              'Authorization': 'Bearer my-token',
+          },
+      };
+  
+      // URL for Create API
+      // Fetch API call to the database to create a new user
+      fetch(create_fetch, requestOptions)
+        .then(response => {
+          // trap error response from Web API
+          if (response.status !== 200) {
+            const errorMsg = 'Database create error: ' + response.status;
+            console.log(errorMsg);
+            const tr = document.createElement("tr");
+            const td = document.createElement("td");
+            td.innerHTML = errorMsg;
+            tr.appendChild(td);
+            resultContainer.appendChild(tr);
+            return;
+          }
+          // response contains valid result
+          response.json().then(data => {
+              console.log(data);
+              //add a table row for the new/created userid
+              add_row(data);
+          })
+      })
+    }
+  
+    function add_row(data) {
+      const tr = document.createElement("tr");
+      const name = document.createElement("td");
+      const time = document.createElement("td");
+      const level = document.createElement("td");
+      const pin = document.createElement("td");
+    
+  
+      // obtain data that is specific to the API
+      name.innerHTML = data.name; 
+      time.innerHTML = data.time; 
+      level.innerHTML = data.level; 
+      pin.innerHTML = data.pin
+  
+      // add HTML to container
+      tr.appendChild(name);
+      tr.appendChild(time);
+      tr.appendChild(level);
+      tr.appendChild(pin);
+  
+      resultContainer.appendChild(tr);
+    }
+  
+  </script>
   <script>
     function openPopup(){
       document.getElementById("signin").classList.add("open-popup");
@@ -156,16 +320,8 @@
     let uinp = document.getElementById("textinput").value;
     let phealth = 7;
     let atkstat = 1;
-    let garfhealth = 0;
-    let dalihealth = 0;
-    let kithealth = 0;
-    let monahealth = 0;
     let ophealth = 7;
-    const partyhp = []
-    partyhp[0] = garfhealth
-    partyhp[1] = dalihealth
-    partyhp[2] = monahealth
-    partyhp[3] = kithealth
+    const partyhp = [7, 0, 0, 0, 0]
     const get = [0, 0, 0, 0]
 
     inpbox.addEventListener("keypress", function(event) {
@@ -230,12 +386,14 @@
         gamestate = "3";
       } else if (uinp == "FIND ENEMY") {
         writeterm("YOU ARE IN FRONT OF AN ENEMY")
+        writeterm("YOU CAN ATTACK AND CHECK STATUS")
         randenc()
       } else if (uinp == "FIGHT BOSS") {
         ophealth = 20
         gamestate = "4"
         writeterm("THE BOSS STANDS BEFORE YOU");
         writeterm("YOU MUST DEFEAT HIM")
+        writeterm("YOU CAN ATTACK AND CHECK STATUS")
       } else if (uinp == "WIN") {
         gamestate = "-1";
         win();
@@ -286,21 +444,25 @@
     function garfield() {
       writeterm("YOU'RE FIGHTING GARFIELD");
       writeterm("DEFEAT HIM TO RECRUIT HIM");
+      writeterm("YOU CAN ATTACK AND CHECK STATUS")
       ophealth = 7;
     }
     function dali() {
       writeterm("YOU'RE FIGHTING DALI");
       writeterm("DEFEAT HIM TO RECRUIT HIM");
+      writeterm("YOU CAN ATTACK AND CHECK STATUS")
       ophealth = 7;
     }
     function mona() {
       writeterm("YOU'RE FIGHTING MORGANA");
       writeterm("DEFEAT HIM TO RECRUIT HIM");
+      writeterm("YOU CAN ATTACK AND CHECK STATUS")
       ophealth = 7;
     }
     function mrkitty() {
       writeterm("YOU'RE FIGHTING MR. KITTY");
       writeterm("DEFEAT HIM TO RECRUIT HIM");
+      writeterm("YOU CAN ATTACK AND CHECK STATUS")
       ophealth = 7;
     }
     function playerturn(){
@@ -310,9 +472,10 @@
       } else if (uinp == "PERSONA") {
         writeterm("YOU CAN'T CHANGE PERSONAS");
       } else if (uinp == "CHECK") {
-        writeterm("PLAYER HEALTH: " + phealth);
+        writeterm("PLAYER HEALTH: " + partyhp[0]);
         writeterm("OPPONENT HEALTH: " + ophealth);
       } else if (uinp == "WIN") {
+        openPopup()
         gamestate = "-1";
       } else if (uinp == "TIME") {
         writeterm("TIME: " + time);
@@ -320,17 +483,18 @@
     }
     function opturn() {
       let cent = Math.floor(Math.random() * 5);
-      while (phealth > 0) {
+      while (partyhp[0] > 0) {
+        console.log("one while loop")
         cent = Math.floor(Math.random() * 5);
         if (partyhp[cent] > 0) {
-          cent -= 1;
-          if (cent == 0) {
+          partyhp[cent] -= 1;
+          if (cent == 1) {
             writeterm("GARFIELD TOOK 1 DAMAGE");
-          } else if (cent == 1) {
-            writeterm("DALI TOOK 1 DAMAGE");
           } else if (cent == 2) {
-            writeterm("MORGANA TOOK 1 DAMAGE");
+            writeterm("DALI TOOK 1 DAMAGE");
           } else if (cent == 3) {
+            writeterm("MORGANA TOOK 1 DAMAGE");
+          } else if (cent == 4) {
             writeterm("MR. KITTY TOOK 1 DAMAGE");
           } else {writeterm("YOU TOOK 1 DAMAGE")}
           break
@@ -339,40 +503,48 @@
     }
     function turn() {
       playerturn();
+      console.log("after playerturn")
       if (party[0] == 1) {
         writeterm("GARFIELD ATTACKS");
         ophealth -= Math.floor(Math.random() * (2 - 1) ) + 1;
       }
+      console.log("after garfield")
       if (party[1] == 1) {
         writeterm("DALI ATTACKS");
         ophealth -= Math.floor(Math.random() * (2 - 1) ) + 1;
       }
+      console.log("after dali")
       if (party[2] == 1) {
         writeterm("MORGANA ATTACKS");
         ophealth -= Math.floor(Math.random() * (2 - 1) ) + 1;
       }
+      console.log("after morgana")
       if (party[3] == 1) {
         writeterm("MR. KITTY ATTACKS");
         ophealth -= Math.floor(Math.random() * (2 - 1) ) + 1;
       }
+      console.log("after mr kitty")
       opturn()
+      console.log("after opturn")
       if (ophealth <= 0) {winbattle()}
-      if (phealth <= 0) {gamestate = "L"}
+      console.log("after win")
+      if (partyhp[0] <= 0) {gamestate = "L"}
+      console.log("after lose")
     }
     function bossturn() {
       let bent = Math.floor(Math.random() * 5);
       let davidt = Math.floor(Math.random() * (2 - 1) ) + 1;
-      while (phealth > 0) {
-        cent = Math.floor(Math.random() * 5);
-        if (partyhp[cent] > 0) {
-          cent -= davidt;
-          if (cent == 0) {
+      while (partyhp[0] > 0) {
+        bent = Math.floor(Math.random() * 5);
+        if (partyhp[bent] > 0) {
+          partyhp[bent] -= davidt;
+          if (bent == 1) {
             writeterm("GARFIELD TOOK " + davidt + " DAMAGE");
-          } else if (cent == 1) {
+          } else if (bent == 2) {
             writeterm("DALI TOOK " + davidt + " DAMAGE");
-          } else if (cent == 2) {
+          } else if (bent == 3) {
             writeterm("MORGANA TOOK " + davidt + " DAMAGE");
-          } else if (cent == 3) {
+          } else if (bent == 4) {
             writeterm("MR. KITTY TOOK " + davidt + " DAMAGE");
           } else {writeterm("YOU TOOK " + davidt + " DAMAGE")}
           break
@@ -402,18 +574,18 @@
         win1()
         gamestate = "-1"
       }
-      if (phealth <= 0) {
+      if (partyhp[0] <= 0) {
         writeterm("YOU DIED")
         writeterm("TIME: " + time)
         gamestate = "L"
       }
     }
     function healthreset() {
-      phealth = 7;
-      if (party[0] == 1) {garfhealth = 7}
-      if (party[1] == 1) {dalihealth = 7}
-      if (party[2] == 1) {monahealth = 7}
-      if (party[3] == 1) {kithealth = 7}
+      partyhp[0] = 7;
+      if (party[0] == 1) {partyhp[1] = 7}
+      if (party[1] == 1) {partyhp[2] = 7}
+      if (party[2] == 1) {partyhp[3] = 7}
+      if (party[3] == 1) {partyhp[4] = 7}
     }
     function encountcheck() {
       console.log("Encounter check")
@@ -427,7 +599,7 @@
       }
     }
     function winbattle() {
-      phealth = 7;
+      partyhp[0] = 7;
       writeterm("THE OPPONENT HAS BEEN DEFFEATED");
       gamestate = "1";
       writeterm("WHAT WOULD YOU LIKE TO DO?");
@@ -455,28 +627,28 @@
     function garfget() {
       writeterm("YOU HAVE GARFIELD NOW");
       console.log("g");
-      garfhealth = 7;
+      partyhp[1] = 7;
       party[0] = 1;
       gamestate = "1";
     }
     function monaget() {
       writeterm("YOU HAVE MORGANA NOW");
       console.log("m");
-      monahealth = 7;
+      partyhp[3] = 7;
       party[2] = 1;
       gamestate = "1";
     }
     function daliget() {
       writeterm("YOU HAVE DALI NOW");
       console.log("d");
-      dalihealth = 7;
+      partyhp[2] = 7;
       party[1] = 1;
       gamestate = "1";
     }
     function kitget() {
       writeterm("YOU HAVE MR. KITTY NOW");
       console.log("k");
-      kithealth = 7;
+      partyhp[4] = 7;
       party[3] = 1;
       gamestate = "1";
     }
@@ -506,7 +678,7 @@
       } else {points += 10}
       writeterm("CONGRATULATIONS, YOU WON!");
       writeterm("YOUR TIME: " + time);
-      writeterm("YOUR HEALTH: " + phealth);
+      writeterm("YOUR HEALTH: " + partyhp[0]);
       writeterm("YOUR POINTS: " + points);
       writeterm("YOU HAVE " + partywincount + " PARTY MEMBERS OUT OF 4");
     }
