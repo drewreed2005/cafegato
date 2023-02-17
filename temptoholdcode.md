@@ -110,7 +110,7 @@
 
   <div class="flex-container2">
     <div style="flex-grow: 1;flex-shrink: 0;background-color: White;"></div>
-    <input class="uc-text-smooth" type="text" id="textinput" style="flex-grow: 4;"></input>
+    <input class="uc-text-smooth" type="text" id="textinput" style="flex-grow: 4;">
     <div style="flex-grow: 1;flex-shrink: 0;background-color: White;"></div>
   </div>
   <div class="popup" id="signin">
