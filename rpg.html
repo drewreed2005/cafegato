@@ -475,7 +475,6 @@
         writeterm("PLAYER HEALTH: " + partyhp[0]);
         writeterm("OPPONENT HEALTH: " + ophealth);
       } else if (uinp == "WIN") {
-        openPopup()
         gamestate = "-1";
       } else if (uinp == "TIME") {
         writeterm("TIME: " + time);
@@ -572,6 +571,7 @@
       bossturn()
       if (ophealth <= 0) {
         win1()
+        openPopup()
         gamestate = "-1"
       }
       if (partyhp[0] <= 0) {
