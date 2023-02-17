@@ -395,15 +395,14 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
                     };
                 };
                 console.log(sorted_List);
-                clone_Sort = [...sorted_List];
-                for (let k = 0, t = 0; t < sorted_List.length; t++) {
-                    console.log(sorted_List[k]['date']);
-                    console.log(monthval.substring(5, 7));
+                var final_List = [];
+                for (let k = 0; k < sorted_List.length; k++) {
                     if (sorted_List[k]['date'].substring(6, 10) == monthval.substring(0, 4)) {
-                        if (sorted_List[k]['date'].substring(0, 2) == monthval.substring(5, 7)) {k = k + 1} else {clone_Sort.splice(k, 1);console.log(clone_Sort)};
-                    } else {clone_Sort.splice(k, 1)};
+                        if (sorted_List[k]['date'].substring(0, 2) == monthval.substring(5, 7)) {final_List.push(sorted_List[k])} else {};
+                    } else {};
                 };
-                table_Make(clone_Sort);
+                console.log(final_List);
+                table_Make(final_List);
             });
         });
     };
