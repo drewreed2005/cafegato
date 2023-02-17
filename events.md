@@ -394,6 +394,7 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
                         };
                     };
                 };
+                console.log(sorted_List);
                 clone_Sort = [...sorted_List];
                 for (let k = 0, t = 0; t < sorted_List.length; t++) {
                     if (sorted_List[k]['date'].substring(6, 10) == monthval.substring(0, 4)) {
