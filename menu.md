@@ -155,8 +155,10 @@
   color: white;
 }
 </style>
+</head>
 <body>
 
+</style>
 <head>
     <p>San Diego, CA</p>
     <p>$$$ • Brunch/Lunch </p>
@@ -281,18 +283,18 @@ async function postFormFieldsAsJson({ url, formData }) {
   <h3>Submit a Review: </h3>
   <div class="form-row">
     <label for="name" >Name:</label>
-    <input type="text" class="input-text input-text-block w-100" id="name" name="name">
+    <input type="text" class="input-text input-text-block w-100" id="name" name="name" required>
 
   </div>
   <br>
   <div class="form-row">
     <label for="name">Review:</label>
-    <input type="text" class="input-text input-text-block w-100" id="review" name="review">
+    <input type="text" class="input-text input-text-block w-100" id="review" name="review" required>
   </div>
   <br>
   <div class="form-row">
     <label for="name">Rate (/5):</label>
-    <input type="number" class="input-text input-text-block w-100" id="rate" name="rate">
+    <input type="number" class="input-text input-text-block w-100" id="rate" name="rate" min= "1" max="5" required>
   </div>
   <br>
   <div class="form-row mx-auto">
@@ -315,7 +317,8 @@ async function postFormFieldsAsJson({ url, formData }) {
 
 <!--GET request reviews db-->
 <body style = "text-align:center;" id = "body">
-    <h3>Customer Reviews:</h3>
+  <br>
+  <h3>Customer Reviews:</h3>
     <p id="response1"></p>
     <script>
         const url1 = "http://127.0.0.1:5000/getrev";
