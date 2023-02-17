@@ -241,10 +241,10 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
                     const post_options = {
                         method: 'POST',
                         body: JSON.stringify(body),
+                        mode: 'no-cors',
                         headers: {
                             'Content-Type':'application/json',
                             'Authorization': 'Bearer my-token',
-                            'Access-Control-Allow-Origin': 'https://cgato.duckdns.org/',
                         },
                     };
                     console.log(body);
