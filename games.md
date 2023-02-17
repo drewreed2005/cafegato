@@ -281,7 +281,7 @@ function closePopup1(){
     let nextLetter = 0;
     let rightGuessString = WORDS[Math.floor(Math.random() * WORDS.length)]
     console.log(rightGuessString)
-    alert(rightGuessString)
+    // alert(rightGuessString)
 
     function gameboard() {
         let board = document.getElementById("game-board");
@@ -460,6 +460,12 @@ function closePopup1(){
     </tr>
 </table>
 
+<h2 style="color:black" class="widebr">Leaderboard</h2>
+<!--
+<div id="lbControls">
+    <th><button class="btn" id="deletebtn" style="display:none" onclick="delete_Entry()">Delete Event</button></th>
+</div>
+-->
 
 <table>
   <thead>
@@ -483,6 +489,16 @@ function closePopup1(){
   // const url = "https://cgato.duckdns.org/api/wordles/create"
   const create_fetch = url + 'create';
   const read_fetch = url;
+
+  function showEvTable() {
+        create_Table();
+        document.getElementById('evlogbtn').style = "display:none";
+        document.getElementById('logrefbtn').style = "display:block";
+        document.getElementById('updatebtn').style = "display:block";
+        document.getElementById('deletebtn').style = "display:block";
+        document.getElementById('evtable').style = "display:block";
+        document.getElementById('filters').style = "font-size:25px;display:block";
+    }
 
   // Load users on page entry
   read_users();
