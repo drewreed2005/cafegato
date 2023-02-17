@@ -386,12 +386,14 @@
         gamestate = "3";
       } else if (uinp == "FIND ENEMY") {
         writeterm("YOU ARE IN FRONT OF AN ENEMY")
+        writeterm("YOU CAN ATTACK AND CHECK STATUS")
         randenc()
       } else if (uinp == "FIGHT BOSS") {
         ophealth = 20
         gamestate = "4"
         writeterm("THE BOSS STANDS BEFORE YOU");
         writeterm("YOU MUST DEFEAT HIM")
+        writeterm("YOU CAN ATTACK AND CHECK STATUS")
       } else if (uinp == "WIN") {
         gamestate = "-1";
         win();
@@ -442,21 +444,25 @@
     function garfield() {
       writeterm("YOU'RE FIGHTING GARFIELD");
       writeterm("DEFEAT HIM TO RECRUIT HIM");
+      writeterm("YOU CAN ATTACK AND CHECK STATUS")
       ophealth = 7;
     }
     function dali() {
       writeterm("YOU'RE FIGHTING DALI");
       writeterm("DEFEAT HIM TO RECRUIT HIM");
+      writeterm("YOU CAN ATTACK AND CHECK STATUS")
       ophealth = 7;
     }
     function mona() {
       writeterm("YOU'RE FIGHTING MORGANA");
       writeterm("DEFEAT HIM TO RECRUIT HIM");
+      writeterm("YOU CAN ATTACK AND CHECK STATUS")
       ophealth = 7;
     }
     function mrkitty() {
       writeterm("YOU'RE FIGHTING MR. KITTY");
       writeterm("DEFEAT HIM TO RECRUIT HIM");
+      writeterm("YOU CAN ATTACK AND CHECK STATUS")
       ophealth = 7;
     }
     function playerturn(){
@@ -469,6 +475,7 @@
         writeterm("PLAYER HEALTH: " + partyhp[0]);
         writeterm("OPPONENT HEALTH: " + ophealth);
       } else if (uinp == "WIN") {
+        openPopup()
         gamestate = "-1";
       } else if (uinp == "TIME") {
         writeterm("TIME: " + time);
