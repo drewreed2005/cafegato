@@ -244,6 +244,7 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
                         headers: {
                             'Content-Type':'application/json',
                             'Authorization': 'Bearer my-token',
+                            'Access-Control-Allow-Origin': 'https://cgato.duckdns.org/',
                         },
                     };
                     console.log(body);
