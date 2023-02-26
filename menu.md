@@ -45,6 +45,7 @@
 <!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
 <!-- end custom head snippets -->
 
+  </head>
   <style>
     p{text-align: center; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color: black;}
     h1{text-align: center; font-family:cursive; letter-spacing: 0.2cm; color: rgb(255, 182, 133);}
@@ -157,6 +158,7 @@
 </head>
 <body>
 
+</style>
 <head>
     <p>San Diego, CA</p>
     <p>$$$ • Brunch/Lunch </p>
@@ -164,89 +166,7 @@
     <h1>Cafe Gato</h1>
   <h2>Review's Average Value: </h2>
   <img src="https://img.freepik.com/premium-vector/star-rating-icon-clients-opinion-about-quality-our-services-symbol-sign-evalution-vector_744955-208.jpg?w=1800" alt="3.5stars" style="width:100px;height:30px;" align="center">
-  <script>
-    //Get the form element by id
-const sampleForm = document.getElementById("UserReviews");
-
-//Add an event listener to the form element and handler for the submit an event.
-sampleForm.addEventListener("submit", async (e) => {
-  /**
-   * Prevent the default browser behaviour of submitting
-   * the form so that you can handle this instead.
-   */
-  e.preventDefault();
-
-  /**
-   * Get the element attached to the event handler.
-   */
-  let form = e.currentTarget;
-
-  /**
-   * Take the URL from the form's `action` attribute.
-   */
-  let url = form.action;
-  alert(url);
-
-  try {
-    /**
-     * Takes all the form fields and make the field values
-     * available through a `FormData` instance.
-     */
-    let formData = new FormData(form);
-
-    /**
-     * The `postFormFieldsAsJson()` function in the next step.
-     */
-    let responseData = await postFormFieldsAsJson({ url, formData });
-    alert(responseData);
-
-    //Destructure the response data
-    let { serverDataResponse } = responseData;
-
-    //Display the response data in the console (for debugging)
-    console.log(serverDataResponse);
-  } catch (error) {
-    //If an error occurs display it in the console (for debugging)
-    console.error(error);
-  }
-});
-
-/**
- * Helper function to POST data as JSON with Fetch.
- */
-async function postFormFieldsAsJson({ url, formData }) {
-  //Create an object from the form data entries
-  let formDataObject = Object.fromEntries(formData.entries());
-  // Format the plain form data as JSON
-  let formDataJsonString = JSON.stringify(formDataObject);
-  alert(formDataJsonString);
-
-  //Set the fetch options (headers, body)
-  let fetchOptions = {
-    //HTTP method set to POST.
-    method: "POST",
-    //Set the headers that specify you're sending a JSON body request and accepting JSON response
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-    // POST request body as JSON string.
-    body: formDataJsonString,
-  };
-
-  //Get the response body as JSON.
-  //If the response was not OK, throw an error.
-  let res = await fetch(url, fetchOptions);
-
-  //If the response is not ok throw an error (for debugging)
-  if (!res.ok) {
-    let error = await res.text();
-    throw new Error(error);
-  }
-  //If the response was OK, return the response body.
-  return res.json();
-}
-  </script>
+  
 </head>
 <body>
   <p id="response">
@@ -277,7 +197,7 @@ async function postFormFieldsAsJson({ url, formData }) {
   </script>
   
 
-<form action="http://127.0.0.1:5000/" id="UserReviews" method="POST" class="left" >
+<form id="UserReviews" method="POST" class="left" >
   <h3>Submit a Review: </h3>
   <div class="form-row">
     <label for="name" >Name:</label>
@@ -296,7 +216,7 @@ async function postFormFieldsAsJson({ url, formData }) {
   </div>
   <br>
   <div class="form-row mx-auto">
-    <button type="submit" class="btn-submit" id="btnSubmit" onclick="submitForm()">Submit</button>
+    <button type="submit" class="btn-submit" id="btnSubmit" >Submit</button>
   </div>
 </form>
 
@@ -403,6 +323,7 @@ async function postFormFieldsAsJson({ url, formData }) {
   <table class = "center">
     <thead>
     <tr>
+      <th class = "header4">ID:</th>
       <th class = "header4">Name:</th>
       <th class = "header4">Review:</th>
       <th class = "header4">  Rate:</th>
@@ -452,14 +373,17 @@ async function postFormFieldsAsJson({ url, formData }) {
             for (let row in data) {
               // tr and td build out for each row
               const tr = document.createElement("tr");
+              const id = document.createElement("td");
               const name = document.createElement("td");
               const review = document.createElement("td");
               const rate = document.createElement("td");
               // data is specific to the API
+              id.innerHTML = data[row].id; 
               name.innerHTML = data[row].name; 
               review.innerHTML = data[row].review; 
               rate.innerHTML = data[row].rate; 
               // add HTML to container
+              tr.appendChild(id);
               tr.appendChild(name);
               tr.appendChild(review);
               tr.appendChild(rate);
@@ -477,7 +401,8 @@ async function postFormFieldsAsJson({ url, formData }) {
       resultContainer.appendChild(tr);
     });
   </script>
-  
+
+
 
 <head>
 	
@@ -493,6 +418,246 @@ async function postFormFieldsAsJson({ url, formData }) {
 	<table align = "center"
 			id="table" border="1">
 	</table>
+
+
+ <!-- <form id="your_form">
+    <h3>Delete a Review:</h3>
+    <p>Enter the id of the review you would like to delete:</p>
+    <input type="number" name="keywords">
+    <button type="button" value="DELETE" id="deletebtn">DELETE</button>
+</form> -->
+
+
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+  body {font-family: Arial, Helvetica, sans-serif;}
+  * {box-sizing: border-box;}
+  /* The popup form - hidden by default */
+  .form-popup {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    right: 15px;
+    border: 3px solid #F1F1F1;
+    z-index: 9;
+  }
+  /* Add styles to the form container */
+  .form-container {
+    max-width: 300px;
+    padding: 10px;
+    background-color: white;
+  }
+  </style>
+  </head>
+  <body>
+  <div class="form-popup" id="myForm" >
+    <form id="your_form" class="form-container">
+      <h3>Delete a Review:</h3>
+      <p>Enter the id of the review you would like to delete:</p>
+      <input type="number" name="keywords">
+      <button type="button" value="DELETE" id="deletebtn">DELETE</button>
+  </form>
+  </div>
+  <button onclick="checkPin()">Enter Authentication Pin</button>
+  <script>
+  function openForm() {
+    document.getElementById("myForm").style.display = "block";
+  }
+  function checkPin() {
+  inputPin = prompt("Enter Authentication Pin")
+  if (inputPin == 1029384756) {
+    openForm();
+  } else {
+     alert("Incorrect Pin, Authentication Failed");
+  }
+  }
+  </script>
+  </body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+
+  //Get the form element by id
+const sampleForm = document.getElementById("UserReviews");
+// alert(sampleForm);
+
+//Add an event listener to the form element and handler for the submit an event.
+sampleForm.addEventListener("submit", async (e) => {
+//  alert("Listener");
+/**
+ * Prevent the default browser behaviour of submitting
+ * the form so that you can handle this instead.
+ */
+e.preventDefault();
+
+/**
+ * Get the element attached to the event handler.
+ */
+let form = e.currentTarget;
+
+/**
+ * Take the URL from the form's `action` attribute.
+ */
+let url = "http://localhost:5000/reviews";
+// alert(url);
+
+try {
+  /**
+   * Takes all the form fields and make the field values
+   * available through a `FormData` instance.
+   */
+  let formData = new FormData(form);
+
+  /**
+   * The `postFormFieldsAsJson()` function in the next step.
+   */
+  let responseData = await postFormFieldsAsJson({ url, formData });
+  // alert(responseData);
+  // displayav();
+  
+  // location.reload()
+  //Destructure the response data
+  //let { serverDataResponse } = responseData;
+
+  //Display the response data in the console (for debugging)
+  //console.log(serverDataResponse);
+} catch (error) {
+  //If an error occurs display it in the console (for debugging)
+  console.error(error);
+}
+});
+
+/**
+* Helper function to POST data as JSON with Fetch.
+*/
+async function postFormFieldsAsJson({ url, formData }) {
+//Create an object from the form data entries
+let formDataObject = Object.fromEntries(formData.entries());
+// Format the plain form data as JSON
+let formDataJsonString = JSON.stringify(formDataObject);
+// alert(formDataJsonString);
+fetch (url, {
+
+  method: "POST",
+  body: formDataJsonString,
+  headers: {
+    "Content-type": "application/json; charset=UTF-8"
+  }
+
+
+
+})
+ .then((response)  => displayav());
+// .then((json) => console.log(json));
+}
+</script>
+<script>
+
+  
+  //Get the form element by id
+const deleteForm = document.getElementById("deletebtn");
+// alert(sampleForm);
+
+//Add an event listener to the form element and handler for the submit an event.
+deleteForm.addEventListener("click", async (e) => {
+// alert("Listener");
+/**
+ * Prevent the default browser behaviour of submitting
+ * the form so that you can handle this instead.
+ */
+e.preventDefault();
+
+/**
+ * Get the element attached to the event handler.
+ */
+let form1 = e.currentTarget;
+
+/**
+ * Take the URL from the form's `action` attribute.
+ */
+// alert(url);
+
+try {
+  /**
+   * Takes all the form fields and make the field values
+   * available through a `FormData` instance.
+   */
+  let deletekey = document.getElementsByName("keywords")[0].value;
+ // alert(deletekey);
+  /**
+   * The `postFormFieldsAsJson()` function in the next step.
+   */
+  let responseData = await postdelete({ deletekey });
+  // alert(responseData);
+  // displayav();
+  
+  // location.reload()
+  //Destructure the response data
+  //let { serverDataResponse } = responseData;
+
+  //Display the response data in the console (for debugging)
+  //console.log(serverDataResponse);
+} catch (error) {
+  //If an error occurs display it in the console (for debugging)
+  console.error(error);
+}
+});
+
+/**
+* Helper function to POST data as JSON with Fetch.
+*/
+async function postdelete({deletekey }) {
+ const url3= "http://127.0.0.1:5000/delete/"+deletekey;
+
+        const options1 = {
+      method: 'GET',
+      mode: 'cors',
+      cache: 'default',
+      credentials: 'omit',
+    };
+
+            fetch(url3, options1)
+            .then(response1 => response1.text())
+        .catch(error => {
+          console.error('Error fetching');
+        });
+  
+  }
+</script>
+
+
+
+<script>
+function yourFunction(){
+    var action_src = "http://localhost:5000/delete/" + document.getElementsByName("keywords")[0].value;
+    var your_form = document.getElementById('your_form');
+    your_form.action = action_src ;
+}
+</script>
+
 
 <div class="media-scroller snaps-inline">
     <div class="media-element">
@@ -572,4 +737,15 @@ async function postFormFieldsAsJson({ url, formData }) {
       <p class="title">Meow Buns  • $5.50</p>
     </div>
   </div>
-  
+
+
+
+
+<header class="page-header">
+    <div class="container flow">
+    </div>
+  </header>
+<head>
+	
+
+
