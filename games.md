@@ -446,9 +446,8 @@ function closePopup1(){
 	});
 </script> 
 
-<h2 style="color:black">Enter Leaderboard</h2>
 <!--
-<form action="create_user()">
+<form action="createUser()">
     <p><label>
         Name:
         <input type="text" name="name" id="name" required>
@@ -466,7 +465,7 @@ function closePopup1(){
 </form>
 -->
 
-
+<h2 style="color:black">Enter Leaderboard</h2>
 <table>
     <tr>
         <th><label for="name">Name</label></th>
@@ -477,13 +476,23 @@ function closePopup1(){
         <td><input type="text" name="name" id="name" required></td>
         <td><input type="password" name="pin" id="pin" required></td>
         <td><input type="number" name="score" id="score" min="1" max="6" required></td>
-        <td><button onclick="create_user()">Submit</button></td>
+        <td><button onclick="createUser()">Submit</button></td>
     </tr>
 </table>
 
-
 <h2 style="color:black" class="widebr">Leaderboard</h2>
+
 <table>
+    <tr>
+        <th><label for="delete">Delete User by ID</label></th>
+    </tr>
+    <tr>
+        <td><input type="number" name="id" id="id" required></td>
+        <td><button onclick="deleteUser()">Delete</button></td>
+    </tr>
+</table>
+
+<table id = "myTable">
   <thead>
   <tr>
     <th>ID</th>
@@ -508,6 +517,7 @@ function closePopup1(){
   // const url = "https://cgato.duckdns.org/api/wordles"
   const create_fetch = url + '/create';
   const read_fetch = url + '/';
+  const delete_fetch = url + '/delete';
 
   // Load users on page entry
   read_users();
@@ -560,9 +570,7 @@ function closePopup1(){
     });
   }
 
-  function create_user(){
-    //Validate Password (must be 6-20 characters in len)
-    //verifyPassword("click");
+  function createUser(){
     const body = {
         name: document.getElementById("name").value,
         pin: document.getElementById("pin").value,
@@ -576,6 +584,7 @@ function closePopup1(){
             'Authorization': 'Bearer my-token',
         },
     };
+  
 
     // URL for Create API
     // Fetch API call to the database to create a new user
@@ -614,6 +623,38 @@ function closePopup1(){
     })
   }
 
+  function deleteUser(){
+      idToDelete = document.getElementById("id").value
+      const body = {
+        id: document.getElementById("id").value
+      };
+      const requestOptions = {
+          method: 'DELETE',
+          body: JSON.stringify(body),
+          headers: {
+              "content-type": "application/json",
+              'Authorization': 'Bearer my-token',
+          },
+      };
+
+    fetch(delete_fetch, requestOptions)
+      .then(response => {
+        // trap error response from Web API
+        if (response.status == 240){
+            alert("ID not found. Please enter an ID with a valid user.")
+            return;
+        }
+        else{
+            delete_row(idToDelete);
+        // response contains valid result
+            response.json().then(data => {
+                console.log(data);
+            })
+      }
+    })
+  }
+    
+
   function add_row(data) {
     const tr = document.createElement("tr");
     const id = document.createElement("td");
@@ -635,6 +676,26 @@ function closePopup1(){
     tr.appendChild(score);
 
     resultContainer.appendChild(tr);
+  }
+
+  function delete_row(id) {
+    rownum = -1; 
+    // note:  it has be defined : resultContainer = document.getElementById("result");  // tbody
+    var i = 0;
+    for (let row of resultContainer.rows) 
+    {
+        //console.log(row.cells[0].innerText)
+        if (row.cells[0].innerText == String(id))
+        {
+           rownum = i;
+           break
+        }
+        i++
+    }
+    if (rownum != -1)
+    {
+        resultContainer.deleteRow(rownum);
+    }
   }
 
 </script>
@@ -686,4 +747,18 @@ function closePopup1(){
             });
     });
     };
+
+  function deleteUser(){
+        const body = {
+          id: document.getElementById("id").value
+      };
+      const requestOptions = {
+          method: 'DELETE',
+          body: JSON.stringify(body),
+          headers: {
+              "content-type": "application/json",
+              'Authorization': 'Bearer my-token',
+          },
+      };
+    }
 -->
