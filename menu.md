@@ -461,7 +461,6 @@
   </form>
   </div>
   <button onclick="checkPin()">Enter Authentication Pin</button>
-  <br></br>
   <script>
   function openForm() {
     document.getElementById("myForm").style.display = "block";
