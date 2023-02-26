@@ -121,7 +121,8 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
     let sorted = false;
     var pulldata = "";
 
-    const read_url = "https://cgato.duckdns.org/api/events";
+    // const read_url = "https://cgato.duckdns.org/api/events";
+    const read_url = "http://127.0.0.1:8239/api/events/";
     const read_options = {
         method: 'GET', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, *cors, same-origin
@@ -132,7 +133,8 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
         // 'Content-Type': 'application/x-www-form-urlencoded',
         },
     };
-    const post_url = "https://cgato.duckdns.org/api/events/create";
+    //const post_url = "https://cgato.duckdns.org/api/events/create";
+    const post_url = "http://127.0.0.1:8239/api/events/create";
 
     const table = document.getElementById("evtablecont");
 
