@@ -45,6 +45,7 @@
 <!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
 <!-- end custom head snippets -->
 
+  </head>
   <style>
     p{text-align: center; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color: black;}
     h1{text-align: center; font-family:cursive; letter-spacing: 0.2cm; color: rgb(255, 182, 133);}
@@ -157,6 +158,7 @@
 </head>
 <body>
 
+</style>
 <head>
     <p>San Diego, CA</p>
     <p>$$$ • Brunch/Lunch </p>
@@ -459,6 +461,7 @@
   </form>
   </div>
   <button onclick="checkPin()">Enter Authentication Pin</button>
+  <br></br>
   <script>
   function openForm() {
     document.getElementById("myForm").style.display = "block";
