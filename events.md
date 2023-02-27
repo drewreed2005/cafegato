@@ -301,15 +301,15 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
                 var temp_etime = user.end_time;
                 if (Number(temp_stime.substring(0, 2)) > 12) {
                     var temp_shr = Number(temp_stime.substring(0, 2)) - 12;
-                    const new_stime = String(temp_shr) + temp_stime.substring(2, 5) + " PM";
+                    var new_stime = String(temp_shr) + temp_stime.substring(2, 5) + " PM";
                 } else {
-                    const new_stime = temp_stime + " AM"
+                    var new_stime = temp_stime + " AM"
                 }
                 if (Number(temp_etime.substring(0, 2)) > 12) {
                     var temp_ehr = Number(temp_etime.substring(0, 2)) - 12;
-                    const new_etime = String(temp_ehr) + temp_etime.substring(2, 5) + " PM";
+                    var new_etime = String(temp_ehr) + temp_etime.substring(2, 5) + " PM";
                 } else {
-                    const new_etime = temp_etime + " AM"
+                    var new_etime = temp_etime + " AM"
                 }
 
                 // add content from user data          
