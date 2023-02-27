@@ -506,9 +506,11 @@ function closePopup1(){
 <table>
     <tr>
         <th><label for="delete">Delete User by ID</label></th>
+        <th><label for="deletepin">User Pin</label></th>
     </tr>
     <tr>
         <td><input type="number" name="id" id="id" required></td>
+        <td><input type="password" name="deletepin" id="deletepin" required></td>
         <td><button onclick="deleteUser()">Delete</button></td>
     </tr>
 </table>
@@ -520,7 +522,9 @@ function closePopup1(){
     <th>Name</th>
     <th>Pin</th>
     <th>Score</th>
+    <!--
     <button class="btn" id="sortbtn" onclick="sortScore()">Sort by Score</button>
+    -->
   </tr>
   </thead>
   <tbody id="result">
@@ -645,9 +649,10 @@ function closePopup1(){
   }
 
   function deleteUser(){
-      idToDelete = document.getElementById("id").value
+      //idToDelete = document.getElementById("id").value
       const body = {
-        id: document.getElementById("id").value
+        id: document.getElementById("id").value,
+        pin: document.getElementById("deletepin").value
       };
       const requestOptions = {
           method: 'DELETE',
@@ -662,11 +667,14 @@ function closePopup1(){
       .then(response => {
         // trap error response from Web API
         if (response.status == 240){
-            alert("ID not found. Please enter an ID with a valid user.")
+            alert("ID not found, or user/pin incorrect. Please make sure all fields are filled in correctly.")
             return;
         }
         else{
-            delete_row(idToDelete);
+            resultContainer.innerHTML = "";
+            read_users();
+            //delete_row(idToDelete);
+            
         // response contains valid result
             response.json().then(data => {
                 console.log(data);
@@ -698,7 +706,7 @@ function closePopup1(){
 
     resultContainer.appendChild(tr);
   }
-
+/*
   function delete_row(id) {
     rownum = -1; 
     // note:  it has be defined : resultContainer = document.getElementById("result");  // tbody
@@ -718,7 +726,7 @@ function closePopup1(){
         resultContainer.deleteRow(rownum);
     }
   }
-
+*/
 </script>
 
 <!--
