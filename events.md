@@ -428,6 +428,7 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
     function delete_Event() {
         var del_ename = document.getElementById("event_name_del").value;
         var del_password = document.getElementById("password_del").value;
+        var success = false;
         fetch(read_url, read_options)
             // response is a RESTful "promise" on any successful fetch
             .then(response => {
@@ -461,10 +462,10 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
                                 })
                             )
                         alert('You have successfully deleted the event "' + event['event_name'] + '" from the events database.');
-                        return;
+                        success = true;
                     }
                 })
-                alert("There was an error in one of the two fields you have filled in. Make sure that your event name and password both match the case used when first created. (You can copy-paste the event name from the data below.)")
+                if (success == false) {alert("There was an error in one of the two fields you have filled in. Make sure that your event name and password both match the case used when first created. (You can copy-paste the event name from the data below.)")}
             })
         })
     }
