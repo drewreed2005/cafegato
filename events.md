@@ -296,14 +296,30 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
                 const start_time = document.createElement("td");
                 const end_time = document.createElement("td");
                     
+                // filter times
+                var temp_stime = user.start_time;
+                var temp_etime = user.end_time;
+                if (Number(temp_stime.substring(0, 2)) > 12) {
+                    var temp_shr = Number(temp_stime.substring(0, 2)) - 12;
+                    const new_stime = String(temp_shr) + temp_stime.substring(2, 5) + " PM";
+                } else {
+                    const new_stime = temp_stime + " AM"
+                }
+                if (Number(temp_etime.substring(0, 2)) > 12) {
+                    var temp_ehr = Number(temp_etime.substring(0, 2)) - 12;
+                    const new_etime = String(temp_ehr) + temp_etime.substring(2, 5) + " PM";
+                } else {
+                    const new_etime = temp_etime + " AM"
+                }
+
                 // add content from user data          
                 name.innerHTML = user.name; 
                 email.innerHTML = user.email; 
                 event_name.innerHTML = user.event_name; 
                 event_details.innerHTML = user.event_details;
                 date.innerHTML = user.date; 
-                start_time.innerHTML = user.start_time; 
-                end_time.innerHTML = user.end_time;
+                start_time.innerHTML = new_stime; 
+                end_time.innerHTML = new_etime;
 
                 // add data to row
                 tr.appendChild(name);
@@ -447,9 +463,9 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
                         alert('You have successfully deleted the event "' + event['event_name'] + '" from the events database.');
                         return;
                     }
-                    alert("There was an error in one of the two fields you have filled in. Make sure that your event name and password both match the case used when first created. (You can copy-paste the event name from the data below.)")
                 })
-                })
+                alert("There was an error in one of the two fields you have filled in. Make sure that your event name and password both match the case used when first created. (You can copy-paste the event name from the data below.)")
             })
+        })
     }
 </script>
