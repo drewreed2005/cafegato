@@ -214,6 +214,8 @@
     }
   
     function create_piss(){
+      document.getElementById("level").value = levelcount
+      document.getElementById("time").value = timefinish
       //Validate Password (must be 6-20 characters in len)
       //verifyPassword("click");
       const body = {
@@ -308,6 +310,7 @@
     let terminallimit = "13 lines";
     let gamestate = "0"
     let time = 0;
+    let timefinish = 0;
     let points = 0;
     const party = [0, 0, 0, 0, 1];
     let encountercountdown = 2;
@@ -392,6 +395,7 @@
         writeterm("YOU CAN ATTACK AND CHECK STATUS")
       } else if (uinp == "WIN") {
         gamestate = "-1";
+        timefinish = time
         win();
       } else if (uinp == "POP") {
         openPopup();
@@ -472,6 +476,7 @@
         writeterm("OPPONENT HEALTH: " + ophealth);
       } else if (uinp == "WIN") {
         gamestate = "-1";
+        timefinish = time
       } else if (uinp == "TIME") {
         writeterm("TIME: " + time);
       } else {}
@@ -566,6 +571,7 @@
       }
       bossturn()
       if (ophealth <= 0) {
+        timefinish = time
         win1()
         openPopup()
         gamestate = "-1"
@@ -673,9 +679,9 @@
         points += 25;
       } else {points += 10}
       writeterm("CONGRATULATIONS, YOU WON!");
-      writeterm("YOUR TIME: " + time);
+      writeterm("YOUR TIME: " + timefinish);
       writeterm("YOUR HEALTH: " + partyhp[0]);
-      writeterm("YOUR POINTS: " + points);
+      writeterm("YOUR LEVEL: " + levelcount);
       writeterm("YOU HAVE " + partywincount + " PARTY MEMBERS OUT OF 4");
     }
   </script>
