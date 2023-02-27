@@ -85,7 +85,7 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
 
 <h2 style="color:black" class="widebr">Current Event Log</h2>
 <button class="btn" id="evlogbtn" onclick="showEvTable()">Show Event Log</button>
-<div id="delControls" style="display:none">
+<div id="delControls" style="display:none;justify-content:center">
     <th>Event name: <input type="text" name="event_name_del" id="event_name_del" style="display:none" required>  Event Password: <input type="text" name="password_del" id="password_del" style="display:none" required> <button class="btn" id="deletebtn" style="display:none" onclick="delete_Event()">Delete Event</button></th>
 </div>
 <div id="logControls" style="display:flex;justify-content:center">
@@ -134,6 +134,7 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
         },
     };
     const post_url = "https://cgato.duckdns.org/api/events/create";
+    const del_url = "https://cgato.duckdns.org/api/events/delete";
 
     const table = document.getElementById("evtablecont");
 
@@ -411,6 +412,44 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
     };
 
     function delete_Event() {
-
+        var del_ename = document.getElementById("event_name_del").value;
+        var del_password = document.getElementById("password_del").value;
+        fetch(read_url, read_options)
+            // response is a RESTful "promise" on any successful fetch
+            .then(response => {
+            // check for response errors
+            if (response.status !== 200) {
+                const errorMsg = 'Database response error: ' + response.status;
+                console.log(errorMsg);
+            };
+            // valid response will have json data
+            response.json().then(data => {
+                data.forEach(event => {
+                    if (event['event_name'] == del_ename && event['password'] == del_password) {
+                        // if all validations successful
+                        const del_ID = event['id'];
+                        const body = {
+                            'id':del_ID
+                        };
+                        const del_options = {
+                            method: 'DELETE',
+                            body: JSON.stringify(body),
+                            headers: {
+                                'Content-Type':'application/json',
+                                'Authorization': 'Bearer my-token',
+                            },
+                        };
+                        console.log(body);
+                        fetch(del_url, del_options)
+                            .then(response =>
+                                response.json().then(data => {
+                                    console.log(data);
+                                })
+                            )
+                        alert('You have successfully deleted the event "' + event['event_name'] + '" from the events database.');
+                        }
+                })
+                })
+            })
     }
 </script>
