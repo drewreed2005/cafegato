@@ -87,7 +87,6 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
 <button class="btn" id="evlogbtn" onclick="showEvTable()">Show Event Log</button>
 <div id="logControls" style="display:flex;justify-content:space-between;">
     <th><button class="btn" id="logrefbtn" style="display:none" onclick="create_Table()">Refresh Log</button></th>
-    <th><button class="btn" id="updatebtn" style="display:none" onclick="event_Update()">Update Event</button></th>
     <th><button class="btn" id="deletebtn" style="display:none" onclick="delete_Event()">Delete Event</button></th>
 </div>
 <div style="font-size:25px;display:none" id="filters" name="filters">
@@ -140,7 +139,6 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
         create_Table();
         document.getElementById('evlogbtn').style = "display:none";
         document.getElementById('logrefbtn').style = "display:block";
-        document.getElementById('updatebtn').style = "display:block";
         document.getElementById('deletebtn').style = "display:block";
         document.getElementById('evtable').style = "display:block";
         document.getElementById('filters').style = "font-size:25px;display:block";
