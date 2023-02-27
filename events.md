@@ -85,9 +85,12 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
 
 <h2 style="color:black" class="widebr">Current Event Log</h2>
 <button class="btn" id="evlogbtn" onclick="showEvTable()">Show Event Log</button>
-<div id="logControls" style="display:flex;justify-content:space-between;">
-    <th><button class="btn" id="logrefbtn" style="display:none" onclick="create_Table()">Refresh Log</button></th>
+<div>
+    <th>Event name: <input type="text" name="event_name_del" id="event_name_del" required>  Event Password: <input type="text" name="password_del" id="password_del" required></th>
     <th><button class="btn" id="deletebtn" style="display:none" onclick="delete_Event()">Delete Event</button></th>
+</div>
+<div id="logControls" style="display:flex;justify-content:center">
+    <th><button class="btn" id="logrefbtn" style="display:none" onclick="create_Table()">Refresh Log</button></th>
 </div>
 <div style="font-size:25px;display:none" id="filters" name="filters">
     Filters: <select id="timesort" name="timesort">
@@ -404,4 +407,8 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
             });
         });
     };
+
+    function delete_Event() {
+
+    }
 </script>
