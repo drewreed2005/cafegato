@@ -85,9 +85,8 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
 
 <h2 style="color:black" class="widebr">Current Event Log</h2>
 <button class="btn" id="evlogbtn" onclick="showEvTable()">Show Event Log</button>
-<div>
-    <th>Event name: <input type="text" name="event_name_del" id="event_name_del" required>  Event Password: <input type="text" name="password_del" id="password_del" required></th>
-    <th><button class="btn" id="deletebtn" style="display:none" onclick="delete_Event()">Delete Event</button></th>
+<div id="delControls" style="display:none">
+    <th>Event name: <input type="text" name="event_name_del" id="event_name_del" style="display:none" required>  Event Password: <input type="text" name="password_del" id="password_del" style="display:none" required> <button class="btn" id="deletebtn" style="display:none" onclick="delete_Event()">Delete Event</button></th>
 </div>
 <div id="logControls" style="display:flex;justify-content:center">
     <th><button class="btn" id="logrefbtn" style="display:none" onclick="create_Table()">Refresh Log</button></th>
@@ -142,6 +141,9 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
         create_Table();
         document.getElementById('evlogbtn').style = "display:none";
         document.getElementById('logrefbtn').style = "display:block";
+        document.getElementById('delControls').style = "display:block";
+        document.getElementById('event_name_del').style = "display:block";
+        document.getElementById('password_del').style = "display:block";
         document.getElementById('deletebtn').style = "display:block";
         document.getElementById('evtable').style = "display:block";
         document.getElementById('filters').style = "font-size:25px;display:block";
