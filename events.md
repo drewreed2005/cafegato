@@ -85,11 +85,8 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
 
 <h2 style="color:black" class="widebr">Current Event Log</h2>
 <button class="btn" id="evlogbtn" onclick="showEvTable()">Show Event Log</button>
-<div id="delControls" style="display:none;justify-content:center">
-    <th>Event name: <input type="text" name="event_name_del" id="event_name_del" style="display:none" required>  Event Password: <input type="text" name="password_del" id="password_del" style="display:none" required> <button class="btn" id="deletebtn" style="display:none" onclick="delete_Event()">Delete Event</button></th>
-</div>
-<div id="logControls" style="display:flex;justify-content:center">
-    <th><button class="btn" id="logrefbtn" style="display:none" onclick="create_Table()">Refresh Log</button></th>
+<div id="delControls" style="display:none;justify-content:center;font-size:20px">
+    <th>Event name: <input type="text" name="event_name_del" id="event_name_del" style="display:none" required>  Event Password: <input type="text" name="password_del" id="password_del" style="display:none" required><br><button class="btn" id="deletebtn" style="display:none" onclick="delete_Event()">Delete Event</button></th>
 </div>
 <div style="font-size:25px;display:none" id="filters" name="filters">
     Filters: <select id="timesort" name="timesort">
@@ -99,6 +96,9 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
     </select>
     <input type="month" id="monthfil" name="monthfil" value="2023-02">
     <button class="btn" id="sortbtn" onclick="sort_Events()">Sort</button>
+</div>
+<div id="logControls" style="display:flex;justify-content:center">
+    <th><button class="btn" id="logrefbtn" style="display:none" onclick="create_Table()">Refresh Log</button></th>
 </div>
 
 <table id="evtable" style="display:none;width:50%">
@@ -398,14 +398,12 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
                         };
                     };
                 };
-                console.log(sorted_List);
                 var final_List = [];
                 for (let k = 0; k < sorted_List.length; k++) {
                     if (sorted_List[k]['date'].substring(6, 10) == monthval.substring(0, 4)) {
                         if (sorted_List[k]['date'].substring(0, 2) == monthval.substring(5, 7)) {final_List.push(sorted_List[k])} else {};
                     } else {};
                 };
-                console.log(final_List);
                 table_Make(final_List);
             });
         });
@@ -447,7 +445,9 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
                                 })
                             )
                         alert('You have successfully deleted the event "' + event['event_name'] + '" from the events database.');
-                        }
+                        return;
+                    }
+                    alert("There was an error in one of the two fields you have filled in. Make sure that your event name and password both match the case used when first created. (You can copy-paste the event name from the data below.)")
                 })
                 })
             })
