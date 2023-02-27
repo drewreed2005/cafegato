@@ -145,7 +145,6 @@
     <th>Name</th>
     <th>Time</th>
     <th>Level</th>
-    <th>Pin</th>
   </tr>
   </thead>
   <tbody id="result">
@@ -261,20 +260,17 @@
       const name = document.createElement("td");
       const time = document.createElement("td");
       const level = document.createElement("td");
-      const pin = document.createElement("td");
     
   
       // obtain data that is specific to the API
       name.innerHTML = data.name; 
       time.innerHTML = data.time; 
       level.innerHTML = data.level; 
-      pin.innerHTML = data.pin
   
       // add HTML to container
       tr.appendChild(name);
       tr.appendChild(time);
       tr.appendChild(level);
-      tr.appendChild(pin);
   
       resultContainer.appendChild(tr);
     }
