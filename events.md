@@ -85,10 +85,8 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
 
 <h2 style="color:black" class="widebr">Current Event Log</h2>
 <button class="btn" id="evlogbtn" onclick="showEvTable()">Show Event Log</button>
-<div id="logControls" style="display:flex;justify-content:space-between;">
-    <th><button class="btn" id="logrefbtn" style="display:none" onclick="create_Table()">Refresh Log</button></th>
-    <th><button class="btn" id="updatebtn" style="display:none" onclick="event_Update()">Update Event</button></th>
-    <th><button class="btn" id="deletebtn" style="display:none" onclick="delete_Event()">Delete Event</button></th>
+<div id="delControls" style="display:none;justify-content:center;font-size:20px">
+    <th>Event name: <input type="text" name="event_name_del" id="event_name_del" style="display:none" required>  Event Password: <input type="text" name="password_del" id="password_del" style="display:none" required><br><button class="btn" id="deletebtn" style="display:none" onclick="delete_Event()">Delete Event</button></th>
 </div>
 <div style="font-size:25px;display:none" id="filters" name="filters">
     Filters: <select id="timesort" name="timesort">
@@ -98,6 +96,9 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
     </select>
     <input type="month" id="monthfil" name="monthfil" value="2023-02">
     <button class="btn" id="sortbtn" onclick="sort_Events()">Sort</button>
+</div>
+<div id="logControls" style="display:flex;justify-content:center">
+    <th><button class="btn" id="logrefbtn" style="display:none" onclick="create_Table()">Refresh Log</button></th>
 </div>
 
 <table id="evtable" style="display:none;width:50%">
@@ -121,8 +122,7 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
     let sorted = false;
     var pulldata = "";
 
-    // const read_url = "https://cgato.duckdns.org/api/events";
-    const read_url = "http://127.0.0.1:8239/api/events/";
+    const read_url = "https://cgato.duckdns.org/api/events";
     const read_options = {
         method: 'GET', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, *cors, same-origin
@@ -133,8 +133,8 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
         // 'Content-Type': 'application/x-www-form-urlencoded',
         },
     };
-    //const post_url = "https://cgato.duckdns.org/api/events/create";
-    const post_url = "http://127.0.0.1:8239/api/events/create";
+    const post_url = "https://cgato.duckdns.org/api/events/create";
+    const del_url = "https://cgato.duckdns.org/api/events/delete";
 
     const table = document.getElementById("evtablecont");
 
@@ -142,7 +142,9 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
         create_Table();
         document.getElementById('evlogbtn').style = "display:none";
         document.getElementById('logrefbtn').style = "display:block";
-        document.getElementById('updatebtn').style = "display:block";
+        document.getElementById('delControls').style = "display:block";
+        document.getElementById('event_name_del').style = "display:block";
+        document.getElementById('password_del').style = "display:block";
         document.getElementById('deletebtn').style = "display:block";
         document.getElementById('evtable').style = "display:block";
         document.getElementById('filters').style = "font-size:25px;display:block";
@@ -294,14 +296,30 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
                 const start_time = document.createElement("td");
                 const end_time = document.createElement("td");
                     
+                // filter times
+                var temp_stime = user.start_time;
+                var temp_etime = user.end_time;
+                if (Number(temp_stime.substring(0, 2)) > 12) {
+                    var temp_shr = Number(temp_stime.substring(0, 2)) - 12;
+                    var new_stime = String(temp_shr) + temp_stime.substring(2, 5) + " PM";
+                } else {
+                    var new_stime = temp_stime + " AM"
+                }
+                if (Number(temp_etime.substring(0, 2)) > 12) {
+                    var temp_ehr = Number(temp_etime.substring(0, 2)) - 12;
+                    var new_etime = String(temp_ehr) + temp_etime.substring(2, 5) + " PM";
+                } else {
+                    var new_etime = temp_etime + " AM"
+                }
+
                 // add content from user data          
                 name.innerHTML = user.name; 
                 email.innerHTML = user.email; 
                 event_name.innerHTML = user.event_name; 
                 event_details.innerHTML = user.event_details;
                 date.innerHTML = user.date; 
-                start_time.innerHTML = user.start_time; 
-                end_time.innerHTML = user.end_time;
+                start_time.innerHTML = new_stime; 
+                end_time.innerHTML = new_etime;
 
                 // add data to row
                 tr.appendChild(name);
@@ -396,16 +414,59 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
                         };
                     };
                 };
-                console.log(sorted_List);
                 var final_List = [];
                 for (let k = 0; k < sorted_List.length; k++) {
                     if (sorted_List[k]['date'].substring(6, 10) == monthval.substring(0, 4)) {
                         if (sorted_List[k]['date'].substring(0, 2) == monthval.substring(5, 7)) {final_List.push(sorted_List[k])} else {};
                     } else {};
                 };
-                console.log(final_List);
                 table_Make(final_List);
             });
         });
     };
+
+    function delete_Event() {
+        var del_ename = document.getElementById("event_name_del").value;
+        var del_password = document.getElementById("password_del").value;
+        var success = false;
+        fetch(read_url, read_options)
+            // response is a RESTful "promise" on any successful fetch
+            .then(response => {
+            // check for response errors
+            if (response.status !== 200) {
+                const errorMsg = 'Database response error: ' + response.status;
+                console.log(errorMsg);
+            };
+            // valid response will have json data
+            response.json().then(data => {
+                data.forEach(event => {
+                    if (event['event_name'] == del_ename && event['password'] == del_password) {
+                        // if all validations successful
+                        const del_ID = event['id'];
+                        const body = {
+                            'id':del_ID
+                        };
+                        const del_options = {
+                            method: 'DELETE',
+                            body: JSON.stringify(body),
+                            headers: {
+                                'Content-Type':'application/json',
+                                'Authorization': 'Bearer my-token',
+                            },
+                        };
+                        console.log(body);
+                        fetch(del_url, del_options)
+                            .then(response =>
+                                response.json().then(data => {
+                                    console.log(data);
+                                })
+                            )
+                        alert('You have successfully deleted the event "' + event['event_name'] + '" from the events database.');
+                        success = true;
+                    }
+                })
+                if (success == false) {alert("There was an error in one of the two fields you have filled in. Make sure that your event name and password both match the case used when first created. (You can copy-paste the event name from the data below.)")}
+            })
+        })
+    }
 </script>
