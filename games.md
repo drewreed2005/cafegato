@@ -295,7 +295,7 @@ function closePopup1(){
             board.appendChild(row)
         }
     }
-    
+    /*
     document.addEventListener("keyup", (e) => {    
         if (guessesRemaining === 0) {
             return
@@ -316,8 +316,28 @@ function closePopup1(){
             insertLetter(pressedKey)
         }
     })
-	
+	*/
 // functions	
+    function clickKey (pressedKey) {
+      if (guessesRemaining === 0) {
+            return
+        }
+        if (pressedKey === "Backspace" && nextLetter !== 0) {
+            deleteLetter()
+            return
+        }
+        if (pressedKey === "Enter") {
+            checkGuess()
+            return
+        }
+        let found = pressedKey.match(/[a-z]/gi)
+        if (!found || found.length > 1) {
+            return
+        } else {
+            insertLetter(pressedKey)
+        }
+    }
+
     function insertLetter (pressedKey) {
         if (nextLetter === 5) {
             return
@@ -442,13 +462,13 @@ function closePopup1(){
         if (key === "Del") {
             key = "Backspace"
         } 
-        document.dispatchEvent(new KeyboardEvent("keyup", {'key': key}))
+        clickKey(key);
+        //document.dispatchEvent(new KeyboardEvent("keyup", {'key': key}))
 	});
 </script> 
 
-<h2 style="color:black">Enter Leaderboard</h2>
 <!--
-<form action="create_user()">
+<form action="createUser()">
     <p><label>
         Name:
         <input type="text" name="name" id="name" required>
@@ -466,7 +486,7 @@ function closePopup1(){
 </form>
 -->
 
-
+<h2 style="color:black">Enter Leaderboard</h2>
 <table>
     <tr>
         <th><label for="name">Name</label></th>
@@ -477,20 +497,34 @@ function closePopup1(){
         <td><input type="text" name="name" id="name" required></td>
         <td><input type="password" name="pin" id="pin" required></td>
         <td><input type="number" name="score" id="score" min="1" max="6" required></td>
-        <td><button onclick="create_user()">Submit</button></td>
+        <td><button onclick="createUser()">Submit</button></td>
     </tr>
 </table>
 
-
 <h2 style="color:black" class="widebr">Leaderboard</h2>
+
 <table>
+    <tr>
+        <th><label for="delete">Delete User by ID</label></th>
+        <th><label for="deletepin">User Pin</label></th>
+    </tr>
+    <tr>
+        <td><input type="number" name="id" id="id" required></td>
+        <td><input type="password" name="deletepin" id="deletepin" required></td>
+        <td><button onclick="deleteUser()">Delete</button></td>
+    </tr>
+</table>
+
+<table id = "myTable">
   <thead>
   <tr>
     <th>ID</th>
     <th>Name</th>
     <th>Pin</th>
     <th>Score</th>
+    <!--
     <button class="btn" id="sortbtn" onclick="sortScore()">Sort by Score</button>
+    -->
   </tr>
   </thead>
   <tbody id="result">
@@ -504,10 +538,11 @@ function closePopup1(){
   // prepare HTML result container for new output
   const resultContainer = document.getElementById("result");
   // prepare URL's to allow easy switch from deployment and localhost
-  const url = "http://127.0.0.1:8239/api/wordles"
-  // const url = "https://cgato.duckdns.org/api/wordles"
+  //const url = "http://127.0.0.1:8239/api/wordles"
+  const url = "https://cgato.duckdns.org/api/wordles"
   const create_fetch = url + '/create';
   const read_fetch = url + '/';
+  const delete_fetch = url + '/delete';
 
   // Load users on page entry
   read_users();
@@ -560,9 +595,7 @@ function closePopup1(){
     });
   }
 
-  function create_user(){
-    //Validate Password (must be 6-20 characters in len)
-    //verifyPassword("click");
+  function createUser(){
     const body = {
         name: document.getElementById("name").value,
         pin: document.getElementById("pin").value,
@@ -576,6 +609,7 @@ function closePopup1(){
             'Authorization': 'Bearer my-token',
         },
     };
+  
 
     // URL for Create API
     // Fetch API call to the database to create a new user
@@ -614,6 +648,42 @@ function closePopup1(){
     })
   }
 
+  function deleteUser(){
+      //idToDelete = document.getElementById("id").value
+      const body = {
+        id: document.getElementById("id").value,
+        pin: document.getElementById("deletepin").value
+      };
+      const requestOptions = {
+          method: 'DELETE',
+          body: JSON.stringify(body),
+          headers: {
+              "content-type": "application/json",
+              'Authorization': 'Bearer my-token',
+          },
+      };
+
+    fetch(delete_fetch, requestOptions)
+      .then(response => {
+        // trap error response from Web API
+        if (response.status == 240){
+            alert("ID not found, or user/pin incorrect. Please make sure all fields are filled in correctly.")
+            return;
+        }
+        else{
+            resultContainer.innerHTML = "";
+            read_users();
+            //delete_row(idToDelete);
+            
+        // response contains valid result
+            response.json().then(data => {
+                console.log(data);
+            })
+      }
+    })
+  }
+    
+
   function add_row(data) {
     const tr = document.createElement("tr");
     const id = document.createElement("td");
@@ -636,7 +706,27 @@ function closePopup1(){
 
     resultContainer.appendChild(tr);
   }
-
+/*
+  function delete_row(id) {
+    rownum = -1; 
+    // note:  it has be defined : resultContainer = document.getElementById("result");  // tbody
+    var i = 0;
+    for (let row of resultContainer.rows) 
+    {
+        //console.log(row.cells[0].innerText)
+        if (row.cells[0].innerText == String(id))
+        {
+           rownum = i;
+           break
+        }
+        i++
+    }
+    if (rownum != -1)
+    {
+        resultContainer.deleteRow(rownum);
+    }
+  }
+*/
 </script>
 
 <!--
@@ -686,4 +776,18 @@ function closePopup1(){
             });
     });
     };
+
+  function deleteUser(){
+        const body = {
+          id: document.getElementById("id").value
+      };
+      const requestOptions = {
+          method: 'DELETE',
+          body: JSON.stringify(body),
+          headers: {
+              "content-type": "application/json",
+              'Authorization': 'Bearer my-token',
+          },
+      };
+    }
 -->
