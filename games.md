@@ -295,7 +295,7 @@ function closePopup1(){
             board.appendChild(row)
         }
     }
-    
+    /*
     document.addEventListener("keyup", (e) => {    
         if (guessesRemaining === 0) {
             return
@@ -316,8 +316,28 @@ function closePopup1(){
             insertLetter(pressedKey)
         }
     })
-	
+	*/
 // functions	
+    function clickKey (pressedKey) {
+      if (guessesRemaining === 0) {
+            return
+        }
+        if (pressedKey === "Backspace" && nextLetter !== 0) {
+            deleteLetter()
+            return
+        }
+        if (pressedKey === "Enter") {
+            checkGuess()
+            return
+        }
+        let found = pressedKey.match(/[a-z]/gi)
+        if (!found || found.length > 1) {
+            return
+        } else {
+            insertLetter(pressedKey)
+        }
+    }
+
     function insertLetter (pressedKey) {
         if (nextLetter === 5) {
             return
@@ -442,7 +462,8 @@ function closePopup1(){
         if (key === "Del") {
             key = "Backspace"
         } 
-        document.dispatchEvent(new KeyboardEvent("keyup", {'key': key}))
+        clickKey(key);
+        //document.dispatchEvent(new KeyboardEvent("keyup", {'key': key}))
 	});
 </script> 
 
@@ -513,8 +534,8 @@ function closePopup1(){
   // prepare HTML result container for new output
   const resultContainer = document.getElementById("result");
   // prepare URL's to allow easy switch from deployment and localhost
-  // const url = "http://127.0.0.1:8239/api/wordles"
-  const url = "https://cgato.duckdns.org/api/wordles"
+  const url = "http://127.0.0.1:8239/api/wordles"
+  //const url = "https://cgato.duckdns.org/api/wordles"
   const create_fetch = url + '/create';
   const read_fetch = url + '/';
   const delete_fetch = url + '/delete';
