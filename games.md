@@ -493,7 +493,7 @@ function closePopup1(){
     </tr>
     <tr>
         <td><input type="text" name="name" id="name" required></td>
-        <td><input type="password" name="pin" id="pin" required></td>
+        <td><input type="text" name="pin" id="pin" required></td>
         <td><input type="number" name="score" id="score" min="1" max="6" required></td>
         <td><button onclick="createUser()">Submit</button></td>
     </tr>
@@ -518,7 +518,8 @@ function closePopup1(){
   <tr>
     <th>ID</th>
     <th>Name</th>
-    <th>Pin</th>
+    <!--<th>Pin</th>
+    -->
     <th>Score</th>
     <!--
     <button class="btn" id="sortbtn" onclick="sortScore()">Sort by Score</button>
@@ -686,20 +687,20 @@ function closePopup1(){
     const tr = document.createElement("tr");
     const id = document.createElement("td");
     const name = document.createElement("td");
-    const pin = document.createElement("td");
+    //const pin = document.createElement("td");
     const score = document.createElement("td");
   
 
     // obtain data that is specific to the API
     id.innerHTML = data.id;
     name.innerHTML = data.name; 
-    pin.innerHTML = data.pin;
+    //pin.innerHTML = data.pin;
     score.innerHTML = data.score; 
 
     // add HTML to container
     tr.appendChild(id);
     tr.appendChild(name);
-    tr.appendChild(pin);
+    //tr.appendChild(pin);
     tr.appendChild(score);
 
     resultContainer.appendChild(tr);
