@@ -508,7 +508,7 @@ function closePopup1(){
     </tr>
     <tr>
         <td><input type="number" name="id" id="id" required></td>
-        <td><input type="password" name="deletepin" id="deletepin" required></td>
+        <td><input type="text" name="deletepin" id="deletepin" required></td>
         <td><button onclick="deleteUser()">Delete</button></td>
     </tr>
 </table>
