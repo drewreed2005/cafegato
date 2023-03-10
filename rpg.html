@@ -121,11 +121,11 @@
       </label></p>
       <p><label>
           Pin:
-          <input type="pin" name="pin" id="pin" required>
+          <input type="text" name="pin" id="pin" required>
       </label></p>
       <p><label>
           Level:
-          <input type="text" name="level" id="level" required>
+          <input type="number" name="level" id="level">
       </label></p>
       <p><label>
           Time:
@@ -355,14 +355,14 @@
       } else if (gamestate == "-1") {
         win1();
       } else if (gamestate == "2") {
-        turn();
+        turn(0);
       } else if (gamestate == "3") {
         recruit();
       } else if (gamestate == "L") {
         writeterm("YOU DIED")
         writeterm("TIME: " + time)
       } else if (gamestate == "4") {
-        boss()
+        turn(1)
       }
     }
     function gamestate0() {
@@ -501,35 +501,44 @@
         }
       }
     }
-    function turn() {
+    function turn(bic) {
       playerturn();
-      console.log("after playerturn")
       if (party[0] == 1) {
         writeterm("GARFIELD ATTACKS");
         ophealth -= Math.floor(Math.random() * (2 - 1) ) + 1;
       }
-      console.log("after garfield")
       if (party[1] == 1) {
         writeterm("DALI ATTACKS");
         ophealth -= Math.floor(Math.random() * (2 - 1) ) + 1;
       }
-      console.log("after dali")
       if (party[2] == 1) {
         writeterm("MORGANA ATTACKS");
         ophealth -= Math.floor(Math.random() * (2 - 1) ) + 1;
       }
-      console.log("after morgana")
       if (party[3] == 1) {
         writeterm("MR. KITTY ATTACKS");
         ophealth -= Math.floor(Math.random() * (2 - 1) ) + 1;
       }
-      console.log("after mr kitty")
-      opturn()
-      console.log("after opturn")
-      if (ophealth <= 0) {winbattle()}
-      console.log("after win")
-      if (partyhp[0] <= 0) {gamestate = "L"}
-      console.log("after lose")
+      if (bic == 1) {
+        bossturn()
+      } else if (bic == 0) {
+        opturn()
+      }
+      if (bic == 0) {
+        if (ophealth <= 0) {winbattle()}
+      } else if (bic == 1) {
+        if (ophealth <= 0) {
+          timefinish = time
+          win1()
+          openPopup()
+          gamestate = "-1"
+        }
+      }
+      if (partyhp[0] <= 0) {
+        writeterm("YOU DIED")
+        writeterm("TIME: " + time)
+        gamestate = "L"
+      }
     }
     function bossturn() {
       let bent = Math.floor(Math.random() * 5);
