@@ -44,6 +44,58 @@
     cursor: pointer;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   }
+  .bigflexbox {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .bigflexbox > div {
+    background-color: black;
+    font-family: 'Courier New';
+    color: rgb(6, 240, 6);
+    text-align: center;
+    margin: 10px;
+    padding: 20px;
+    font-size: 30px;
+    align-items: flex-end;
+  }
+  .terminalbox {
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+  .terminalbox > p {
+    font-family: 'Courier New';
+    color: rgb(6, 240, 6);
+    text-align: left;
+    margin: 10px;
+    padding: 20px;
+    font-size: 20px;
+    overflow: hidden;
+  }
+  .terminalbox > div {
+    font-family: 'Courier New';
+    color: rgb(6, 240, 6);
+    text-align: left;
+    margin: 10px;
+    padding: 20px;
+    font-size: 20px;
+    overflow: hidden;
+  }
+  
+  .bigflexbox2 {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .bigflexbox2 > input {
+    background-color: black;
+    font-family: 'Courier New';
+    color: rgb(6, 240, 6);
+    margin: 10px;
+    padding: 20px;
+    font-size: 30px;
+  }
 </style>
 </head>
 <body>
@@ -85,7 +137,7 @@
   </form>
   </div>
 
-  <p>Leaderboard (unorderd)</p>
+  <p>Leaderboard</p>
 
 <table>
   <thead>
@@ -143,6 +195,8 @@
           }
           // valid response will have json data
           response.json().then(data => {
+              console.log(data);
+              data.sort(function(a, b){return a.time - b.time})
               console.log(data);
               for (let row in data) {
                 console.log(data[row]);
