@@ -96,6 +96,13 @@
     padding: 20px;
     font-size: 30px;
   }
+  .orderthings {
+    display: flex;
+  }
+  .orderthings > div {
+    margin: 10px;
+    padding: 20px;
+  }
 </style>
 </head>
 <body>
@@ -136,22 +143,28 @@
       </p>
   </form>
   </div>
+<div class="orderthings">
+  <div>
+    <p>Leaderboard</p>
 
-  <p>Leaderboard</p>
+    <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Time</th>
+        <th>Level</th>
+      </tr>
+      </thead>
+      <tbody id="result">
+        <!-- javascript generated data -->
+      </tbody>
+    </table>
+  </div>
 
-<table>
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Time</th>
-    <th>Level</th>
-  </tr>
-  </thead>
-  <tbody id="result">
-    <!-- javascript generated data -->
-  </tbody>
-</table>
-
+  <div id="delControls" style="display:block;justify-content:center;font-size:20px">
+    <th>Player name: <input type="text" name="playername_del" id="playername_del" style="display:block" required>  Player pin: <input type="text" name="playerpin_del" id="playerpin_del" style="display:block" required><br><button class="btn" id="deletebtn" style="display:block" onclick="delete_piss()">Delete Player</button></th>
+  </div>
+</div>
   <script>
     // prepare HTML result container for new output
     const resultContainer = document.getElementById("result");
@@ -160,6 +173,7 @@
     //const url = "https://flask.nighthawkcodingsociety.com/api/users"
     const create_fetch = url + '/create';
     const read_fetch = url + '/';
+    const del_url = "https://cgato.duckdns.org/api/pisses/delete";
   
     // Load users on page entry
     read_pisses();
@@ -278,7 +292,51 @@
   
       resultContainer.appendChild(tr);
     }
-  
+
+    function delete_piss() {
+      var del_playername = document.getElementById("playername_del").value;
+      var del_playerpin = document.getElementById("playerpin_del").value;
+      var success = false;
+      fetch(read_url, read_options)
+          // response is a RESTful "promise" on any successful fetch
+          .then(response => {
+          // check for response errors
+          if (response.status !== 200) {
+              const errorMsg = 'Database response error: ' + response.status;
+              console.log(errorMsg);
+          };
+          // valid response will have json data
+          response.json().then(data => {
+              data.forEach(piss => {
+                  if (piss['name'] == del_playername && piss['pin'] == del_playerpin) {
+                      // if all validations successful
+                      const del_ID = piss['id'];
+                      const body = {
+                          'id':del_ID
+                      };
+                      const del_options = {
+                          method: 'DELETE',
+                          body: JSON.stringify(body),
+                          headers: {
+                              'Content-Type':'application/json',
+                              'Authorization': 'Bearer my-token',
+                          },
+                      };
+                      console.log(body);
+                      fetch(del_url, del_options)
+                          .then(response =>
+                              response.json().then(data => {
+                                  console.log(data);
+                              })
+                          )
+                      alert('You have successfully deleted the player "' + piss['name'] + '" from the player database.');
+                      success = true;
+                  }
+              })
+              if (success == false) {alert("There was an error in one of the two fields you have filled in. Make sure that your player name and pin both match the case used when first created. (You can copy-paste the player name from the data below.)")}
+          })
+      })
+  }
   </script>
   <script>
     function openPopup(){
@@ -287,10 +345,9 @@
     function closePopup(){
       document.getElementById("signin").classList.remove("open-popup");
     }
-    
-    let list = [1, 2, 3, 5, 9, 2]
-    list.sort(function(a, b){return a - b});
-    console.log(list)
+    for (let aaas = 0; aaas < 10; aaas++){
+      console.log(Math.floor(Math.random() * (3 - 1) ) + 1)
+    }
   </script>
   <script>
   const forceKeyPressUppercase = (e) => {
@@ -327,7 +384,7 @@
     let atkstat = 1;
     let ophealth = 7;
     let pp = 10
-    const partyhp = [7, 0, 0, 0, 0]
+    const partyhp = [6, 0, 0, 0, 0]
     const get = [0, 0, 0, 0]
 
     inpbox.addEventListener("keypress", function(event) {
@@ -395,7 +452,7 @@
         writeterm("YOU CAN ATTACK, USE AGI, AND CHECK STATUS")
         randenc()
       } else if (uinp == "FIGHT BOSS") {
-        ophealth = 20
+        ophealth = 30
         gamestate = "4"
         writeterm("THE BOSS STANDS BEFORE YOU");
         writeterm("YOU MUST DEFEAT HIM")
@@ -423,7 +480,7 @@
     }
     function randenc() {
       gamestate = "2"
-      ophealth = 7
+      ophealth = 10
     }
     function recruit() {
       if (uinp == "GARFIELD") {
@@ -452,25 +509,32 @@
       writeterm("YOU'RE FIGHTING GARFIELD");
       writeterm("DEFEAT HIM TO RECRUIT HIM");
       writeterm("YOU CAN ATTACK, USE AGI, AND CHECK STATUS")
-      ophealth = 7;
+      ophealth = 12;
     }
     function dali() {
       writeterm("YOU'RE FIGHTING DALI");
       writeterm("DEFEAT HIM TO RECRUIT HIM");
       writeterm("YOU CAN ATTACK, USE AGI, AND CHECK STATUS")
-      ophealth = 7;
+      ophealth = 12;
     }
     function mona() {
       writeterm("YOU'RE FIGHTING MORGANA");
       writeterm("DEFEAT HIM TO RECRUIT HIM");
       writeterm("YOU CAN ATTACK, USE AGI, AND CHECK STATUS")
-      ophealth = 7;
+      ophealth = 12;
     }
     function mrkitty() {
       writeterm("YOU'RE FIGHTING MR. KITTY");
       writeterm("DEFEAT HIM TO RECRUIT HIM");
       writeterm("YOU CAN ATTACK, USE AGI, AND CHECK STATUS")
-      ophealth = 7;
+      ophealth = 12;
+    }
+    function agi(){
+      if (pp >= 3) {
+        pp -= 3
+        ophealth -= math.floor(atkstat * 1.25) + 6
+        writeterm("AGI DEALS 7 DAMAGE")
+      } else{writeterm("YOU DO NOT HAVE ENOUGH MANA")}
     }
     function playerturn(){
       if (uinp == "ATTACK") {
@@ -486,13 +550,7 @@
       } else if (uinp == "WIN") {
         gamestate = "-1";
         timefinish = time
-      } else if (uinp == "AGI") {
-        if (pp >= 3) {
-          pp -= 3
-          ophealth -= 7
-          writeterm("AGI DEALS 7 DAMAGE")
-        } else{writeterm("YOU DO NOT HAVE ENOUGH MANA")}
-      }
+      } else if (uinp == "AGI") {agi()}
     }
     function opturn() {
       let cent = Math.floor(Math.random() * 5);
@@ -518,19 +576,19 @@
       playerturn();
       if (party[0] == 1) {
         writeterm("GARFIELD ATTACKS");
-        ophealth -= Math.floor(Math.random() * (2 - 1) ) + 1;
+        ophealth -= Math.floor(Math.random() * (3 - 1) ) + 1;
       }
       if (party[1] == 1) {
         writeterm("DALI ATTACKS");
-        ophealth -= Math.floor(Math.random() * (2 - 1) ) + 1;
+        ophealth -= Math.floor(Math.random() * (3 - 1) ) + 1;
       }
       if (party[2] == 1) {
         writeterm("MORGANA ATTACKS");
-        ophealth -= Math.floor(Math.random() * (2 - 1) ) + 1;
+        ophealth -= Math.floor(Math.random() * (3 - 1) ) + 1;
       }
       if (party[3] == 1) {
         writeterm("MR. KITTY ATTACKS");
-        ophealth -= Math.floor(Math.random() * (2 - 1) ) + 1;
+        ophealth -= Math.floor(Math.random() * (3 - 1) ) + 1;
       }
       if (bic == 1) {
         bossturn()
@@ -555,7 +613,7 @@
     }
     function bossturn() {
       let bent = Math.floor(Math.random() * 5);
-      let davidt = Math.floor(Math.random() * (2 - 1) ) + 1;
+      let davidt = Math.floor(Math.random() * (3 - 1) ) + 1;
       while (partyhp[0] > 0) {
         bent = Math.floor(Math.random() * 5);
         if (partyhp[bent] > 0) {
@@ -577,19 +635,19 @@
       playerturn()
       if (party[0] == 1) {
         writeterm("GARFIELD ATTACKS");
-        ophealth -= Math.floor(Math.random() * (2 - 1) ) + 1;
+        ophealth -= Math.floor(Math.random() * (3 - 1) ) + 1;
       }
       if (party[1] == 1) {
         writeterm("DALI ATTACKS");
-        ophealth -= Math.floor(Math.random() * (2 - 1) ) + 1;
+        ophealth -= Math.floor(Math.random() * (3 - 1) ) + 1;
       }
       if (party[2] == 1) {
         writeterm("MORGANA ATTACKS");
-        ophealth -= Math.floor(Math.random() * (2 - 1) ) + 1;
+        ophealth -= Math.floor(Math.random() * (3 - 1) ) + 1;
       }
       if (party[3] == 1) {
         writeterm("MR. KITTY ATTACKS");
-        ophealth -= Math.floor(Math.random() * (2 - 1) ) + 1;
+        ophealth -= Math.floor(Math.random() * (3 - 1) ) + 1;
       }
       bossturn()
       if (ophealth <= 0) {
@@ -605,7 +663,7 @@
       }
     }
     function healthreset() {
-      partyhp[0] = 7;
+      partyhp[0] = 6;
       if (party[0] == 1) {partyhp[1] = 7}
       if (party[1] == 1) {partyhp[2] = 7}
       if (party[2] == 1) {partyhp[3] = 7}
@@ -624,7 +682,7 @@
       }
     }
     function winbattle() {
-      partyhp[0] = 7;
+      healthreset()
       writeterm("THE OPPONENT HAS BEEN DEFFEATED");
       gamestate = "1";
       writeterm("WHAT WOULD YOU LIKE TO DO?");
