@@ -70,7 +70,7 @@
     text-align: left;
     margin: 10px;
     padding: 20px;
-    font-size: 20px;
+    font-size: 18px;
     overflow: hidden;
   }
   .terminalbox > div {
@@ -94,7 +94,7 @@
     color: rgb(6, 240, 6);
     margin: 10px;
     padding: 20px;
-    font-size: 30px;
+    font-size: 25px;
   }
   .orderthings {
     display: flex;
@@ -345,9 +345,6 @@
     function closePopup(){
       document.getElementById("signin").classList.remove("open-popup");
     }
-    for (let aaas = 0; aaas < 10; aaas++){
-      console.log(Math.floor(Math.random() * (3 - 1) ) + 1)
-    }
   </script>
   <script>
   const forceKeyPressUppercase = (e) => {
@@ -384,6 +381,8 @@
     let atkstat = 1;
     let ophealth = 7;
     let pp = 10
+    let ppfactor = 0
+    let healfactor = 0
     const partyhp = [6, 0, 0, 0, 0]
     const get = [0, 0, 0, 0]
 
@@ -411,6 +410,14 @@
       let userchoice = doc.getElementById("textinput").value;
       return userchoice;
     }
+    function heal(){
+      if (pp >= 1){
+        pp -= 1
+        garfunkle = Math.floor(Math.random()*2) + 1 + healfactor
+        partyhp[0] += garfunkle
+        writeterm("YOU HEALED " + garfunkle + " HEALTH")
+      } else {writeterm("YOU DO NOT HAVE ENOUGH MANA")}
+    }
     function enter() {
       if (gamestate == "0") {
         gamestate0();
@@ -434,7 +441,7 @@
         console.log("play start")
         setInterval(timeincrease, 1000);
         gamestate = "1";
-        writeterm("WHAT WOULD YOU LIKE TO DO?");
+        writeterm("<br>WHAT WOULD YOU LIKE TO DO?");
         writeterm("RECRUIT A NEW TEAMMATE");
         writeterm("FIND ENEMY, FIGHT BOSS");
       } else {
@@ -447,16 +454,16 @@
         console.log(uinp)
         writeterm("RECRUIT: GARFIELD, MORGANA, DALI, MR. KITTY")
         gamestate = "3";
-      } else if (uinp == "FIND ENEMY") {
-        writeterm("YOU ARE IN FRONT OF AN ENEMY")
-        writeterm("YOU CAN ATTACK, USE AGI, AND CHECK STATUS")
+      } else if (uinp == "FIND ENEMY" || uinp == "ENEMY") {
+        writeterm("<br>YOU ARE IN FRONT OF AN ENEMY")
+        writeterm("YOU CAN ATTACK, USE AGI, HEAL, AND CHECK STATUS")
         randenc()
-      } else if (uinp == "FIGHT BOSS") {
+      } else if (uinp == "FIGHT BOSS" || uinp == "BOSS") {
         ophealth = 30
         gamestate = "4"
-        writeterm("THE BOSS STANDS BEFORE YOU");
+        writeterm("<br>THE BOSS STANDS BEFORE YOU");
         writeterm("YOU MUST DEFEAT HIM")
-        writeterm("YOU CAN ATTACK, USE AGI, AND CHECK STATUS")
+        writeterm("YOU CAN ATTACK, USE AGI, HEAL, AND CHECK STATUS")
       } else if (uinp == "WIN") {
         gamestate = "-1";
         timefinish = time
@@ -470,13 +477,15 @@
       } else if (uinp == "PENIS") {writeterm("hehe, penis")}
     }
     function checkm() {
-      writeterm("PARTY:")
+      writeterm("<br>PARTY:")
       if (party[0] == 1) {writeterm("GARFIELD")}
       if (party[1] == 1) {writeterm("DALI")}
       if (party[2] == 1) {writeterm("MORGANA")}
       if (party[3] == 1) {writeterm("MR. KITTY")}
+      if (party[0] == 0 && party[1] == 0 && party[2] == 0 && party[3] == 0) {writeterm("EMPTY")}
       writeterm("ATTACK: " + atkstat);
       writeterm("PARTY HEALTH: " + partyhp);
+      writeterm("MANA: " + pp)
     }
     function randenc() {
       gamestate = "2"
@@ -506,34 +515,35 @@
       }
     }
     function garfield() {
-      writeterm("YOU'RE FIGHTING GARFIELD");
+      writeterm("<br>YOU'RE FIGHTING GARFIELD");
       writeterm("DEFEAT HIM TO RECRUIT HIM");
-      writeterm("YOU CAN ATTACK, USE AGI, AND CHECK STATUS")
+      writeterm("YOU CAN ATTACK, USE AGI, HEAL, AND CHECK STATUS")
       ophealth = 12;
     }
     function dali() {
-      writeterm("YOU'RE FIGHTING DALI");
+      writeterm("<br>YOU'RE FIGHTING DALI");
       writeterm("DEFEAT HIM TO RECRUIT HIM");
-      writeterm("YOU CAN ATTACK, USE AGI, AND CHECK STATUS")
+      writeterm("YOU CAN ATTACK, USE AGI, HEAL, AND CHECK STATUS")
       ophealth = 12;
     }
     function mona() {
-      writeterm("YOU'RE FIGHTING MORGANA");
+      writeterm("<br>YOU'RE FIGHTING MORGANA");
       writeterm("DEFEAT HIM TO RECRUIT HIM");
-      writeterm("YOU CAN ATTACK, USE AGI, AND CHECK STATUS")
+      writeterm("YOU CAN ATTACK, USE AGI, HEAL, AND CHECK STATUS")
       ophealth = 12;
     }
     function mrkitty() {
-      writeterm("YOU'RE FIGHTING MR. KITTY");
+      writeterm("<br>YOU'RE FIGHTING MR. KITTY");
       writeterm("DEFEAT HIM TO RECRUIT HIM");
-      writeterm("YOU CAN ATTACK, USE AGI, AND CHECK STATUS")
+      writeterm("YOU CAN ATTACK, USE AGI, HEAL, AND CHECK STATUS")
       ophealth = 12;
     }
     function agi(){
       if (pp >= 3) {
+        console.log("agi")
         pp -= 3
-        ophealth -= math.floor(atkstat * 1.25) + 6
-        writeterm("AGI DEALS 7 DAMAGE")
+        ophealth -= Math.floor(atkstat * 1.25) + 6
+        writeterm("AGI DEALS " + (Math.floor(atkstat * 1.25) + 6) + " DAMAGE")
       } else{writeterm("YOU DO NOT HAVE ENOUGH MANA")}
     }
     function playerturn(){
@@ -550,7 +560,9 @@
       } else if (uinp == "WIN") {
         gamestate = "-1";
         timefinish = time
-      } else if (uinp == "AGI") {agi()}
+      } else if (uinp == "AGI") {
+        agi()
+      } else if (uinp = "HEAL") {heal()}
     }
     function opturn() {
       let cent = Math.floor(Math.random() * 5);
@@ -606,7 +618,7 @@
         }
       }
       if (partyhp[0] <= 0) {
-        writeterm("YOU DIED")
+        writeterm("<br>YOU DIED")
         writeterm("TIME: " + time)
         gamestate = "L"
       }
@@ -657,7 +669,7 @@
         gamestate = "-1"
       }
       if (partyhp[0] <= 0) {
-        writeterm("YOU DIED")
+        writeterm("<br>YOU DIED")
         writeterm("TIME: " + time)
         gamestate = "L"
       }
@@ -675,21 +687,23 @@
       if (encountercountdown == 0) {
         levelcount += 1;
         encountercountdown = 1 + levelcount;
+        if (levelcount == 2) {healfactor = 1}
+        if (levelcount == 3) {ppfactor = 5}
         atkstat += 1
-        writeterm("YOU LEVELED UP");
+        writeterm("<br>YOU LEVELED UP");
         writeterm("YOUR ATTACK: " + atkstat)
-        pp = 10
+        pp = 10 + ppfactor
       }
     }
     function winbattle() {
       healthreset()
-      writeterm("THE OPPONENT HAS BEEN DEFFEATED");
+      writeterm("<br>THE OPPONENT HAS BEEN DEFFEATED");
+      encountcheck();
       gamestate = "1";
       writeterm("WHAT WOULD YOU LIKE TO DO?");
       writeterm("RECRUIT A NEW TEAMMATE");
       writeterm("GARFIELD, MORGANA, DALI, MR. KITTY");
       writeterm("FIND ENEMY, FIGHT BOSS");
-      encountcheck();
       if (get[0] == 1) {
         garfget();
         get[0] = 2;
@@ -736,7 +750,7 @@
       gamestate = "1";
     }
     function win1() {
-      writeterm("THE BOSS HAS BEEN DEFEATED")
+      writeterm("<br>THE BOSS HAS BEEN DEFEATED")
       let partywincount = 0;
       if (party[0] == 1) {
         partywincount += 1;
@@ -754,6 +768,7 @@
       writeterm("YOUR TIME: " + timefinish);
       writeterm("YOUR HEALTH: " + partyhp[0]);
       writeterm("YOUR LEVEL: " + levelcount);
+      writeterm("YOUR MANA: " + pp);
       writeterm("YOU HAVE " + partywincount + " PARTY MEMBERS OUT OF 4");
     }
   </script>
