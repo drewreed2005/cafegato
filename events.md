@@ -94,7 +94,7 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
     <option value="soonest">Soonest</option>
     <option value="latest">Latest</option>
     </select>
-    <input type="month" id="monthfil" name="monthfil" value="2023-02">
+    <input type="month" id="monthfil" name="monthfil" value="2023-05">
     <button class="btn" id="sortbtn" onclick="sort_Events()">Sort</button>
 </div>
 <div id="logControls" style="display:flex;justify-content:center">
@@ -122,7 +122,7 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
     let sorted = false;
     var pulldata = "";
 
-    const read_url = "https://cgato.duckdns.org/api/events";
+    const read_url = "http://127.0.0.1:8239/api/events/";
     const read_options = {
         method: 'GET', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, *cors, same-origin
@@ -133,8 +133,8 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
         // 'Content-Type': 'application/x-www-form-urlencoded',
         },
     };
-    const post_url = "https://cgato.duckdns.org/api/events/create";
-    const del_url = "https://cgato.duckdns.org/api/events/delete";
+    const post_url = "http://127.0.0.1:8239/api/events/create";
+    const del_url = "http://127.0.0.1:8239/api/events/delete";
 
     const table = document.getElementById("evtablecont");
 
