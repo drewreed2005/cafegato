@@ -122,24 +122,25 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
     let sorted = false;
     var pulldata = "";
 
+    //NOTE: the url that data is pulled from was previously from a deployed, linked site, but due to lack of resources the AWS container had most of its instances brought down
     const read_url = "http://127.0.0.1:8239/api/events/";
     const read_options = {
-        method: 'GET', // *GET, POST, PUT, DELETE, etc.
-        mode: 'cors', // no-cors, *cors, same-origin
-        cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: 'omit', // include, *same-origin, omit
+        method: 'GET', //read option
+        mode: 'cors', // cors used
+        cache: 'default', // set to default
+        credentials: 'omit', // omit credentials
         headers: {
         'Content-Type': 'application/json'
         // 'Content-Type': 'application/x-www-form-urlencoded',
         },
     };
-    const post_url = "http://127.0.0.1:8239/api/events/create";
-    const del_url = "http://127.0.0.1:8239/api/events/delete";
+    const post_url = "http://127.0.0.1:8239/api/events/create"; // for POST
+    const del_url = "http://127.0.0.1:8239/api/events/delete"; // for DELETE
 
     const table = document.getElementById("evtablecont");
 
     function showEvTable() {
-        create_Table();
+        create_Table(); //making table interaction elements visible
         document.getElementById('evlogbtn').style = "display:none";
         document.getElementById('logrefbtn').style = "display:block";
         document.getElementById('delControls').style = "display:block";
@@ -150,24 +151,26 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
         document.getElementById('filters').style = "font-size:25px;display:block";
     }
 
+    //a function used to translate times for the Date object, used below
     function time_Dif(start, end) {
         var hourdif = 60 * (Number(end.substring(0, 2)) - Number(start.substring(0, 2)));
         var mindif = Number(end.substring(3, 5)) - Number(start.substring(3, 5));
         return hourdif + mindif
     }
 
-    // THIS IS A PLACEHOLDER FUNCTION FOR WHEN THE API IS RUNNING
+    // function used when the submit button is clicked for new events
     function submit_Form() {
         try {
+            //NOTE: uses of the FETCH function are modeled based on https://github.com/nighthawkcoders/APCSP/blob/master/_posts/2022-07-10-PBL-database.md; the rest of the content of this function is my own
             fetch(read_url, read_options)
-                // response is a RESTful "promise" on any successful fetch
+                // response is RESTful, process needs to be sequential
                 .then(response => {
                 // check for response errors
                 if (response.status !== 200) {
                     const errorMsg = 'Database response error: ' + response.status;
                     console.log(errorMsg);
                 };
-                // valid response will have json data
+                // valid response is JSON
                 response.json().then(data => {
                     var form_list = [document.getElementById('name').value, document.getElementById('email').value, document.getElementById('event_name').value, document.getElementById('event_details').value, document.getElementById('date').value, document.getElementById('start_time').value, document.getElementById('end_time').value, document.getElementById('password').value];
                     // for loop to ensure all fields were filled in
@@ -188,14 +191,14 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
                     var tempstime = document.getElementById('start_time').value;
                     var tempetime = document.getElementById('end_time').value;
                     var datefix = tempdate.substr(5, 2) + '/' + tempdate.substr(8, 10) + '/' + tempdate.substr(0, 4);
-                    const hourdict = [{"open":10, "close":18}, {"open":8, "close":17}, {"open":8, "close":17}, {"open":8, "close":17}, {"open":8, "close":17}, {"open":8, "close":17}, {"open":10, "close":18}];
+                    const hourdict = [{"open":10, "close":18}, {"open":8, "close":17}, {"open":8, "close":17}, {"open":8, "close":17}, {"open":8, "close":17}, {"open":8, "close":17}, {"open":10, "close":18}]; //matches open times in military time
                     form_list[4] = datefix;
                     var fulldate = datefix + " " + tempstime;
                     let ev_date = new Date(fulldate);
                     let cur_date = new Date();
                     console.log(ev_date, cur_date);
                     let ev_dow = ev_date.getDay()
-                    // validating date
+                    // validating date for valid range
                     var datedif = Math.ceil((ev_date - cur_date) / (1000 * 60 * 60 * 24));
                     if (1 > datedif || 365 < datedif) {
                         alert("There was an error processing your form. Make sure the date you have inputted is less than a year in the future.");
@@ -257,11 +260,11 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
                                 console.log(data);
                             })
                         )
-                    alert("Thank you, " + form_list[0] + ", for submitting an event! Watch your email for a confirmation message.\n\n(Warning: Please do not submit two events at a time! Your events may end up being cancelled as a result.)");
+                    alert("Thank you, " + form_list[0] + ", for submitting an event!\n\n(Warning: You cannot submit two events at the same time! You may only have one event at a time.)");
                 });
             });
         } catch (err) {
-            alert("There was an error processing your form. (Failed to send to/pull from the database, or there was an error in the formatting of your form. Make sure you're on unrestricted WiFi.)");
+            alert("There was an error processing your form. (Failed to send to/pull from the database, or there was an error in the formatting of your form. You may be on restricted WiFi.)");
         };
     };
 
@@ -281,13 +284,13 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
         });
     };
     
+    // forms a table based on a list argument, requires formatting
     function table_Make(list) {
         table.innerHTML = "";
         list.forEach(user => {
-                // build a row for each user
+                // creating a new row for each event
                 const tr = document.createElement("tr");
-
-                // td's to build out each column of data
+                // building each column of data
                 const name = document.createElement("td");
                 const email = document.createElement("td");
                 const event_name = document.createElement("td");
@@ -295,8 +298,8 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
                 const date = document.createElement("td");
                 const start_time = document.createElement("td");
                 const end_time = document.createElement("td");
-                    
-                // filter times
+                
+                // filtering times to display in Pacific time
                 var temp_stime = user.start_time;
                 var temp_etime = user.end_time;
                 if (Number(temp_stime.substring(0, 2)) > 12) {
@@ -312,7 +315,7 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
                     var new_etime = temp_etime + " AM"
                 }
 
-                // add content from user data          
+                // after validation with pull, content is added       
                 name.innerHTML = user.name; 
                 email.innerHTML = user.email; 
                 event_name.innerHTML = user.event_name; 
@@ -320,8 +323,7 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
                 date.innerHTML = user.date; 
                 start_time.innerHTML = new_stime; 
                 end_time.innerHTML = new_etime;
-
-                // add data to row
+                // the columns are appended to the row
                 tr.appendChild(name);
                 tr.appendChild(email);
                 tr.appendChild(event_name);
@@ -329,12 +331,12 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
                 tr.appendChild(date);
                 tr.appendChild(start_time);
                 tr.appendChild(end_time);
-
-                // add row to table
+                // the row is appended to the table
                 table.appendChild(tr);
         });
     };
 
+    // variables here are defined outside of the function to give them global scope
     var soonval = "placeholder";
     var soon_fulldate = "placeholder";
     var temp_soondate = "placeholder";
@@ -348,19 +350,18 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
         var sorted_List = [];
         // fetch the API
         fetch(read_url, read_options)
-            // response is a RESTful "promise" on any successful fetch
+            // new fetch to update
             .then(response => {
-            // check for response errors
+            // response error handler
             if (response.status !== 200) {
                 const errorMsg = 'Database response error: ' + response.status;
                 console.log(errorMsg);
             };
-            // valid response will have json data
             response.json().then(data => {
                 var testcopy = [...data];
                 var d_length = testcopy.length;
                 if (orderval == "time_submitted") {
-                            testcopy.forEach(event => {sorted_List.push(event)});
+                            testcopy.forEach(event => {sorted_List.push(event)}); // below orders based on the input from the selection menu
                 } else if (orderval == "soonest") {
                     for (let j = 0; j < d_length; j++) {
                         let i = 0;
@@ -425,19 +426,19 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
         });
     };
 
+    // function to delete events with event name and password (unique)
     function delete_Event() {
         var del_ename = document.getElementById("event_name_del").value;
         var del_password = document.getElementById("password_del").value;
         var success = false;
         fetch(read_url, read_options)
-            // response is a RESTful "promise" on any successful fetch
+            // fetch to look for most updated event data
             .then(response => {
             // check for response errors
             if (response.status !== 200) {
                 const errorMsg = 'Database response error: ' + response.status;
                 console.log(errorMsg);
             };
-            // valid response will have json data
             response.json().then(data => {
                 data.forEach(event => {
                     if (event['event_name'] == del_ename && event['password'] == del_password) {
