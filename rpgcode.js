@@ -5,7 +5,6 @@ function closePopup(){
     document.getElementById("signin").classList.remove("open-popup");
 }
     
-let terminallimit = "13 lines";
 let gamestate = "0"
 let time = 0;
 let timefinish = 0;
@@ -23,6 +22,12 @@ let ppfactor = 0
 let healfactor = 0
 const partyhp = [6, 0, 0, 0, 0]
 const get = [0, 0, 0, 0]
+
+function statupdate(num, healthparty, healthvalue) {
+    let element = document.getElementById("stats").children[num];
+    let newNode = document.createTextNode(healthparty + ": " + healthvalue);
+    element.replaceChild(newNode, element.childNodes[0]);
+}
 
 inpbox.addEventListener("keypress", function(event) {
     if (event.key === "Enter") {
@@ -51,6 +56,7 @@ function grabinput() {
 function heal(){
     if (pp >= 1){
         pp -= 1
+        statupdate(1, "MANA", pp)
         garfunkle = Math.floor(Math.random()*2) + 1 + healfactor
         partyhp[0] += garfunkle
         writeterm("YOU HEALED " + garfunkle + " HEALTH")
@@ -180,6 +186,7 @@ function agi(){
     if (pp >= 3) {
         console.log("agi")
         pp -= 3
+        statupdate(1, "MANA", pp)
         ophealth -= Math.floor(atkstat * 1.25) + 6
         writeterm("AGI DEALS " + (Math.floor(atkstat * 1.25) + 6) + " DAMAGE")
     } else{writeterm("YOU DO NOT HAVE ENOUGH MANA")}
@@ -211,13 +218,20 @@ function opturn() {
             partyhp[cent] -= 1;
             if (cent == 1) {
                 writeterm("GARFIELD TOOK 1 DAMAGE");
+                statupdate(2, "GARFIELD", partyhp[1])
             } else if (cent == 2) {
                 writeterm("DALI TOOK 1 DAMAGE");
+                statupdate(4, "DALI", partyhp[2])
             } else if (cent == 3) {
                 writeterm("MORGANA TOOK 1 DAMAGE");
+                statupdate(3, "MORGANA", partyhp[3])
             } else if (cent == 4) {
                 writeterm("MR. KITTY TOOK 1 DAMAGE");
-            } else {writeterm("YOU TOOK 1 DAMAGE")}
+                statupdate(5, "MR. KITTY", partyhp[4])
+            } else {
+                writeterm("YOU TOOK 1 DAMAGE")
+                statupdate(0, "HP", partyhp[0])
+            }
             break
         }
     }
@@ -270,13 +284,20 @@ function bossturn() {
             partyhp[bent] -= davidt;
             if (bent == 1) {
                 writeterm("GARFIELD TOOK " + davidt + " DAMAGE");
+                statupdate(2, "GARFIELD", partyhp[1])
             } else if (bent == 2) {
                 writeterm("DALI TOOK " + davidt + " DAMAGE");
+                statupdate(4, "DALI", partyhp[2])
             } else if (bent == 3) {
                 writeterm("MORGANA TOOK " + davidt + " DAMAGE");
+                statupdate(3, "MORGANA", partyhp[3])
             } else if (bent == 4) {
                 writeterm("MR. KITTY TOOK " + davidt + " DAMAGE");
-            } else {writeterm("YOU TOOK " + davidt + " DAMAGE")}
+                statupdate(5, "MR. KITTY", partyhp[4])
+            } else {
+                writeterm("YOU TOOK " + davidt + " DAMAGE")
+                statupdate(0, "HP", partyhp[0])
+            }
             break
         }
     }
@@ -318,6 +339,11 @@ function healthreset() {
     if (party[1] == 1) {partyhp[2] = 7}
     if (party[2] == 1) {partyhp[3] = 7}
     if (party[3] == 1) {partyhp[4] = 7}
+    statupdate(0, "HP", partyhp[0])
+    statupdate(5, "MR. KITTY", partyhp[4])
+    statupdate(3, "MORGANA", partyhp[3])
+    statupdate(4, "DALI", partyhp[2])
+    statupdate(2, "GARFIELD", partyhp[1])
 }
 function encountcheck() {
     console.log("Encounter check")
@@ -360,28 +386,28 @@ function winbattle() {
 }
 function garfget() {
     writeterm("YOU HAVE GARFIELD NOW");
-    console.log("g");
+    document.getElementById("garfhp").style.display = "block"
     partyhp[1] = 7;
     party[0] = 1;
     gamestate = "1";
 }
 function monaget() {
     writeterm("YOU HAVE MORGANA NOW");
-    console.log("m");
+    document.getElementById("monahp").style.display = "block"
     partyhp[3] = 7;
     party[2] = 1;
     gamestate = "1";
 }
 function daliget() {
     writeterm("YOU HAVE DALI NOW");
-    console.log("d");
+    document.getElementById("dalihp").style.display = "block"
     partyhp[2] = 7;
     party[1] = 1;
     gamestate = "1";
 }
 function kitget() {
     writeterm("YOU HAVE MR. KITTY NOW");
-    console.log("k");
+    document.getElementById("kithp").style.display = "block"
     partyhp[4] = 7;
     party[3] = 1;
     gamestate = "1";
