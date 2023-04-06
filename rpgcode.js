@@ -60,6 +60,7 @@ function heal(){
         garfunkle = Math.floor(Math.random()*2) + 1 + healfactor
         partyhp[0] += garfunkle
         writeterm("YOU HEALED " + garfunkle + " HEALTH")
+        statupdate(0, "HP", partyhp[0])
     } else {writeterm("YOU DO NOT HAVE ENOUGH MANA")}
 }
 function enter() {
@@ -357,10 +358,10 @@ function encountcheck() {
         writeterm("YOU LEVELED UP");
         writeterm("YOUR ATTACK: " + atkstat + "<br>")
         pp = 10 + ppfactor
+        statupdate(1, "MANA", pp)
     }
 }
 function winbattle() {
-    healthreset()
     writeterm("<br>THE OPPONENT HAS BEEN DEFFEATED");
     gamestate = "1";
     if (get[0] == 1) {
@@ -379,6 +380,7 @@ function winbattle() {
         kitget();
         get[3] = 2;
     }
+    healthreset()
     encountcheck();
     writeterm("WHAT WOULD YOU LIKE TO DO?");
     writeterm("RECRUIT A NEW TEAMMATE");
