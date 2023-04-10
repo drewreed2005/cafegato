@@ -305,14 +305,18 @@ The events room has plenty of space for scheduled get-togethers! Bring members o
                 if (Number(temp_stime.substring(0, 2)) > 12) {
                     var temp_shr = Number(temp_stime.substring(0, 2)) - 12;
                     var new_stime = String(temp_shr) + temp_stime.substring(2, 5) + " PM";
-                } else {
+                } else if (Number(temp_stime.substring(0, 2)) < 12) {
                     var new_stime = temp_stime + " AM"
+                } else {
+                    var new_stime = temp_stime + " PM"
                 }
                 if (Number(temp_etime.substring(0, 2)) > 12) {
                     var temp_ehr = Number(temp_etime.substring(0, 2)) - 12;
                     var new_etime = String(temp_ehr) + temp_etime.substring(2, 5) + " PM";
-                } else {
+                } else if (Number(temp_etime.substring(0, 2)) < 12) {
                     var new_etime = temp_etime + " AM"
+                } else {
+                    var new_stime = temp_etime + " PM"
                 }
 
                 // after validation with pull, content is added       
