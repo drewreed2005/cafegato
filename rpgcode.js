@@ -255,20 +255,17 @@ function turn(bic) {
         writeterm("MR. KITTY ATTACKS");
         ophealth -= Math.floor(Math.random() * (3 - 1) ) + 1;
     }
-    if (bic == 1) {
-        bossturn()
-    } else if (bic == 0) {
-        opturn()
-    }
     if (bic == 0) {
-        if (ophealth <= 0) {winbattle()}
+        if (ophealth <= 0) {
+            winbattle()
+        } else {opturn()}
     } else if (bic == 1) {
         if (ophealth <= 0) {
         timefinish = time
         win1()
         openPopup()
         gamestate = "-1"
-        }
+        } else {bossturn()}
     }
     if (partyhp[0] <= 0) {
         writeterm("<br>YOU DIED")
