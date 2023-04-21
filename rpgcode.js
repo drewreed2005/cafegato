@@ -8,20 +8,21 @@ function closePopup(){
 let gamestate = "0"
 let time = 0;
 let timefinish = 0;
-let points = 0;
 const party = [0, 0, 0, 0, 1];
 let encountercountdown = 2;
 let levelcount = 0;
 let inpbox = document.getElementById("textinput");
 let uinp = document.getElementById("textinput").value;
-let phealth = 7;
 let atkstat = 1;
 let ophealth = 7;
 let pp = 10
 let ppfactor = 0
 let healfactor = 0
+let magic = 0
+let healing = 0
 const partyhp = [6, 0, 0, 0, 0]
 const get = [0, 0, 0, 0]
+const partynames = ["GARFIELD", "DALI", "MORGANA", "MR. KITTY"]
 
 function statupdate(num, healthparty, healthvalue) {
     let element = document.getElementById("stats").children[num];
@@ -41,27 +42,8 @@ function timeincrease() {time++}
 function terminaltext() {
     return document.getElementById("terminal").innerHTML
 }
-function attack() {
-    let doctor = Math.floor(Math.random() * 4) + atkstat - 1;
-    ophealth -= doctor;
-    writeterm("YOU DID " + doctor + " DAMAGE");
-}
 function writeterm(inputtext) {
     document.getElementById("terminal").innerHTML = terminaltext() + "<br>" + inputtext;
-}
-function grabinput() {
-    let userchoice = doc.getElementById("textinput").value;
-    return userchoice;
-}
-function heal(){
-    if (pp >= 1){
-        pp -= 1
-        statupdate(1, "MANA", pp)
-        garfunkle = Math.floor(Math.random()*2) + 1 + healfactor
-        partyhp[0] += garfunkle
-        writeterm("YOU HEALED " + garfunkle + " HEALTH")
-        statupdate(0, "HP", partyhp[0])
-    } else {writeterm("YOU DO NOT HAVE ENOUGH MANA")}
 }
 function enter() {
     if (gamestate == "0") {
@@ -79,6 +61,8 @@ function enter() {
         writeterm("TIME: " + time)
     } else if (gamestate == "4") {
         turn(1)
+    } else if (gamestate == "5") {
+        choice(levelcount)
     }
 }
 function gamestate0() {
@@ -101,18 +85,29 @@ function gamestate1() {
         gamestate = "3";
     } else if (uinp == "FIND ENEMY" || uinp == "ENEMY") {
         writeterm("<br>YOU ARE IN FRONT OF AN ENEMY")
-        writeterm("YOU CAN ATTACK, USE AGI, HEAL, AND CHECK STATUS")
-        randenc()
+        writeterm("YOU CAN ATTACK AND CHECK STATUS")
+        if (magic.search("A") != -1) {writeterm("YOU CAN USE AGI")}
+        if (magic.search("B") != -1) {writeterm("YOU CAN USE BUFU")}
+        if (magic.search("Z") != -1) {writeterm("YOU CAN USE ZIO")}
+        if (magic.search("G") != -1) {writeterm("YOU CAN USE GARU")}
+        if (healing == 1 || healing == 2) {writeterm("YOU CAN ALSO HEAL")}
+        gamestate = "2"
+        ophealth = 10
     } else if (uinp == "FIGHT BOSS" || uinp == "BOSS") {
-        ophealth = 30
+        ophealth = 30 + (levelcount * 3)
         gamestate = "4"
         writeterm("<br>THE BOSS STANDS BEFORE YOU");
         writeterm("YOU MUST DEFEAT HIM")
-        writeterm("YOU CAN ATTACK, USE AGI, HEAL, AND CHECK STATUS")
+        writeterm("YOU CAN ATTACK AND CHECK STATUS")
+        if (magic.search("A") != -1) {writeterm("YOU CAN USE AGI")}
+        if (magic.search("B") != -1) {writeterm("YOU CAN USE BUFU")}
+        if (magic.search("Z") != -1) {writeterm("YOU CAN USE ZIO")}
+        if (magic.search("G") != -1) {writeterm("YOU CAN USE GARU")}
+        if (healing == 1 || healing == 2) {writeterm("YOU CAN ALSO HEAL")}
     } else if (uinp == "WIN") {
         gamestate = "-1";
         timefinish = time
-        win();
+        win1();
     } else if (uinp == "POP") {
         openPopup();
     } else if (uinp == "UNPOP") {
@@ -131,10 +126,6 @@ function checkm() {
     writeterm("ATTACK: " + atkstat);
     writeterm("PARTY HEALTH: " + partyhp);
     writeterm("MANA: " + pp)
-}
-function randenc() {
-    gamestate = "2"
-    ophealth = 10
 }
 function recruit() {
     if (uinp == "GARFIELD") {
@@ -162,80 +153,78 @@ function recruit() {
 function garfield() {
     writeterm("<br>YOU'RE FIGHTING GARFIELD");
     writeterm("DEFEAT HIM TO RECRUIT HIM");
-    writeterm("YOU CAN ATTACK, USE AGI, HEAL, AND CHECK STATUS")
+    writeterm("YOU CAN ATTACK AND CHECK STATUS")
+    if (magic.search("A") != -1) {writeterm("YOU CAN USE AGI")}
+    if (magic.search("B") != -1) {writeterm("YOU CAN USE BUFU")}
+    if (magic.search("Z") != -1) {writeterm("YOU CAN USE ZIO")}
+    if (magic.search("G") != -1) {writeterm("YOU CAN USE GARU")}
+    if (healing == 1 || healing == 2) {writeterm("YOU CAN ALSO HEAL")}
     ophealth = 12;
 }
 function dali() {
     writeterm("<br>YOU'RE FIGHTING DALI");
     writeterm("DEFEAT HIM TO RECRUIT HIM");
-    writeterm("YOU CAN ATTACK, USE AGI, HEAL, AND CHECK STATUS")
+    writeterm("YOU CAN ATTACK AND CHECK STATUS")
+    if (magic.search("A") != -1) {writeterm("YOU CAN USE AGI")}
+    if (magic.search("B") != -1) {writeterm("YOU CAN USE BUFU")}
+    if (magic.search("Z") != -1) {writeterm("YOU CAN USE ZIO")}
+    if (magic.search("G") != -1) {writeterm("YOU CAN USE GARU")}
+    if (healing == 1 || healing == 2) {writeterm("YOU CAN ALSO HEAL")}
     ophealth = 12;
 }
 function mona() {
     writeterm("<br>YOU'RE FIGHTING MORGANA");
     writeterm("DEFEAT HIM TO RECRUIT HIM");
-    writeterm("YOU CAN ATTACK, USE AGI, HEAL, AND CHECK STATUS")
+    writeterm("YOU CAN ATTACK AND CHECK STATUS")
+    if (magic.search("A") != -1) {writeterm("YOU CAN USE AGI")}
+    if (magic.search("B") != -1) {writeterm("YOU CAN USE BUFU")}
+    if (magic.search("Z") != -1) {writeterm("YOU CAN USE ZIO")}
+    if (magic.search("G") != -1) {writeterm("YOU CAN USE GARU")}
+    if (healing == 1 || healing == 2) {writeterm("YOU CAN ALSO HEAL")}
     ophealth = 12;
 }
 function mrkitty() {
     writeterm("<br>YOU'RE FIGHTING MR. KITTY");
     writeterm("DEFEAT HIM TO RECRUIT HIM");
-    writeterm("YOU CAN ATTACK, USE AGI, HEAL, AND CHECK STATUS")
+    writeterm("YOU CAN ATTACK AND CHECK STATUS")
+    if (magic.search("A") != -1) {writeterm("YOU CAN USE AGI")}
+    if (magic.search("B") != -1) {writeterm("YOU CAN USE BUFU")}
+    if (magic.search("Z") != -1) {writeterm("YOU CAN USE ZIO")}
+    if (magic.search("G") != -1) {writeterm("YOU CAN USE GARU")}
+    if (healing == 1 || healing == 2) {writeterm("YOU CAN HEAL")}
     ophealth = 12;
 }
-function agi(){
-    if (pp >= 3) {
-        console.log("agi")
-        pp -= 3
-        statupdate(1, "MANA", pp)
-        ophealth -= Math.floor(atkstat * 1.25) + 6
-        writeterm("AGI DEALS " + (Math.floor(atkstat * 1.25) + 6) + " DAMAGE")
-    } else{writeterm("YOU DO NOT HAVE ENOUGH MANA")}
+function garfget() {
+    writeterm("YOU HAVE GARFIELD NOW");
+    document.getElementById("garfhp").style.display = "block"
+    partyhp[1] = 7;
+    party[0] = 1;
+    gamestate = "1";
+    get[0] = 2;
 }
-function playerturn(){
-    if (uinp == "ATTACK") {
-        attack();
-        console.log("attack");
-    } else if (uinp == "PERSONA") {
-        writeterm("YOU CAN'T CHANGE PERSONAS");
-    } else if (uinp == "CHECK") {
-        writeterm("PLAYER HEALTH: " + partyhp[0]);
-        writeterm("OPPONENT HEALTH: " + ophealth);
-        writeterm("MANA: " + pp)
-        writeterm("TIME: " + time)
-    } else if (uinp == "WIN") {
-        gamestate = "-1";
-        timefinish = time
-    } else if (uinp == "AGI") {
-        agi()
-    } else if (uinp = "HEAL") {heal()}
+function daliget() {
+    writeterm("YOU HAVE DALI NOW");
+    document.getElementById("dalihp").style.display = "block"
+    partyhp[2] = 7;
+    party[1] = 1;
+    gamestate = "1";
+    get[1] = 2
 }
-function opturn() {
-    let cent = Math.floor(Math.random() * 5);
-    while (partyhp[0] > 0) {
-        console.log("one while loop")
-        cent = Math.floor(Math.random() * 5);
-        if (partyhp[cent] > 0) {
-            partyhp[cent] -= 1;
-            if (cent == 1) {
-                writeterm("GARFIELD TOOK 1 DAMAGE");
-                statupdate(2, "GARFIELD", partyhp[1])
-            } else if (cent == 2) {
-                writeterm("DALI TOOK 1 DAMAGE");
-                statupdate(4, "DALI", partyhp[2])
-            } else if (cent == 3) {
-                writeterm("MORGANA TOOK 1 DAMAGE");
-                statupdate(3, "MORGANA", partyhp[3])
-            } else if (cent == 4) {
-                writeterm("MR. KITTY TOOK 1 DAMAGE");
-                statupdate(5, "MR. KITTY", partyhp[4])
-            } else {
-                writeterm("YOU TOOK 1 DAMAGE")
-                statupdate(0, "HP", partyhp[0])
-            }
-            break
-        }
-    }
+function monaget() {
+    writeterm("YOU HAVE MORGANA NOW");
+    document.getElementById("monahp").style.display = "block"
+    partyhp[3] = 7;
+    party[2] = 1;
+    gamestate = "1";
+    get[2] = 2
+}
+function kitget() {
+    writeterm("YOU HAVE MR. KITTY NOW");
+    document.getElementById("kithp").style.display = "block"
+    partyhp[4] = 7;
+    party[3] = 1;
+    gamestate = "1";
+    get[3] = 2
 }
 function turn(bic) {
     playerturn();
@@ -273,6 +262,157 @@ function turn(bic) {
         gamestate = "L"
     }
 }
+function playerturn(){
+    if (uinp == "ATTACK") {
+        attack();
+        console.log("attack");
+    } else if (uinp == "PERSONA") {
+        writeterm("YOU CAN'T CHANGE PERSONAS");
+    } else if (uinp == "CHECK") {
+        writeterm("OPPONENT HEALTH: " + ophealth);
+        writeterm("TIME: " + time)
+        if (opweak == "A") {writeterm("WEAK TO FIRE")}
+        if (opweak == "B") {writeterm("WEAK TO ICE")}
+        if (opweak == "Z") {writeterm("WEAK TO THUNDER")}
+        if (opweak == "G") {writeterm("WEAK TO WIND")}
+    } else if (uinp == "WIN") {
+        gamestate = "-1";
+        timefinish = time
+    } else if (uinp == "AGI" || uinp == "BUFU") {
+        magic1()
+    } else if (uinp == "HEAL") {
+        heal()
+    } else if (uinp == "ZIO" || uinp == "GARU") {magic2()}
+}
+function attack() {
+    let doctor = Math.floor(Math.random() * 4) + atkstat - 1;
+    ophealth -= doctor;
+    writeterm("YOU DID " + doctor + " DAMAGE");
+}
+function heal(){
+    if (healing == 1){
+        if (pp >= 2){
+            pp -= 2
+            statupdate(1, "MANA", pp)
+            garfunkle = Math.floor(Math.random()*2) + 2 + healfactor
+            partyhp[0] += garfunkle
+            writeterm("YOU HEALED " + garfunkle + " HEALTH")
+            statupdate(0, "HP", partyhp[0])
+        } else {writeterm("YOU DO NOT HAVE ENOUGH MANA")}
+    } else if (healing == 2) {
+        if (pp >= 2){
+            pp -= 2
+            statupdate(1, "MANA", pp)
+            garfunkle = Math.floor(Math.random()*2) + 1 + healfactor
+            partyhp[0] += garfunkle
+            for (let boe in get) {
+                if (get[boe] == 2) {
+                    partyhp[boe + 1] += 1
+                    statupdate(boe + 2, partynames[boe], partyhp[boe + 1])
+                }
+            }
+            writeterm("EVERYONE WAS HEALED 1 HEALTH")
+            statupdate(0, "HP", partyhp[0])
+        } else {writeterm("YOU DO NOT HAVE ENOUGH MANA")}
+    } else if (healing == 0) {
+        writeterm("YOU DON'T KNOW HOW")
+    }
+}
+function magic1() {
+    if (magic.search("A") != -1) {
+        agi()
+    } else if (magic.search("B") != -1) {
+        bufu()
+    } else if (magic == 0) {
+        writeterm("YOU DON'T KNOW ANY MAGIC")
+    }
+}
+function magic2() {
+    if (magic.search("Z") != -1) {
+        zio()
+    } else if (magic.search("G") != -1) {
+        garu()
+    } else {writeterm("YOU DON'T KNOW THIS MAGIC YET")}
+}
+function agi(){
+    if (pp >= 3) {
+        let whittaker = 0
+        console.log("agi")
+        pp -= 3
+        statupdate(1, "MANA", pp)
+        if (opweak == "A") {
+            whittaker = 1
+        }
+        ophealth -= Math.floor(atkstat * 1.25) + 6 + whittaker
+        writeterm("AGI DEALS " + (Math.floor(atkstat * 1.25) + 6 + whittaker) + " DAMAGE")
+    } else{writeterm("YOU DO NOT HAVE ENOUGH MANA")}
+}
+function bufu(){
+    if (pp >= 3) {
+        let smith = 0
+        console.log("bufu")
+        pp -= 3
+        statupdate(1, "MANA", pp)
+        if (opweak == "B") {
+            smith = 1
+        }
+        ophealth -= Math.floor(atkstat * 1.25) + 6 + smith
+        writeterm("BUFU DEALS " + (Math.floor(atkstat * 1.25) + 6 + smith) + " DAMAGE")
+    } else{writeterm("YOU DO NOT HAVE ENOUGH MANA")}
+}
+function zio() {
+    if (pp >= 4) {
+        let tennant = 0
+        console.log("zio")
+        pp -= 4
+        statupdate(1, "MANA", pp)
+        if (opweak == "B") {
+            tennant = 2
+        }
+        ophealth -= Math.floor(atkstat * 1.25) + 6 + tennant
+        writeterm("BUFU DEALS " + (Math.floor(atkstat * 1.25) + 6 + tennant) + " DAMAGE")
+    } else{writeterm("YOU DO NOT HAVE ENOUGH MANA")}
+}
+function garu() {
+    if (pp >= 4) {
+        let eccleston = 0
+        console.log("garu")
+        pp -= 4
+        statupdate(1, "MANA", pp)
+        if (opweak == "B") {
+            eccleston = 2
+        }
+        ophealth -= Math.floor(atkstat * 1.25) + 6 + eccleston
+        writeterm("BUFU DEALS " + (Math.floor(atkstat * 1.25) + 6 + eccleston) + " DAMAGE")
+    } else{writeterm("YOU DO NOT HAVE ENOUGH MANA")}
+}
+function opturn() {
+    let cent = Math.floor(Math.random() * 5);
+    while (partyhp[0] > 0) {
+        console.log("one while loop")
+        cent = Math.floor(Math.random() * 5);
+        if (partyhp[cent] > 0) {
+            partyhp[cent] -= 1;
+            if (cent == 1) {
+                writeterm("GARFIELD TOOK 1 DAMAGE");
+                statupdate(2, "GARFIELD", partyhp[1])
+            } else if (cent == 2) {
+                writeterm("DALI TOOK 1 DAMAGE");
+                statupdate(3, "DALI", partyhp[2])
+            } else if (cent == 3) {
+                writeterm("MORGANA TOOK 1 DAMAGE");
+                statupdate(4, "MORGANA", partyhp[3])
+            } else if (cent == 4) {
+                writeterm("MR. KITTY TOOK 1 DAMAGE");
+                statupdate(5, "MR. KITTY", partyhp[4])
+            } else {
+                writeterm("YOU TOOK 1 DAMAGE")
+                statupdate(0, "HP", partyhp[0])
+            }
+            break
+        }
+    }
+}
 function bossturn() {
     let bent = Math.floor(Math.random() * 5);
     let davidt = Math.floor(Math.random() * (3 - 1) ) + 1;
@@ -285,10 +425,10 @@ function bossturn() {
                 statupdate(2, "GARFIELD", partyhp[1])
             } else if (bent == 2) {
                 writeterm("DALI TOOK " + davidt + " DAMAGE");
-                statupdate(4, "DALI", partyhp[2])
+                statupdate(3, "DALI", partyhp[2])
             } else if (bent == 3) {
                 writeterm("MORGANA TOOK " + davidt + " DAMAGE");
-                statupdate(3, "MORGANA", partyhp[3])
+                statupdate(4, "MORGANA", partyhp[3])
             } else if (bent == 4) {
                 writeterm("MR. KITTY TOOK " + davidt + " DAMAGE");
                 statupdate(5, "MR. KITTY", partyhp[4])
@@ -300,36 +440,14 @@ function bossturn() {
         }
     }
 }
-function boss() {
-    playerturn()
-    if (party[0] == 1) {
-        writeterm("GARFIELD ATTACKS");
-        ophealth -= Math.floor(Math.random() * (3 - 1) ) + 1;
-    }
-    if (party[1] == 1) {
-        writeterm("DALI ATTACKS");
-        ophealth -= Math.floor(Math.random() * (3 - 1) ) + 1;
-    }
-    if (party[2] == 1) {
-        writeterm("MORGANA ATTACKS");
-        ophealth -= Math.floor(Math.random() * (3 - 1) ) + 1;
-    }
-    if (party[3] == 1) {
-        writeterm("MR. KITTY ATTACKS");
-        ophealth -= Math.floor(Math.random() * (3 - 1) ) + 1;
-    }
-    bossturn()
-    if (ophealth <= 0) {
-        timefinish = time
-        win1()
-        openPopup()
-        gamestate = "-1"
-    }
-    if (partyhp[0] <= 0) {
-        writeterm("<br>YOU DIED")
-        writeterm("TIME: " + time)
-        gamestate = "L"
-    }
+function winbattle() {
+    writeterm("<br>THE OPPONENT HAS BEEN DEFFEATED");
+    if (get[0] == 1) {garfget()}
+    if (get[1] == 1) {daliget()}
+    if (get[2] == 1) {monaget()}
+    if (get[3] == 1) {kitget()}
+    healthreset()
+    encountcheck();
 }
 function healthreset() {
     partyhp[0] = 6;
@@ -339,8 +457,8 @@ function healthreset() {
     if (party[3] == 1) {partyhp[4] = 7}
     statupdate(0, "HP", partyhp[0])
     statupdate(5, "MR. KITTY", partyhp[4])
-    statupdate(3, "MORGANA", partyhp[3])
-    statupdate(4, "DALI", partyhp[2])
+    statupdate(4, "MORGANA", partyhp[3])
+    statupdate(3, "DALI", partyhp[2])
     statupdate(2, "GARFIELD", partyhp[1])
 }
 function encountcheck() {
@@ -349,67 +467,86 @@ function encountcheck() {
     if (encountercountdown == 0) {
         levelcount += 1;
         encountercountdown = 1 + levelcount;
-        if (levelcount == 2) {healfactor = 1}
-        if (levelcount == 3) {ppfactor = 5}
+        if (levelcount == 2) {
+            writeterm("LEARN AGI OR BUFU?")
+            healfactor = 1
+            gamestate = "5"
+        }
+        if (levelcount == 5) {
+            writeterm("LEARN ZIO OR GARU?")
+            gamestate = "5"
+        }
+        if (levelcount == 3) {
+            ppfactor = 3
+            gamestate = "5"
+            writeterm("LEARN DIA OR MEDIA?")
+        }
         atkstat += 1
+        if (levelcount >= 3 && levelcount % 2 == 1) {ppfactor += 1}
         writeterm("YOU LEVELED UP");
         writeterm("YOUR ATTACK: " + atkstat + "<br>")
         pp = 10 + ppfactor
         statupdate(1, "MANA", pp)
+        if (gamestate != "5") {
+            gamestate = "1"
+            writeterm("WHAT WOULD YOU LIKE TO DO?");
+            writeterm("RECRUIT A NEW TEAMMATE");
+            writeterm("FIND ENEMY, FIGHT BOSS");
+        }
     }
 }
-function winbattle() {
-    writeterm("<br>THE OPPONENT HAS BEEN DEFFEATED");
-    gamestate = "1";
-    if (get[0] == 1) {
-        garfget();
-        get[0] = 2;
+function choice(level) {
+    if (level == 2) {
+        if (uinp == "AGI") {
+            magic = "A"
+            gamestate = "1"
+            writeterm("YOU CAN NOW USE AGI")
+            writeterm("<br>WHAT WOULD YOU LIKE TO DO?");
+            writeterm("RECRUIT A NEW TEAMMATE");
+            writeterm("FIND ENEMY, FIGHT BOSS");
+        } else if (uinp == "BUFU") {
+            gamestate = "1"
+            magic = "B"
+            writeterm("YOU CAN NOW USE BUFU")
+            writeterm("<br>WHAT WOULD YOU LIKE TO DO?");
+            writeterm("RECRUIT A NEW TEAMMATE");
+            writeterm("FIND ENEMY, FIGHT BOSS");
+        }
     }
-    if (get[1] == 1) {
-        daliget();
-        get[1] = 2;
+    if (level == 3) {
+        if (uinp == "DIA") {
+            healing = 1
+            gamestate = "1"
+            writeterm("YOU CAN NOW USE DIA")
+            writeterm("<br>WHAT WOULD YOU LIKE TO DO?");
+            writeterm("RECRUIT A NEW TEAMMATE");
+            writeterm("FIND ENEMY, FIGHT BOSS");
+        } else if (uinp == "MEDIA") {
+            healing = 2
+            gamestate = "1"
+            writeterm("YOU CAN NOW USE MEDIA")
+            writeterm("<br>WHAT WOULD YOU LIKE TO DO?");
+            writeterm("RECRUIT A NEW TEAMMATE");
+            writeterm("FIND ENEMY, FIGHT BOSS");
+        }
     }
-    if (get[2] == 1) {
-        monaget();
-        get[2] = 2;
+    if (level == 5) {
+        if (uinp == "ZIO") {
+            magic += "Z"
+            gamestate = "1"
+            writeterm("YOU CAN NOW USE ZIO")
+            writeterm("<br>WHAT WOULD YOU LIKE TO DO?");
+            writeterm("RECRUIT A NEW TEAMMATE");
+            writeterm("FIND ENEMY, FIGHT BOSS");
+        } else if (uinp == "GARU") {
+            magic += "G"
+            gamestate = "1"
+            writeterm("YOU CAN NOW USE GARU")
+            writeterm("<br>WHAT WOULD YOU LIKE TO DO?");
+            writeterm("RECRUIT A NEW TEAMMATE");
+            writeterm("FIND ENEMY, FIGHT BOSS");
+        }
     }
-    if (get[3] == 1) {
-        kitget();
-        get[3] = 2;
-    }
-    healthreset()
-    encountcheck();
-    writeterm("WHAT WOULD YOU LIKE TO DO?");
-    writeterm("RECRUIT A NEW TEAMMATE");
-    writeterm("FIND ENEMY, FIGHT BOSS");
-}
-function garfget() {
-    writeterm("YOU HAVE GARFIELD NOW");
-    document.getElementById("garfhp").style.display = "block"
-    partyhp[1] = 7;
-    party[0] = 1;
-    gamestate = "1";
-}
-function monaget() {
-    writeterm("YOU HAVE MORGANA NOW");
-    document.getElementById("monahp").style.display = "block"
-    partyhp[3] = 7;
-    party[2] = 1;
-    gamestate = "1";
-}
-function daliget() {
-    writeterm("YOU HAVE DALI NOW");
-    document.getElementById("dalihp").style.display = "block"
-    partyhp[2] = 7;
-    party[1] = 1;
-    gamestate = "1";
-}
-function kitget() {
-    writeterm("YOU HAVE MR. KITTY NOW");
-    document.getElementById("kithp").style.display = "block"
-    partyhp[4] = 7;
-    party[3] = 1;
-    gamestate = "1";
 }
 function win1() {
     writeterm("<br>THE BOSS HAS BEEN DEFEATED")
@@ -428,9 +565,7 @@ function win1() {
     }
     writeterm("CONGRATULATIONS, YOU WON!");
     writeterm("YOUR TIME: " + timefinish);
-    writeterm("YOUR HEALTH: " + partyhp[0]);
     writeterm("YOUR LEVEL: " + levelcount);
-    writeterm("YOUR MANA: " + pp);
     writeterm("YOU HAVE " + partywincount + " PARTY MEMBERS OUT OF 4");
 }
 
