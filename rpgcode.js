@@ -20,7 +20,7 @@ let ppfactor = 0
 let healfactor = 0
 let magic = "0"
 let healing = 0
-const partyhp = [6, 0, 0, 0, 0]
+const partyhp = [7, 0, 0, 0, 0]
 const get = [0, 0, 0, 0]
 const partynames = ["GARFIELD", "DALI", "MORGANA", "MR. KITTY"]
 
@@ -450,7 +450,7 @@ function winbattle() {
     encountcheck();
 }
 function healthreset() {
-    partyhp[0] = 6;
+    partyhp[0] = 7;
     if (party[0] == 1) {partyhp[1] = 7}
     if (party[1] == 1) {partyhp[2] = 7}
     if (party[2] == 1) {partyhp[3] = 7}
