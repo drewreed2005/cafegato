@@ -487,12 +487,12 @@ function encountcheck() {
         writeterm("YOUR ATTACK: " + atkstat + "<br>")
         pp = 10 + ppfactor
         statupdate(1, "MANA", pp)
-        if (gamestate != "5") {
-            gamestate = "1"
-            writeterm("WHAT WOULD YOU LIKE TO DO?");
-            writeterm("RECRUIT A NEW TEAMMATE");
-            writeterm("FIND ENEMY, FIGHT BOSS");
-        }
+    }
+    if (gamestate != "5") {
+        gamestate = "1";
+        writeterm("WHAT WOULD YOU LIKE TO DO?");
+        writeterm("RECRUIT A NEW TEAMMATE");
+        writeterm("FIND ENEMY, FIGHT BOSS");
     }
 }
 function choice(level) {
