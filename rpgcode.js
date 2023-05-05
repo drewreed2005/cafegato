@@ -20,6 +20,7 @@ let ppfactor = 0
 let healfactor = 0
 let magic = "0"
 let healing = 0
+let opweak = "N"
 const partyhp = [7, 0, 0, 0, 0]
 const get = [0, 0, 0, 0]
 const partynames = ["GARFIELD", "DALI", "MORGANA", "MR. KITTY"]
@@ -73,13 +74,14 @@ function gamestate0() {
         writeterm("<br>WHAT WOULD YOU LIKE TO DO?");
         writeterm("RECRUIT A NEW TEAMMATE");
         writeterm("FIND ENEMY, FIGHT BOSS");
+        writeterm("CHECK STATUS")
     } else {
         writeterm('TYPE "PLAY" TO PLAY');
     }
 }
 function gamestate1() {
     console.log(uinp)
-    if (uinp == "RECRUIT") {
+    if (uinp == "RECRUIT" || uinp == "RECRUIT TEAMMATE" || uinp == "RECRUIT A NEW TEAMMATE") {
         console.log(uinp)
         writeterm("RECRUIT: GARFIELD, MORGANA, DALI, MR. KITTY")
         gamestate = "3";
@@ -93,6 +95,14 @@ function gamestate1() {
         if (healing == 1 || healing == 2) {writeterm("YOU CAN ALSO HEAL")}
         gamestate = "2"
         ophealth = 10
+        let capaldi = Math.floor(Math.random() * 4) //0-3
+        if (capaldi == 0) {
+            opweak = "A"
+        } else if (capaldi == 1) {
+            opweak = "B"
+        } else if (capaldi == 2) {
+            opweak = "Z"
+        } else {opweak = "G"}
     } else if (uinp == "FIGHT BOSS" || uinp == "BOSS") {
         ophealth = 30 + (levelcount * 3)
         gamestate = "4"
@@ -104,6 +114,10 @@ function gamestate1() {
         if (magic.search("Z") != -1) {writeterm("YOU CAN USE ZIO")}
         if (magic.search("G") != -1) {writeterm("YOU CAN USE GARU")}
         if (healing == 1 || healing == 2) {writeterm("YOU CAN ALSO HEAL")}
+        let gatwa = Math.floor(Math.random() * 2)
+        if (gatwa == 0) {
+            opweak = "Z"
+        } else {opweak = "G"}
     } else if (uinp == "WIN") {
         gamestate = "-1";
         timefinish = time
@@ -112,7 +126,7 @@ function gamestate1() {
         openPopup();
     } else if (uinp == "UNPOP") {
         closePopup();
-    } else if (uinp == "CHECK") {
+    } else if (uinp == "CHECK" || uinp == "CHECK STATUS") {
         checkm();
     } else if (uinp == "PENIS") {writeterm("hehe, penis")}
 }
@@ -280,6 +294,7 @@ function playerturn(){
         timefinish = time
     } else if (uinp == "AGI" || uinp == "BUFU") {
         magic1()
+        console.log("magic1")
     } else if (uinp == "HEAL") {
         heal()
     } else if (uinp == "ZIO" || uinp == "GARU") {magic2()}
@@ -321,6 +336,7 @@ function heal(){
 function magic1() {
     if (magic.search("A") != -1) {
         agi()
+        console.log("magic search agi")
     } else if (magic.search("B") != -1) {
         bufu()
     } else if (magic == 0) {
@@ -366,10 +382,10 @@ function zio() {
         console.log("zio")
         pp -= 4
         statupdate(1, "MANA", pp)
-        if (opweak == "B") {
+        if (opweak == "Z") {
             tennant = 2
         }
-        ophealth -= Math.floor(atkstat * 1.25) + 6 + tennant
+        ophealth -= Math.floor(atkstat * 1.5) + 6 + tennant
         writeterm("BUFU DEALS " + (Math.floor(atkstat * 1.25) + 6 + tennant) + " DAMAGE")
     } else{writeterm("YOU DO NOT HAVE ENOUGH MANA")}
 }
@@ -379,10 +395,10 @@ function garu() {
         console.log("garu")
         pp -= 4
         statupdate(1, "MANA", pp)
-        if (opweak == "B") {
+        if (opweak == "G") {
             eccleston = 2
         }
-        ophealth -= Math.floor(atkstat * 1.25) + 6 + eccleston
+        ophealth -= Math.floor(atkstat * 1.5) + 6 + eccleston
         writeterm("BUFU DEALS " + (Math.floor(atkstat * 1.25) + 6 + eccleston) + " DAMAGE")
     } else{writeterm("YOU DO NOT HAVE ENOUGH MANA")}
 }
@@ -493,6 +509,7 @@ function encountcheck() {
         writeterm("WHAT WOULD YOU LIKE TO DO?");
         writeterm("RECRUIT A NEW TEAMMATE");
         writeterm("FIND ENEMY, FIGHT BOSS");
+        writeterm("CHECK STATUS")
     }
 }
 function choice(level) {
@@ -504,6 +521,7 @@ function choice(level) {
             writeterm("<br>WHAT WOULD YOU LIKE TO DO?");
             writeterm("RECRUIT A NEW TEAMMATE");
             writeterm("FIND ENEMY, FIGHT BOSS");
+            writeterm("CHECK STATUS")
         } else if (uinp == "BUFU") {
             gamestate = "1"
             magic = "B"
@@ -511,6 +529,7 @@ function choice(level) {
             writeterm("<br>WHAT WOULD YOU LIKE TO DO?");
             writeterm("RECRUIT A NEW TEAMMATE");
             writeterm("FIND ENEMY, FIGHT BOSS");
+            writeterm("CHECK STATUS")
         }
     }
     if (level == 3) {
@@ -521,6 +540,7 @@ function choice(level) {
             writeterm("<br>WHAT WOULD YOU LIKE TO DO?");
             writeterm("RECRUIT A NEW TEAMMATE");
             writeterm("FIND ENEMY, FIGHT BOSS");
+            writeterm("CHECK STATUS")
         } else if (uinp == "MEDIA") {
             healing = 2
             gamestate = "1"
@@ -528,6 +548,7 @@ function choice(level) {
             writeterm("<br>WHAT WOULD YOU LIKE TO DO?");
             writeterm("RECRUIT A NEW TEAMMATE");
             writeterm("FIND ENEMY, FIGHT BOSS");
+            writeterm("CHECK STATUS")
         }
     }
     if (level == 5) {
@@ -538,6 +559,7 @@ function choice(level) {
             writeterm("<br>WHAT WOULD YOU LIKE TO DO?");
             writeterm("RECRUIT A NEW TEAMMATE");
             writeterm("FIND ENEMY, FIGHT BOSS");
+            writeterm("CHECK STATUS")
         } else if (uinp == "GARU") {
             magic += "G"
             gamestate = "1"
@@ -545,6 +567,7 @@ function choice(level) {
             writeterm("<br>WHAT WOULD YOU LIKE TO DO?");
             writeterm("RECRUIT A NEW TEAMMATE");
             writeterm("FIND ENEMY, FIGHT BOSS");
+            writeterm("CHECK STATUS")
         }
     }
 }
