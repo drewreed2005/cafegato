@@ -600,7 +600,7 @@ const url = "https://cgato.duckdns.org/api/pisses"
 //const url = "https://flask.nighthawkcodingsociety.com/api/users"
 const create_fetch = url + '/create';
 const read_fetch = url + '/';
-const del_url = "https://cgato.duckdns.org/api/pisses/delete";
+const del_url = url + '/delete'
 
 // Load users on page entry
 read_pisses();
