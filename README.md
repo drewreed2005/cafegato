@@ -1,43 +1,28 @@
-## The Reunion Project
+# What is the Café Gato?
 
-Usage
+The Café Gato website is the site of a theoretical cat café created to explore connections between online marketing and computer science. The site features a custom review system that allows visitors to review the location (with reviews stored in a backend SQL database) and an event scheduling system that allows users to schedule gatherings during limited hours. As part of the online marketing aspect, the site also features two games (a Wordle-esque game called "Purr-dle" and an old-school, console-based, cat-themed JRPG called "Not Bubsy 3D"), emphasizing positive user interactions with the site and promoting awareness of the brand.
 
-1. Midnight Theme. Use the GitHub Pages [Midnight Theme](https://github.com/pages-themes/midnight/blob/master/README.md) as a resource.  This project started with customization of _layouts/default.html from the Midnight Theme.  If you wanted to use a different [GitHub Pages Themes](https://pages.github.com/themes/), you would similarly change `_layouts/default.html` from repo used to support that theme.  Observe comment at top of _layouts/default.html ...
+## Runtime Links
 
-```html
-<!-- 
-  _layouts/default.html
-  customization to original Midnight theme 
-  found through GitHub Pages Themes
- -->
-```
+- Café Gato home page: [Click here](https://drewreed2005.github.io/cafegato/)
+    - Reviews page: [Click here](https://drewreed2005.github.io/cafegato/menu)
+    - Events page: [Click here](https://drewreed2005.github.io/cafegato/events)
+    - Purr-dle page: [Click here](https://drewreed2005.github.io/cafegato/games)
+    - Not Bubsy 3D: [Click here](https://drewreed2005.github.io/cafegato/rpg)
+- Deployed backend is no longer active
 
-2. Preview Site (Option A) - [Testing your GitHub Pages site locally with Jekyll](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/testing-your-github-pages-site-locally-with-jekyll).  This instruction provides instructions for ruby `Gemfile`,`bundle install`.  As an addition add `.gitignore` to avoid seeing build files in commit.   After pre-requisites run this command to obtain prompt for web server ...
+## Other Repositories
 
-```bash
-bundle exec jekyll serve -H 0.0.0.0 -P 4001 # -H and -P are optional
-```
+- Café Gato flask backend repository: [Click here](https://github.com/drewreed2005/cafendback)
 
-3. Preview Site (Option B) - [GitHub Pages Ruby Gem](https://github.com/github/pages-gem) has additional information on making a local server.  Ruby requirements are the same: `Gemfile`,`bundle install`.   This README looks like basis of FastPages `make server` as it uses Docker and shows how to setup a `Makefile`.
+## Code Student Resources
 
-4. Customizing style (CSS).  This project uses `/assets/css/style.scss` as the location to customize your CSS. To avoid warnings in VSCode make sure you install `SCSS IntelliSense` plugin.  To understand default style, make sure you ***Preview Site*** and refer to build generated `_site/assets/css/style.css` (this is worth 1000 lectures).  For the reunion site `gallery.md` uses custom style from `assets/css/style.css` to support 3 images per row.  Observe file and position of import and custom CSS, order is important as clarified in Midnight Theme readme. ...
+- Here's a link to our early [Scrum Board](https://github.com/drewreed2005/cafegato/issues/1).
+- Here is our [review ticket](https://github.com/drewreed2005/cafegato/issues/6) from the final project review. It includes separate links to individual contribution details.
 
-```css
----
----
+## Contributors
 
-@import "{{ site.theme }}";
-
-/* "row style" is flexible size and aligns pictures in center */
-.row {
-    align-items: center;
-    display: flex;
-  }
-  
-  /* "column style" is one-third of the width with padding */
-  .column {
-    flex: 33.33%;
-    padding: 5px;
-  }
-```
-
+- Events: [Drew Reed](https://github.com/drewreed2005)
+- Reviews: [Tanisha Patil](https://github.com/tanishapatil1234)
+- Purr-dle: [Aliya Tang](https://github.com/aliyatang)
+- Not Bubsy 3D: [AJ Ruiz](https://github.com/KKcbal)
